@@ -1,5 +1,4 @@
 # opencv-python-inference-engine
-<<<<<<< HEAD
 
 It is *Unofficial* pre-built OpenCV+dldt_module package for Python.
 
