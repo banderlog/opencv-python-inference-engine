@@ -17,8 +17,7 @@ You will need a `glibc-2.27`(thus it will work for Ubuntu >=18.04) and `libtbb2`
 Remove previously installed versions of `cv2`
 
 ```bash
-#pip3 install opencv-python-inference-engine
-pip3 install -i https://test.pypi.org/simple/ opencv-python-inference-engine
+pip3 install opencv-python-inference-engine
 sudo apt-get install libtbb2
 pip3 install numpy
 ```
