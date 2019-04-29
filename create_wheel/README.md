@@ -1,6 +1,6 @@
 # README
 
-This is a pre-built OpenCV 4.0.1 with [dldt](https://github.com/opencv/dldt) 2018_R5 module package for Python3.
+This is a pre-built OpenCV 4.1.0 with [dldt](https://github.com/opencv/dldt) 2019_R1 module package for Python3.
 
 Contrib modules and haarcascades are not included.
 

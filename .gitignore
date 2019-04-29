@@ -18,8 +18,10 @@ create_wheel/cv2/*
 dldt/*
 opencv/*
 ffmpeg/*
+!ffmpeg/.gitkeep
 venv
 *tar.gz
 *tar.bz2
 *.zip
 *.swp
+*.whl
