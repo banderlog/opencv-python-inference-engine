@@ -14,6 +14,8 @@ There is a [guy with an exellent pre-built set of OpenCV packages](https://githu
 
 You will need a `glibc-2.27`(thus it will work for Ubuntu >=18.04) and `libtbb2` to run it.
 
+Also it was built with `ffmpeg-4.1.3` support.
+
 Remove previously installed versions of `cv2`
 
 ```bash
