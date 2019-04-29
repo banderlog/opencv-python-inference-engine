@@ -5,7 +5,7 @@ It is *Unofficial* pre-built OpenCV+dldt_module package for Python.
 **Why:**
 There is a [guy with an exellent pre-built set of OpenCV packages](https://github.com/skvark/opencv-python), but they are all came without [dldt module](https://github.com/opencv/dldt).
 
-+ Package comes without `ffmpeg` support and contrib modules.
++ Package comes without contrib modules.
 + It was tested on Ubuntu 18.04, Ubuntu 18.10 as Windows 10 Subsystem and Gentoo.
 + I had not made a builds for Windows or MacOS.
 + It is 64 bit.
@@ -31,7 +31,7 @@ pip3 install opencv-python-inference-engine
 
 `libtbb-dev`
 
-It testes and working with [OpenCV-4.0.1](https://github.com/opencv/opencv/releases) with [dldt-2018_R5](https://github.com/opencv/dldt/releases).
+It tested and working with [OpenCV-4.1.0](https://github.com/opencv/opencv/releases) with [dldt-2019_R1](https://github.com/opencv/dldt/releases).
 
 ### Preparing
 
@@ -62,7 +62,14 @@ virtualenv --clear --always-copy -p /usr/bin/python3 ./venv
 ```bash
 export ABS_PORTION=YOUR_ABSOLUTE_PATH_TO_opencv-python-inference-engine_dir
 
+cd build/ffmpeg
+bash ./ffmpeg_setup.sh
+make -j8
+
 cd build/dldt
+# if you do not want to buld all IE tests --
+# comment L:142 in `dldt/inference-engine/CMakeLists.txt`
+#   add_subdirectory(tests) 
 bash ./dldt_setup.sh
 make -j8
 

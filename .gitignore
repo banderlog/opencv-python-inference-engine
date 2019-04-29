@@ -5,6 +5,9 @@ build/opencv/*
 !build/dldt
 build/dldt/*
 !build/dldt/dldt_setup.sh
+!build/ffmpeg
+build/ffmpeg/*
+!build/ffmpeg/ffmpeg_setup.sh
 create_wheel/*
 !create_wheel/LICENSE*
 !create_wheel/README.md
@@ -14,6 +17,9 @@ create_wheel/cv2/*
 !create_wheel/cv2/__init__.py
 dldt/*
 opencv/*
+ffmpeg/*
 venv
 *tar.gz
+*tar.bz2
+*.zip
 *.swp
