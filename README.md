@@ -69,7 +69,7 @@ make -j8
 cd build/dldt
 # if you do not want to buld all IE tests --
 # comment L:142 in `dldt/inference-engine/CMakeLists.txt`
-#   add_subdirectory(tests) 
+# <https://github.com/opencv/dldt/pull/139>
 bash ./dldt_setup.sh
 make -j8
 
