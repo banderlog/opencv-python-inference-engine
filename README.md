@@ -46,8 +46,7 @@ Download releases
 
 Download releases and unpack archives to `dldt` and `opencv` folders.
 
-
-You'll need to get 3rd party code for dldt:
+You'll need to get 3rd party `ade` code for dldt of certain commit (as in original dldt repo):
 
 ```bash
 cd dldt/inference-engine/thirdparty/ade
