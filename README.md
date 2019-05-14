@@ -42,11 +42,10 @@ It tested and working with [OpenCV-4.1.0](https://github.com/opencv/opencv/relea
 
 ### Preparing
 
-Download releases 
+1. Download releases of [dldt](https://github.com/opencv/dldt/releases), [opencv](https://github.com/opencv/opencv/releases) and [ffmpeg](https://github.com/FFmpeg/FFmpeg/releases) (or clone their repos)
+2. Unpack archives to `dldt`,`opencv` and `ffmpeg` folders.
 
-Download releases and unpack archives to `dldt` and `opencv` folders.
-
-You'll need to get 3rd party `ade` code for dldt of certain commit (as in original dldt repo):
+3. You'll need to get 3rd party `ade` code for dldt of certain commit (as in original dldt repo):
 
 ```bash
 cd dldt/inference-engine/thirdparty/ade
@@ -54,7 +53,7 @@ git clone https://github.com/opencv/ade/ ./
 git reset --hard 562e301
 ```
 
-Next, we will need a python3 virtual environment with `numpy`:
+4. Next, we will need a python3 virtual environment with `numpy`:
 
 ```bash
 virtualenv --clear --always-copy -p /usr/bin/python3 ./venv
