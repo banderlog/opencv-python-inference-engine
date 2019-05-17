@@ -9,7 +9,7 @@ It built with `ffmpeg` and `v4l` support.
 It compiled with `TBB` lib selected as threading lib, so you will need to
 install it (`libtbb-dev` on Ubuntu).
 
-No GTK/QT support -- use `matplotlib` for plotting your results.
+You will need GTK2 for highgui module (`cv2.imshow()`) 
 
 For additional info read <https://github.com/banderlog/opencv-python-inference-engine/blob/master/README.md> and `cv2.getBuildInformation()` output
 
