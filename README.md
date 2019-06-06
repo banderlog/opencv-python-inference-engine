@@ -11,7 +11,8 @@ There is a [guy with an exellent pre-built set of OpenCV packages](https://githu
 + It is 64 bit.
 + It built with ffmpeg and v4l support.
 + It compiled with TBB lib selected as threading lib, so you will need to install it (libtbb-dev on Ubuntu).
-+ No GTK/QT support -- use matplotlib for plotting your results.
++ GTK-2 supported
++ ffmpeg is *not working* right now
 
 For additional info read cv2.getBuildInformation() output.
 
