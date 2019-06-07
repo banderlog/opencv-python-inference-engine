@@ -26,6 +26,41 @@ sudo apt-get install libtbb2
 pip3 install opencv-python-inference-engine
 ```
 
+## Known problems and TODOs
+
+#### No GTK/QT support
+
+[skvarks's package](https://github.com/skvark/opencv-python) came with `Qt4` GUI for `opencv`.
+And it is +16 MB to file size.
+Also it is a lot of problems and extra work to compile Qt\GTK libs from sources.
+In 95% of cases `matplotlib.imshow()` will be sufficient, in other 5% use another package for now or compile it with GUI
+support by yourself.
+
+To compile it with `GTK-2` support (checked):
+All changes in `opencv-python-inference-engine/build/opencv/opencv_setup.sh`.
+
+1. change string `-D WITH_GTK=OFF \`  to `-D WITH_GTK=ON \`
+2. change `export PKG_CONFIG_PATH=$ABS_PORTION/build/ffmpeg/binaries/lib/pkgconfig:$PKG_CONFIG_PATH` -- you will need to
+   add absolute paths to `.pc` files. On Ubuntu 18.04 it were
+   `/usr/lib/x86_64-linux-gnu/pkgconfig/:/usr/share/pkgconfig/:/usr/local/lib/pkgconfig/:/usr/lib/pkgconfig/`
+
+Exporting `PKG_CONFIG_PATH` for `ffmpeg` somehow messes with default values.
+
+#### Not really `manylinux1`
+
+The package is renamed to `manylinux1` from `linux`, because, according to [PEP 513](https://www.python.org/dev/peps/pep-0513/), PyPi repo does not want to apply other architectures.
+And compiling it for CentOS 2007 is pretty challenging and long and denies from using some of the necessary libs (like tbb).
+Also, I suspect that it will be poorly optimized.
+
+#### `ffmpeg` with `pthreads`, all other stuff with `tbb`
+
+`OpenCV` compiled with `tbb` support, and `ffmpeg` compiled with `pthreads` and this is feels not right.
+There is some unproved solution for how to compile `ffmpeg` with `tbb` support:
+<https://stackoverflow.com/questions/6049798/ffmpeg-mt-and-tbb>.
+
+Maybe someday I will try it.
+
+
 ## Compiling from source
 
 ### Requirements
