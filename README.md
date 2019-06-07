@@ -28,7 +28,7 @@ pip3 install opencv-python-inference-engine
 
 ## Known problems and TODOs
 
-#### No GTK/QT support
+### No GTK/QT support
 
 [skvarks's package](https://github.com/skvark/opencv-python) has `Qt4` GUI for `opencv` and it is +16 MB to file size.
 Also it is a lot of problems and extra work to compile Qt\GTK libs from sources.
@@ -45,13 +45,13 @@ All changes in `opencv-python-inference-engine/build/opencv/opencv_setup.sh`.
 
 Exporting `PKG_CONFIG_PATH` for `ffmpeg` somehow messes with default values.
 
-#### Not really `manylinux1`
+### Not really `manylinux1`
 
 The package is renamed to `manylinux1` from `linux`, because, according to [PEP 513](https://www.python.org/dev/peps/pep-0513/), PyPi repo does not want to apply other architectures.
 And compiling it for CentOS 2007 is pretty challenging and long and denies from using some of the necessary libs (like tbb).
 Also, I suspect that it will be poorly optimized.
 
-#### `ffmpeg` with `pthreads`, all other stuff with `tbb`
+### `ffmpeg` with `pthreads`, all other stuff with `tbb`
 
 `OpenCV` compiled with `tbb` support, and `ffmpeg` compiled with `pthreads` and this is feels not right.
 There is some unproved solution for how to compile `ffmpeg` with `tbb` support:
@@ -59,6 +59,9 @@ There is some unproved solution for how to compile `ffmpeg` with `tbb` support:
 
 Maybe someday I will try it.
 
+### Versioning
+
+First 3 letters are version of OpenCV, the last one -- package version. E.g, `4.1.0.2` -- 2nd version of package and it is based on 4.1.0 OpenCV.
 
 ## Compiling from source
 
