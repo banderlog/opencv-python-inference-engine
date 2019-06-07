@@ -1,7 +1,6 @@
 #!/bin/bash
-# --enable-libx264
-# --enable-libopenh264 \
-# --enable-gpl --enable-libx264 \
+# Maybe, prefix should contain full absolute path
+# it will jelp to generate proper .pc files
 ../../ffmpeg/configure \
 --prefix=./binaries \
 --disable-programs \
