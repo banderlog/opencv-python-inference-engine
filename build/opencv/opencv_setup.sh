@@ -6,10 +6,10 @@ if [[ -z "$ABS_PORTION" ]]; then
 fi
 
 #ABS_PORTION=/home/kabakov/TMP/opencv-python-inference-engine
-export LD_LIBRARY_PATH=$ABS_PORTION/build/ffmpeg/binaries/lib/:$LD_LIBRARY_PATH
-export PKG_CONFIG_PATH=$ABS_PORTION/build/ffmpeg/binaries/lib/pkgconfig:$PKG_CONFIG_PATH
-export PKG_CONFIG_LIBDIR=$ABS_PORTION/build/ffmpeg/binaries/lib/:$PKG_CONFIG_LIBDIR
 FFMPEG_PATH=$ABS_PORTION/build/ffmpeg/binaries
+export LD_LIBRARY_PATH=$FFMPEG_PATH/lib/:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=$FFMPEG_PATH/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_LIBDIR=$FFMPEG_PATH/lib/:$PKG_CONFIG_LIBDIR
  
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D OPENCV_FORCE_3RDPARTY_BUILD=ON \
