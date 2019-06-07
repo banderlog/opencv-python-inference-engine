@@ -1,5 +1,18 @@
 #!/bin/bash
+if [[ -z "$ABS_PORTION" ]]; then
+    echo "You forgot to:"
+    echo "export ABS_PORTION=YOUR_ABSOLUTE_PATH_TO_opencv-python-inference-engine_dir"
+    exit
+fi
+
+#ABS_PORTION=/home/kabakov/TMP/opencv-python-inference-engine
+export LD_LIBRARY_PATH=$ABS_PORTION/build/ffmpeg/binaries/lib/:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=$ABS_PORTION/build/ffmpeg/binaries/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_LIBDIR=$ABS_PORTION/build/ffmpeg/binaries/lib/:$PKG_CONFIG_LIBDIR
+FFMPEG_PATH=$ABS_PORTION/build/ffmpeg/binaries
+ 
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D OPENCV_FORCE_3RDPARTY_BUILD=ON \
     -D OPENCV_SKIP_PYTHON_LOADER=ON \
     -D BUILD_opencv_python3=ON \
     -D BUILD_opencv_python3.6=ON \
@@ -14,14 +27,17 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D WITH_V4L=ON \
     -D WITH_PNG=ON \
     -D WITH_FFMPEG=ON \
-    -D FFMPEG_INCLUDE_DIRS=$ABS_PORTION/build/ffmpeg/binaries/include \
+    -D FFMPEG_INCLUDE_DIRS=$FFMPEG_PATH/include \
+    -D pkgcfg_lib_FFMPEG_avformat=$FFMPEG_PATH/lib/libavformat.so \
+    -D pkgcfg_lib_FFMPEG_avcodec=$FFMPEG_PATH/lib/libavcodec.so \
+    -D pkgcfg_lib_FFMPEG_avutil=$FFMPEG_PATH/lib/libavutil.so \
+    -D pkgcfg_lib_FFMPEG_swscale=$FFMPEG_PATH/lib/libswscale.so \
     -D CMAKE_INSTALL_PREFIX=./binaries/ \
     -D WITH_TBB=ON \
     -D WITH_PROTOBUF=ON \
-    -D WITH_GTK=ON \
     -D JPEG_INCLUDE_DIR=$JPEG_INCLUDE_DIR \
     -D JPEG_LIBRARY=$JPEG_LIBRARY \
-    -D OPENCV_FORCE_3RDPARTY_BUILD=ON \
+    -D WITH_GTK=OFF \
     -D BUILD_opencv_python2=OFF \
     -D BUILD_opencv_python2.7=OFF \
     -D BUILD_SHARED_LIBS=OFF \

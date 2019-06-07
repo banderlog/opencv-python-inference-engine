@@ -9,17 +9,15 @@ There is a [guy with an exellent pre-built set of OpenCV packages](https://githu
 + It was tested on Ubuntu 18.04, Ubuntu 18.10 as Windows 10 Subsystem and Gentoo.
 + I had not made a builds for Windows or MacOS.
 + It is 64 bit.
-+ It built with ffmpeg and v4l support.
-+ It compiled with TBB lib selected as threading lib, so you will need to install it (libtbb-dev on Ubuntu).
-+ No GTK/QT support -- use matplotlib for plotting your results.
++ It built with `ffmpeg` and `v4l` support (`ffmpeg` libs included).
++ It compiled with TBB lib selected as threading lib, so you will need to install it (`libtbb-dev` on Ubuntu).
++ No GTK/QT support -- use `matplotlib` for plotting your results.
 
-For additional info read cv2.getBuildInformation() output.
+For additional info read `cv2.getBuildInformation()` output.
 
 ## Installing from `pip3`
 
 You will need a `glibc-2.27`(thus it will work for Ubuntu >=18.04) and `libtbb2` to run it.
-
-Also it was built with `ffmpeg-4.1.3` support.
 
 Remove previously installed versions of `cv2`
 
