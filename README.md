@@ -30,8 +30,7 @@ pip3 install opencv-python-inference-engine
 
 #### No GTK/QT support
 
-[skvarks's package](https://github.com/skvark/opencv-python) came with `Qt4` GUI for `opencv`.
-And it is +16 MB to file size.
+[skvarks's package](https://github.com/skvark/opencv-python) has `Qt4` GUI for `opencv` and it is +16 MB to file size.
 Also it is a lot of problems and extra work to compile Qt\GTK libs from sources.
 In 95% of cases `matplotlib.imshow()` will be sufficient, in other 5% use another package for now or compile it with GUI
 support by yourself.
