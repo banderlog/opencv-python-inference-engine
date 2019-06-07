@@ -51,13 +51,18 @@ The package is renamed to `manylinux1` from `linux`, because, according to [PEP 
 And compiling it for CentOS 2007 is pretty challenging and long and denies from using some of the necessary libs (like tbb).
 Also, I suspect that it will be poorly optimized.
 
-### `ffmpeg` with `pthreads`, all other stuff with `tbb`
+### Build `ffmpeg` with `tbb`
 
-`OpenCV` compiled with `tbb` support, and `ffmpeg` compiled with `pthreads` and this is feels not right.
+Both `dldt` and `opencv` are compiled with `tbb` support, and `ffmpeg` compiled without it -- this does not feels right.
 There is some unproved solution for how to compile `ffmpeg` with `tbb` support:
-<https://stackoverflow.com/questions/6049798/ffmpeg-mt-and-tbb>.
+<https://stackoverflow.com/questions/6049798/ffmpeg-mt-and-tbb>  
+<https://stackoverflow.com/questions/14082360/pthread-vs-intel-tbb-and-their-relation-to-openmp>
 
 Maybe someday I will try it.
+
+### `tbb` is not shipped with package
+
+Maybe I should put `libtbb.so.2` into package, it is small. But `sudo apt-get install libtbb2` works fine.
 
 ### Versioning
 
