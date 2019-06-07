@@ -61,7 +61,7 @@ Maybe someday I will try it.
 
 ### Versioning
 
-First 3 letters are version of OpenCV, the last one -- package version. E.g, `4.1.0.2` -- 2nd version of package and it is based on 4.1.0 OpenCV.
+First 3 letters are the version of OpenCV, the last one -- package version. E.g, `4.1.0.2` -- 2nd version of based on 4.1.0 OpenCV package. Package versions are not continuously numbered -- each new OpenCV version starts its own numbering.
 
 ## Compiling from source
 
