@@ -131,6 +131,8 @@ cp build/opencv/lib/python3/cv2.cpython-36m-x86_64-linux-gnu.so create_wheel/cv2
 
 cp dldt/inference-engine/bin/intel64/Release/lib/*.so create_wheel/cv2/
 
+cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
+
 # change RPATH
 chrpath -r '$ORIGIN' create_wheel/cv2/cv2.cpython-36m-x86_64-linux-gnu.so 
 
