@@ -13,16 +13,9 @@
 # MKL-DNN -- plugin for CPU
 # CLDNN -- plugin for GPU
 #
-#    -D DEVELOPMENT_PLUGIN_MODE=ON \
-#    -D PYTHON_EXECUTABLE=$ABS_PORTION/venv/bin/python3.6 \
-#    -D PYTHON_LIBRARY=$ABS_PORTION/venv/lib/python3.6/config-3.6m-x86_64-linux-gnu/libpython3.6m.so \
-#    -D PYTHON_INCLUDE_DIR=$ABS_PORTION/venv/include/python3.6m/ \
-#    -D ENABLE_SAMPLES_CORE = ON \
-#    -D MKLDNN_LIBRARY_TYPE=STATIC \
-#    -D MKLDNN_THREADING=TBB \
-#    -D WITH_EXAMPLE=OFF \
-#    -D WITH_TEST=OFF \
-#    -D DISABLE_IE_TESTS=ON \
+#  For MYRIAD PLUGING:
+#    -D ENABLE_VPU=ON \
+#    -D ENABLE_MYRIAD=ON \
 cmake -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX=./binaries/ \
     -D THREADING=TBB \
@@ -44,6 +37,4 @@ cmake -D CMAKE_BUILD_TYPE=Release \
     -D ENABLE_GNA=OFF \
     -D ENABLE_PROFILING_ITT=OFF \
     -D ENABLE_ALTERNATIVE_TEMP=OFF \
-    -D ENABLE_VPU=ON \
-    -D ENABLE_MYRIAD=ON \
     -D ENABLE_CLDNN=OFF ../../dldt/inference-engine/
