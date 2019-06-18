@@ -1,3 +1,5 @@
+[![Downloads](https://pepy.tech/badge/opencv-python-inference-engine)](https://pepy.tech/project/opencv-python-inference-engine) [![Downloads](https://pepy.tech/badge/opencv-python-inference-engine/month)](https://pepy.tech/project/opencv-python-inference-engine/month) [![Downloads](https://pepy.tech/badge/opencv-python-inference-engine/week)](https://pepy.tech/project/opencv-python-inference-engine/week)
+
 # opencv-python-inference-engine
 
 It is *Unofficial* pre-built OpenCV+dldt_module package for Python.
@@ -130,6 +132,8 @@ make -j8
 cp build/opencv/lib/python3/cv2.cpython-36m-x86_64-linux-gnu.so create_wheel/cv2/
 
 cp dldt/inference-engine/bin/intel64/Release/lib/*.so create_wheel/cv2/
+
+cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
 
 # change RPATH
 chrpath -r '$ORIGIN' create_wheel/cv2/cv2.cpython-36m-x86_64-linux-gnu.so 
