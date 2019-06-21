@@ -25,8 +25,6 @@
 #       Thus it will be necessary to build opencv without dldtd, that build dldt than build opencv with dldtd
 #       That's too complicated and unneeded. Better auto-download binary libs for your system as it was before.
 
-In my case was something like:
-OpenCV_DIR=${CUSTOM_OPENCV_INSTALLATION_PATH}/lib/cmake/opencv4/ ./dldt_setup.sh
 cmake -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX=./binaries/ \
     -D THREADING=TBB \
