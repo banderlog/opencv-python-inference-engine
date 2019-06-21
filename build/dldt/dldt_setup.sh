@@ -16,12 +16,22 @@
 #  For MYRIAD PLUGING:
 #    -D ENABLE_VPU=ON \
 #    -D ENABLE_MYRIAD=ON \
+#
+# `-D OpenCV_DIR=../../opencv`  is wrong
+#       NB: OpenCV_DIR is an environmental variable, not cmake's.
+#       And it should point to "The directory containing a CMake configuration file for OpenCV"
+#       something like `OpenCV_DIR=${CUSTOM_OPENCV_INSTALLATION_PATH}/lib/cmake/opencv4/ ./dldt_setup.sh`
+#       but to use it, you have to build OpenCV first.
+#       Thus it will be necessary to build opencv without dldtd, that build dldt than build opencv with dldtd
+#       That's too complicated and unneeded. Better auto-download binary libs for your system as it was before.
+
+In my case was something like:
+OpenCV_DIR=${CUSTOM_OPENCV_INSTALLATION_PATH}/lib/cmake/opencv4/ ./dldt_setup.sh
 cmake -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX=./binaries/ \
     -D THREADING=TBB \
     -D GEMM=JIT \
     -D ENABLE_OPENCV=ON \
-    -D OpenCV_DIR=../../opencv \
     -D ENABLE_MKL_DNN=ON \
     -D BUILD_SHARED_LIBS=OFF \
     -D BUILD_TESTS=OFF \
