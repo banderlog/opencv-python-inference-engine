@@ -98,9 +98,12 @@ git reset --hard 562e301
 4. Next, we will need a python3 virtual environment with `numpy`:
 
 ```bash
-virtualenv --clear --always-copy -p /usr/bin/python3 ./venv
+virtualenv --clear --always-copy -p /usr/bin/python3.6 ./venv
 ./venv/bin/pip3 install numpy
 ```
+
+**NB:** For now, it is assumed, that your default python version is 3.6,
+if it is not true, edit python paths in `build/opencv/opencv_setup.sh`
 
 ### Compilation
 
