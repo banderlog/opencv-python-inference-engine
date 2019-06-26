@@ -5,23 +5,27 @@ if [[ -z "$ABS_PORTION" ]]; then
     exit
 fi
 
-#ABS_PORTION=/home/kabakov/TMP/opencv-python-inference-engine
+
 FFMPEG_PATH=$ABS_PORTION/build/ffmpeg/binaries
 export LD_LIBRARY_PATH=$FFMPEG_PATH/lib/:$LD_LIBRARY_PATH
 export PKG_CONFIG_PATH=$FFMPEG_PATH/lib/pkgconfig:$PKG_CONFIG_PATH
 export PKG_CONFIG_LIBDIR=$FFMPEG_PATH/lib/:$PKG_CONFIG_LIBDIR
+
  
+# grep "5" from "Python 3.5.2"
+PY_VER=`$ABS_PORTION/venv/bin/python3 --version | sed -rn "s/Python .\.(.)\..$/\1/p"`
+PY_LIB_PATH=`find $ABS_PORTION/venv/lib/ -iname libpython3.${PY_VER}m.so`
+
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D OPENCV_FORCE_3RDPARTY_BUILD=ON \
     -D OPENCV_SKIP_PYTHON_LOADER=ON \
     -D BUILD_opencv_python3=ON \
-    -D BUILD_opencv_python3.6=ON \
-    -D PYTHON3_EXECUTABLE=$ABS_PORTION/venv/bin/python3.6 \
-    -D PYTHON3_LIBRARY:PATH=$ABS_PORTION/venv/lib/python3.6/config-3.6m-x86_64-linux-gnu/libpython3.6m.so \
-    -D PYTHON3_NUMPY_INCLUDE_DIRS:PATH=$ABS_PORTION/venv/lib/python3.6/site-packages/numpy/core/include \
-    -D PYTHON_DEFAULT_EXECUTABLE=$ABS_PORTION/venv/bin/python3.6 \
-    -D PYTHON_INCLUDE_DIR=$ABS_PORTION/venv/include/python3.6m \
-    -D PYTHON3_PACKAGES_PATH=$ABS_PORTION/venv/lib/python3.6/site-packages \
+    -D PYTHON3_EXECUTABLE=$ABS_PORTION/venv/bin/python3 \
+    -D PYTHON3_LIBRARY:PATH=$PY_LIB_PATH \
+    -D PYTHON3_NUMPY_INCLUDE_DIRS:PATH=$ABS_PORTION/venv/lib/python3.${PY_VER}/site-packages/numpy/core/include \
+    -D PYTHON_DEFAULT_EXECUTABLE=$ABS_PORTION/venv/bin/python3 \
+    -D PYTHON3_PACKAGES_PATH=$ABS_PORTION/venv/lib/python3.${PY_VER}/site-packages \
+    -D PYTHON_INCLUDE_DIR=/usr/include/python3.${PY_VER} \
     -D INSTALL_CREATE_DISTRIB=ON \
     -D ENABLE_CXX11=ON \
     -D WITH_V4L=ON \

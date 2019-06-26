@@ -15,16 +15,16 @@ class EmptyListWithLength(list):
 
 setuptools.setup(
     name="opencv-python-inference-engine",
-    version="4.1.0.3",
+    version="4.1.0.5",
     url="https://github.com/banderlog/opencv-python-inference-engine",
     maintainer="Kabakov Borys",
     license='MIT, BSD',
-    description="Wrapper package for OpenCV 4 #e28e3c9 with Inference Engine 2019_R1.0.1 python bindings",
+    description="Wrapper package for OpenCV 4.1.0 with Inference Engine 2019_R1.1 python bindings",
     long_description=long_description,
     long_description_content_type="text/markdown",
     ext_modules=EmptyListWithLength(),
     packages=['cv2'],
-    package_data={'cv2': ['*.so']},
+    package_data={'cv2': ['*.so', '*.mvcmd']},
     include_package_data=True,
     install_requires=['numpy'],
     classifiers=[
@@ -35,7 +35,7 @@ setuptools.setup(
         'Intended Audience :: Information Technology',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3',
         'Programming Language :: C++',
         'Operating System :: POSIX :: Linux',
         'Topic :: Scientific/Engineering',
