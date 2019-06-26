@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ -z "$ABS_PORTION" ]]; then
     echo "You forgot to:"
-    echo "export ABS_PORTION=YOUR_ABSOLUTE_PATH_TO_opencv-python-inference-engine_dir"
+    echo "ABS_PORTION=%YOUR_ABSOLUTE_PATH_TO_opencv-python-inference-engine_dir% ./opencv_setup.sh"
     exit
 fi
 
@@ -32,10 +32,14 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D WITH_PNG=ON \
     -D WITH_FFMPEG=ON \
     -D FFMPEG_INCLUDE_DIRS=$FFMPEG_PATH/include \
-    -D pkgcfg_lib_FFMPEG_avformat=$FFMPEG_PATH/lib/libavformat.so \
-    -D pkgcfg_lib_FFMPEG_avcodec=$FFMPEG_PATH/lib/libavcodec.so \
-    -D pkgcfg_lib_FFMPEG_avutil=$FFMPEG_PATH/lib/libavutil.so \
-    -D pkgcfg_lib_FFMPEG_swscale=$FFMPEG_PATH/lib/libswscale.so \
+    -D FFMPEG_ABSOLUTE_avformat=$FFMPEG_PATH/lib/libavformat.so \
+    -D pkgcfg_lib_FFMPEG_avformat=$FFMPEG_PATH/lib/pkgconfig/libavformat.pc \
+    -D FFMPEG_ABSOLUTE_avcodec=$FFMPEG_PATH/lib/libavcodec.so \
+    -D pkgcfg_lib_FFMPEG_avcodec=$FFMPEG_PATH/lib/pkgconfig/libavcodec.pc \
+    -D FFMPEG_ABSOLUTE_avutil=$FFMPEG_PATH/lib/libavutil.so \
+    -D pkgcfg_lib_FFMPEG_avutil=$FFMPEG_PATH/lib/pkgconfig/libavutil.pc \
+    -D FFMPEG_ABSOLUTE_swscale=$FFMPEG_PATH/lib/libswscale.so \
+    -D pkgcfg_lib_FFMPEG_swscale=$FFMPEG_PATH/lib/pkgconfig/libswscale.pc \
     -D CMAKE_INSTALL_PREFIX=./binaries/ \
     -D WITH_TBB=ON \
     -D WITH_PROTOBUF=ON \

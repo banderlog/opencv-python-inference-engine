@@ -17,6 +17,7 @@
 #    -D ENABLE_VPU=ON \
 #    -D ENABLE_MYRIAD=ON \
 #
+# FOR CROSSCOMPILATION
 # `-D OpenCV_DIR=../../opencv`  is wrong
 #       NB: OpenCV_DIR is an environmental variable, not cmake's.
 #       And it should point to "The directory containing a CMake configuration file for OpenCV"
@@ -24,9 +25,10 @@
 #       but to use it, you have to build OpenCV first.
 #       Thus it will be necessary to build opencv without dldtd, that build dldt than build opencv with dldtd
 #       That's too complicated and unneeded. Better auto-download binary libs for your system as it was before.
+#
+# -D BUILD_SHARED_LIBS=ON \ always crash
 
 cmake -D CMAKE_BUILD_TYPE=Release \
-    -D CMAKE_INSTALL_PREFIX=./binaries/ \
     -D THREADING=TBB \
     -D GEMM=JIT \
     -D ENABLE_OPENCV=ON \

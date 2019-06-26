@@ -15,7 +15,7 @@ class EmptyListWithLength(list):
 
 setuptools.setup(
     name="opencv-python-inference-engine",
-    version="4.1.0.5",
+    version="4.1.0.4",
     url="https://github.com/banderlog/opencv-python-inference-engine",
     maintainer="Kabakov Borys",
     license='MIT, BSD',
@@ -24,7 +24,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     ext_modules=EmptyListWithLength(),
     packages=['cv2'],
-    package_data={'cv2': ['*.so', '*.mvcmd']},
+    package_data={'cv2': ['*.so*', '*.mvcmd']},
     include_package_data=True,
     install_requires=['numpy'],
     classifiers=[
