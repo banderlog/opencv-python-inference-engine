@@ -30,6 +30,8 @@
 
 cmake -D CMAKE_BUILD_TYPE=Release \
     -D THREADING=TBB \
+    -D ENABLE_VPU=ON \
+    -D ENABLE_MYRIAD=ON \
     -D GEMM=JIT \
     -D ENABLE_OPENCV=ON \
     -D ENABLE_MKL_DNN=ON \
