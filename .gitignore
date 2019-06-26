@@ -8,6 +8,7 @@ build/dldt/*
 !build/ffmpeg
 build/ffmpeg/*
 !build/ffmpeg/ffmpeg_setup.sh
+!build/ffmpeg/ffmpeg_premake.sh
 create_wheel/*
 !create_wheel/LICENSE*
 !create_wheel/README.md

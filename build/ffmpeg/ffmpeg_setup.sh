@@ -3,31 +3,40 @@
 # it will jelp to generate proper .pc files
 ../../ffmpeg/configure \
 --prefix=./binaries \
---disable-static \
---enable-shared \
 --disable-programs \
---disable-doc \
 --disable-avdevice \
 --disable-postproc \
---disable-symver \
 --disable-static \
 --disable-avdevice \
 --disable-swresample \
 --disable-postproc \
 --disable-avfilter \
+--disable-alsa \
+--disable-appkit \
+--disable-avfoundation \
 --disable-bzlib \
+--disable-coreimage \
 --disable-iconv \
 --disable-lzma \
+--disable-sndio \
 --disable-schannel \
 --disable-sdl2 \
 --disable-securetransport \
 --disable-xlib \
 --disable-zlib  \
 --disable-audiotoolbox \
+--disable-amf \
 --disable-cuvid \
 --disable-d3d11va \
 --disable-dxva2 \
+--disable-ffnvcodec \
+--disable-nvdec \
+--disable-nvenc \
+--disable-v4l2-m2m \
 --disable-vaapi \
 --disable-vdpau \
 --disable-videotoolbox \
---enable-pic
+--disable-doc \
+--disable-static \
+--enable-pic \
+--enable-shared 
