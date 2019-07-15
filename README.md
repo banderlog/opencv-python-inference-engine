@@ -78,6 +78,11 @@ MYRIAD plugin became opensource from dldt-2019_R1.1. It is possible to compile i
 + `libusb-1.0-0-dev` (for dldt  >= 2019_R1.0.1)
 + `chrpath`
 
+```
+sudo apt-get update
+sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath
+```
+
 Last successfully tested with dldt-2019_R1.1, opencv-4.1.0, ffmpeg-4.1.3
 
 ### Preparing
@@ -116,7 +121,7 @@ make install
 
 cd ../dldt
 # if you do not want to buld all IE tests --
-# comment L:142 in `dldt/inference-engine/CMakeLists.txt` ("add_subdirectory(tests)")
+# comment L:142 in `../../dldt/inference-engine/CMakeLists.txt` ("add_subdirectory(tests)")
 # <https://github.com/opencv/dldt/pull/139>
 ./dldt_setup.sh
 make -j8
