@@ -4,15 +4,22 @@
 
 It is *Unofficial* pre-built OpenCV+dldt_module package for Python.
 
-**Why:**
-There is a [guy with an exellent pre-built set of OpenCV packages](https://github.com/skvark/opencv-python), but they are all came without [dldt module](https://github.com/opencv/dldt).
+**Why:**  
+There is a [guy with an exellent pre-built set of OpenCV packages](https://github.com/skvark/opencv-python), but they are all came without [dldt module](https://github.com/opencv/dldt). And you need that module if you want to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/).
 
+**Limitations**:
 + Package comes without contrib modules.
 + It was tested on Ubuntu 16.04, Ubuntu 18.04, Ubuntu 18.10 as Windows 10 Subsystem and Gentoo.
-+ I had not made a builds for Windows or MacOS.
++ I had not made builds for Windows or MacOS.
 + It is 64 bit.
 + It built with `ffmpeg` and `v4l` support (`ffmpeg` libs included).
 + No GTK/QT support -- use `matplotlib` for plotting your results.
+
+This package is most similar to `opencv-python-headless`, main differences are:
++ Usage of `AVX512_SKX` instructions
++ No `JPEG 2000`, `WEBP`, `OpenEXR` support
++ `TBB` used as a parallel framework
++ Inference Engine with `MYRIAD` plugin
 
 For additional info read `cv2.getBuildInformation()` output.
 
@@ -33,9 +40,9 @@ Also it is a lot of problems and extra work to compile Qt\GTK libs from sources.
 In 95% of cases `matplotlib.imshow()` will be sufficient, in other 5% use another package for now or compile it with GUI
 support by yourself.
 
-To compile it with `GTK-2` support (checked):
-All changes in `opencv-python-inference-engine/build/opencv/opencv_setup.sh`.
+#### Steps to compile it with `GTK-2` support (checked)
 
+Make next changes in `opencv-python-inference-engine/build/opencv/opencv_setup.sh`:
 1. change string `-D WITH_GTK=OFF \`  to `-D WITH_GTK=ON \`
 2. change `export PKG_CONFIG_PATH=$ABS_PORTION/build/ffmpeg/binaries/lib/pkgconfig:$PKG_CONFIG_PATH` -- you will need to
    add absolute paths to `.pc` files. On Ubuntu 18.04 it were
@@ -46,7 +53,7 @@ Exporting `PKG_CONFIG_PATH` for `ffmpeg` somehow messes with default values.
 ### Not really `manylinux1`
 
 The package is renamed to `manylinux1` from `linux`, because, according to [PEP 513](https://www.python.org/dev/peps/pep-0513/), PyPi repo does not want to apply other architectures.
-And compiling it for CentOS 2007 is pretty challenging and long and denies from using some of the necessary libs (like tbb).
+And compiling it for CentOS 5.11 is pretty challenging (there is no such lxd container plus I do not want to mess with docker) and denies from using some of the necessary libs (like tbb).
 Also, I suspect that it will be poorly optimized.
 
 ### Build `ffmpeg` with `tbb`
@@ -62,11 +69,10 @@ Maybe someday I will try it.
 
 First 3 letters are the version of OpenCV, the last one -- package version. E.g, `4.1.0.2` -- 2nd version of based on 4.1.0 OpenCV package. Package versions are not continuously numbered -- each new OpenCV version starts its own numbering.
 
-### MYRIAD plugin
-
-MYRIAD plugin became opensource from dldt-2019_R1.1. It is possible to compile it -- read comments in `opencv-python-inference-engine/build/dldt/dldt_setup.sh`. And do not forget to copy not only `*.so` files but also `*.mvcmd`.
 
 ## Compiling from source
+
+I compiled it on Ubuntu 16.04 Linux Container.
 
 ### Requirements
 
