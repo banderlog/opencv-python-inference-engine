@@ -9,6 +9,7 @@ There is a [guy with an exellent pre-built set of OpenCV packages](https://githu
 
 **Limitations**:
 + Package comes without contrib modules.
++ You need to [add udev rules](https://github.com/opencv/dldt/blob/2019/inference-engine/README.md#for-linux-raspbian-stretch-os) if you want working MYRIAD plugin.
 + It was tested on Ubuntu 18.04, Ubuntu 18.10 as Windows 10 Subsystem and Gentoo.
 + It will not work for Ubuntu 16.04 and below (except v4.1.0.4).
 + I had not made builds for Windows or MacOS.
