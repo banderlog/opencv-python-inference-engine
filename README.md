@@ -100,8 +100,6 @@ sudo apt-get update
 sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath
 ```
 
-Last successfully tested with dldt-2019_R1.1, opencv-4.1.0, ffmpeg-4.1.3
-
 ### Preparing
 
 1. Download releases of [dldt](https://github.com/opencv/dldt/releases), [opencv](https://github.com/opencv/opencv/releases) and [ffmpeg](https://github.com/FFmpeg/FFmpeg/releases) (or clone their repos)
