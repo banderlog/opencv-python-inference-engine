@@ -12,4 +12,5 @@ For additional info read <https://github.com/banderlog/opencv-python-inference-e
 
 **Why:**
 
-Now [opencv-python](https://github.com/skvark/opencv-python) package comes with [dldt](https://github.com/opencv/dldt) module, thus just for fun.
+There is a [guy with an exellent pre-built set of OpenCV packages](https://github.com/skvark/opencv-python), but they are all came without [dldt module](https://github.com/opencv/dldt). And you need that module if you want to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/).
+

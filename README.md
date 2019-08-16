@@ -9,7 +9,8 @@ There is a [guy with an exellent pre-built set of OpenCV packages](https://githu
 
 **Limitations**:
 + Package comes without contrib modules.
-+ It was tested on Ubuntu 16.04, Ubuntu 18.04, Ubuntu 18.10 as Windows 10 Subsystem and Gentoo.
++ It was tested on Ubuntu 18.04, Ubuntu 18.10 as Windows 10 Subsystem and Gentoo.
++ It will not work for Ubuntu 16.04 and below (except v4.1.0.4).
 + I had not made builds for Windows or MacOS.
 + It is 64 bit.
 + It built with `ffmpeg` and `v4l` support (`ffmpeg` libs included).
@@ -32,6 +33,16 @@ pip3 install opencv-python-inference-engine
 ```
 
 ## Known problems and TODOs
+
+### No Ubuntu 16.04 support
+
+Release [v4.1.0.4](https://github.com/banderlog/opencv-python-inference-engine/releases/tag/v4.1.0.4) is working with Ubuntu 16.04.
+
+All releases before it were compiled on Ubuntu 18.04 and it has different versions of `glibc`, `cmake`, etc.
+So make it Ubuntu 16.04 compatible was pretty easy -- just change one standard build environment to another.
+
+But `dldt-2019R2` requires `cmake-3.7.2`, which is absent in Ubuntu 16.04. And, of course, it can be installed, but works-from-the-box behavior is loosed 
+from now on.
 
 ### No GTK/QT support
 
@@ -96,7 +107,7 @@ Last successfully tested with dldt-2019_R1.1, opencv-4.1.0, ffmpeg-4.1.3
 1. Download releases of [dldt](https://github.com/opencv/dldt/releases), [opencv](https://github.com/opencv/opencv/releases) and [ffmpeg](https://github.com/FFmpeg/FFmpeg/releases) (or clone their repos)
 2. Unpack archives to `dldt`,`opencv` and `ffmpeg` folders.
 
-3. You'll need to get 3rd party `ade` code for dldt of certain commit (as in original dldt repo):
+3. You'll need to get 3rd party `ade` code for dldt of certain commit (if you did not download a `sources_with_submodules`, they are avaliable from v2019_R2):
 
 ```bash
 cd dldt/inference-engine/thirdparty/ade
@@ -126,9 +137,6 @@ make -j8
 make install
 
 cd ../dldt
-# if you do not want to buld all IE tests --
-# comment L:142 in `../../dldt/inference-engine/CMakeLists.txt` ("add_subdirectory(tests)")
-# <https://github.com/opencv/dldt/pull/139>
 ./dldt_setup.sh
 make -j8
 
