@@ -98,7 +98,7 @@ I compiled it on Ubuntu 16.04 Linux Container.
 
 ```
 sudo apt-get update
-sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath
+sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath patchelf
 ```
 
 ### Preparing
@@ -159,6 +159,9 @@ cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
 
 # change RPATH
 chrpath -r '$ORIGIN' create_wheel/cv2/cv2.so 
+
+# add RPATH
+patchelf --set-rpath \$ORIGIN create_wheel/cv2/libinference_engine.so
 
 # final .whl will be in /create_wheel/dist/
 cd create_wheel
