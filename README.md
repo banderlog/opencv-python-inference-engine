@@ -72,8 +72,8 @@ Also, I suspect that it will be poorly optimized.
 
 Both `dldt` and `opencv` are compiled with `tbb` support, and `ffmpeg` compiled without it -- this does not feels right.
 There is some unproved solution for how to compile `ffmpeg` with `tbb` support:
-<https://stackoverflow.com/questions/6049798/ffmpeg-mt-and-tbb>  
-<https://stackoverflow.com/questions/14082360/pthread-vs-intel-tbb-and-their-relation-to-openmp>
++ <https://stackoverflow.com/questions/6049798/ffmpeg-mt-and-tbb>  
++ <https://stackoverflow.com/questions/14082360/pthread-vs-intel-tbb-and-their-relation-to-openmp>
 
 Maybe someday I will try it.
 
