@@ -106,12 +106,17 @@ sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 v
 1. Download releases of [dldt](https://github.com/opencv/dldt/releases), [opencv](https://github.com/opencv/opencv/releases) and [ffmpeg](https://github.com/FFmpeg/FFmpeg/releases) (or clone their repos)
 2. Unpack archives to `dldt`,`opencv` and `ffmpeg` folders.
 
-3. You'll need to get 3rd party `ade` code for dldt of certain commit (if you did not download a `sources_with_submodules`, they are avaliable from v2019_R2):
+3. You'll need to get 3rd party `ade` (and `ngraph` for >=v2019_R2) code for dldt of certain commit (if you did not download a `sources_with_submodules`, they are avaliable from v2019_R2):
 
 ```bash
 cd dldt/inference-engine/thirdparty/ade
 git clone https://github.com/opencv/ade/ ./
 git reset --hard 562e301
+
+# for >=2019_R2
+cd dldt/inference-engine/thirdparty/ngraph
+git clone https://github.com/NervanaSystems/ngraph ./
+git reset --hard ac02fb9
 ```
 
 4. Next, we will need a python3 virtual environment with `numpy`:
