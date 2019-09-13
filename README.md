@@ -141,8 +141,12 @@ make -j8
 make install
 
 cd ../dldt
+# if <v2019_R2:
+#   comment L:142 in `dldt/inference-engine/CMakeLists.txt`
+#   see <https://github.com/opencv/dldt/issues/248>
 ./dldt_setup.sh
 make -j8
+make ie_cpu_extension
 
 cd ../opencv
 ABS_PORTION=YOUR_ABSOLUTE_PATH_TO_opencv-python-inference-engine_dir ./opencv_setup.sh
