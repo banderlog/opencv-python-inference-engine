@@ -27,6 +27,10 @@
 #       That's too complicated and unneeded. Better auto-download binary libs for your system as it was before.
 #
 # -D BUILD_SHARED_LIBS=ON \ always crash
+#
+#  for ENABLE_SSE42/AVX2/AVX512F see dldt/inference-engine/src/extension/cmake/OptimizationFlags.cmake 
+#
+# if you'll set -D ENABLE_PLUGIN_RPATH=ON, you'll need to chrpath ~4 *.so, better to setrpath one .so
 
 cmake -D CMAKE_BUILD_TYPE=Release \
     -D THREADING=TBB \
@@ -49,4 +53,7 @@ cmake -D CMAKE_BUILD_TYPE=Release \
     -D ENABLE_GNA=OFF \
     -D ENABLE_PROFILING_ITT=OFF \
     -D ENABLE_ALTERNATIVE_TEMP=OFF \
+    -D ENABLE_SSE42=ON \
+    -D ENABLE_AVX2=ON \
+    -D ENABLE_AVX512F=OFF \
     -D ENABLE_CLDNN=OFF ../../dldt/inference-engine/

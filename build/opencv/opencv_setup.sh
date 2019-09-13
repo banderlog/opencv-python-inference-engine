@@ -16,6 +16,9 @@ export PKG_CONFIG_LIBDIR=$FFMPEG_PATH/lib/:$PKG_CONFIG_LIBDIR
 PY_VER=`$ABS_PORTION/venv/bin/python3 --version | sed -rn "s/Python .\.(.)\..$/\1/p"`
 PY_LIB_PATH=`find $ABS_PORTION/venv/lib/ -iname libpython3.${PY_VER}m.so`
 
+# >=dldt-2019_R2 requires SSE4_2 (?)
+# for CPU_BASELINE and CPU_DISPATCH see https://github.com/opencv/opencv/wiki/CPU-optimizations-build-options
+# they should match with ones for  dldt/inference-engine/src/extension/cmake/OptimizationFlags.cmake 
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D OPENCV_FORCE_3RDPARTY_BUILD=ON \
     -D OPENCV_SKIP_PYTHON_LOADER=ON \
@@ -76,4 +79,6 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D WITH_CUDA=OFF \
     -D INF_ENGINE_INCLUDE_DIRS=$ABS_PORTION/dldt/inference-engine/include \
     -D INF_ENGINE_LIB_DIRS=$ABS_PORTION/dldt/inference-engine/bin/intel64/Release/lib \
-    -D WITH_INF_ENGINE=ON ../../opencv
+    -D WITH_INF_ENGINE=ON \
+    -D CPU_BASELINE=SSE4_2 \
+    -D CPU_DISPATCH=AVX,AVX2 ../../opencv
