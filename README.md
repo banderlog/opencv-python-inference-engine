@@ -33,6 +33,12 @@ Remove previously installed versions of `cv2`
 pip3 install opencv-python-inference-engine
 ```
 
+## Downloading intel models
+
+As it appeared it is not an obvious task :)
+
+Please refer to: https://github.com/opencv/open_model_zoo/issues/522
+
 ## Known problems and TODOs
 
 ### No Ubuntu 16.04 support
