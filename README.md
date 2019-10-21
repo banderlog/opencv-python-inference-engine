@@ -112,15 +112,14 @@ sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 v
 1. Download releases of [dldt](https://github.com/opencv/dldt/releases), [opencv](https://github.com/opencv/opencv/releases) and [ffmpeg](https://github.com/FFmpeg/FFmpeg/releases) (or clone their repos)
 2. Unpack archives to `dldt`,`opencv` and `ffmpeg` folders.
 
-3. You'll need to get 3rd party `ade` (and `ngraph` for >=v2019_R2) code for dldt of certain commit (if you did not download a `sources_with_submodules`, they are avaliable from v2019_R2):
+3. You'll need to get 3rd party `ade` and `ngraph` repos of certain commit for dldt:
 
 ```bash
 cd dldt/inference-engine/thirdparty/ade
 git clone https://github.com/opencv/ade/ ./
-git reset --hard 562e301
+git reset --hard cbe2db6
 
-# for >=2019_R2
-cd dldt/inference-engine/thirdparty/ngraph
+cd ../ngraph
 git clone https://github.com/NervanaSystems/ngraph ./
 git reset --hard ac02fb9
 ```
@@ -146,10 +145,9 @@ cd build/ffmpeg
 make -j8
 make install
 
+
+# see <https://github.com/opencv/dldt/issues/248>
 cd ../dldt
-# if <v2019_R2:
-#   comment L:142 in `dldt/inference-engine/CMakeLists.txt`
-#   see <https://github.com/opencv/dldt/issues/248>
 ./dldt_setup.sh
 make -j8
 make ie_cpu_extension
@@ -168,6 +166,7 @@ cp build/opencv/lib/python3/cv2.cpython*.so create_wheel/cv2/cv2.so
 
 cp dldt/inference-engine/bin/intel64/Release/lib/*.so create_wheel/cv2/
 cp dldt/inference-engine/bin/intel64/Release/lib/*.mvcmd create_wheel/cv2/
+cp dldt/inference-engine/bin/intel64/Release/lib/plugins.xml create_wheel/cv2/
 cp dldt/inference-engine/temp/tbb/lib/libtbb.so.2 create_wheel/cv2/
 
 cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
