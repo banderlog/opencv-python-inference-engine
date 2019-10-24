@@ -43,7 +43,7 @@ Please refer to: https://github.com/opencv/open_model_zoo/issues/522
 
 ### No Ubuntu 16.04 support
 
-Release [v4.1.0.4](https://github.com/banderlog/opencv-python-inference-engine/releases/tag/v4.1.0.4) is working with Ubuntu 16.04.
+Release [v4.1.0.4](https://github.com/banderlog/opencv-python-inference-engine/releases/tag/v4.1.0.4) is working with Ubuntu 16.04 ([#3](https://github.com/banderlog/opencv-python-inference-engine/issues/3)).
 
 All releases before it were compiled on Ubuntu 18.04 and it has different versions of `glibc`, `cmake`, etc.
 So make it Ubuntu 16.04 compatible was pretty easy -- just change one standard build environment to another.
@@ -113,7 +113,7 @@ sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 v
 1. Download releases of [dldt](https://github.com/opencv/dldt/releases), [opencv](https://github.com/opencv/opencv/releases) and [ffmpeg](https://github.com/FFmpeg/FFmpeg/releases) (or clone their repos)
 2. Unpack archives to `dldt`,`opencv` and `ffmpeg` folders.
 
-3. You'll need to get 3rd party `ade` and `ngraph` repos of certain commit for dldt:
+3. You'll need to get 3rd party `ade` and `ngraph` repos of certain commit for dldt ([#2](https://github.com/banderlog/opencv-python-inference-engine/issues/2)):
 
 ```bash
 cd dldt/inference-engine/thirdparty/ade
