@@ -18,7 +18,7 @@ There is a [guy with an exellent pre-built set of OpenCV packages](https://githu
 + No GTK/QT support -- use `matplotlib` for plotting your results.
 
 This package is most similar to `opencv-python-headless`, main differences are:
-+ Usage of `AVX512_SKX` instructions
++ Usage of `AVX512_SKX` and `SSE4_2` instructions (for `SSE3` CPUs use v4.1.0.3)
 + No `JPEG 2000`, `WEBP`, `OpenEXR` support
 + `TBB` used as a parallel framework
 + Inference Engine with `MYRIAD` plugin
