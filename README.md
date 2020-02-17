@@ -107,22 +107,17 @@ I compiled it on Ubuntu 18.04 Linux Container.
 sudo apt-get update
 sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath patchelf
 ```
-#### Optional ranger-fm installation
 
-```
-sudo apt install python3-pip
-pip3 install ranger-fm --user
-export PATH=~/.local/bin:$PATH
-```
 ### Preparing
 
+0. `git clone https://github.com/banderlog/opencv-python-inference-engine`
 1. Download releases of [dldt](https://github.com/opencv/dldt/releases), [opencv](https://github.com/opencv/opencv/releases) and [ffmpeg](https://github.com/FFmpeg/FFmpeg/releases) (or clone their repos)
-2. Unpack archives to `dldt`,`opencv` and `ffmpeg` folders.
+2. Unpack archives to `dldt`,`opencv` and `ffmpeg` folders (e.g.: `tar -xf 2020.1.tar.gz --strip-components=1 -C ./opencv-python-inference-engine/dldt/`).
 
 3. You'll need to get 3rd party `ade` and `ngraph` repos of certain commit for dldt ([#2](https://github.com/banderlog/opencv-python-inference-engine/issues/2)):
 
 ```bash
-cd dldt/inference-engine/thirdparty/ade
+cd ./opencv-python-inference-engine/dldt/inference-engine/thirdparty/ade
 git clone https://github.com/opencv/ade/ ./
 git reset --hard cbe2db6
 
@@ -135,7 +130,7 @@ git reset --hard b0bb801
 
 ```bash
 # return to "opencv-python-inference-engine" dir
-cd ../../../../
+cd ../../
 virtualenv --clear --always-copy -p /usr/bin/python3 ./venv
 ./venv/bin/pip3 install numpy
 ```
@@ -157,7 +152,6 @@ make install
 cd ../dldt
 ./dldt_setup.sh
 make -j8
-make ie_cpu_extension
 
 cd ../opencv
 ABS_PORTION=YOUR_ABSOLUTE_PATH_TO_opencv-python-inference-engine_dir ./opencv_setup.sh
@@ -171,9 +165,9 @@ make -j8
 cd ../../
 cp build/opencv/lib/python3/cv2.cpython*.so create_wheel/cv2/cv2.so
 
-cp dldt/inference-engine/bin/intel64/Release/lib/*.so create_wheel/cv2/
-cp dldt/inference-engine/bin/intel64/Release/lib/*.mvcmd create_wheel/cv2/
-cp dldt/inference-engine/bin/intel64/Release/lib/plugins.xml create_wheel/cv2/
+cp dldt/bin/intel64/Release/lib/*.so create_wheel/cv2/
+cp dldt/bin/intel64/Release/lib/*.mvcmd create_wheel/cv2/
+cp dldt/bin/intel64/Release/lib/plugins.xml create_wheel/cv2/
 cp dldt/inference-engine/temp/tbb/lib/libtbb.so.2 create_wheel/cv2/
 
 cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/

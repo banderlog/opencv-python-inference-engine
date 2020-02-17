@@ -19,6 +19,7 @@ PY_LIB_PATH=`find $ABS_PORTION/venv/lib/ -iname libpython3.${PY_VER}m.so`
 # >=dldt-2019_R2 requires SSE4_2 (?)
 # for CPU_BASELINE and CPU_DISPATCH see https://github.com/opencv/opencv/wiki/CPU-optimizations-build-options
 # they should match with ones for  dldt/inference-engine/src/extension/cmake/OptimizationFlags.cmake 
+
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D OPENCV_FORCE_3RDPARTY_BUILD=ON \
     -D OPENCV_SKIP_PYTHON_LOADER=ON \
@@ -35,14 +36,6 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D WITH_PNG=ON \
     -D WITH_FFMPEG=ON \
     -D FFMPEG_INCLUDE_DIRS=$FFMPEG_PATH/include \
-    -D FFMPEG_ABSOLUTE_avformat=$FFMPEG_PATH/lib/libavformat.so \
-    -D pkgcfg_lib_FFMPEG_avformat=$FFMPEG_PATH/lib/pkgconfig/libavformat.pc \
-    -D FFMPEG_ABSOLUTE_avcodec=$FFMPEG_PATH/lib/libavcodec.so \
-    -D pkgcfg_lib_FFMPEG_avcodec=$FFMPEG_PATH/lib/pkgconfig/libavcodec.pc \
-    -D FFMPEG_ABSOLUTE_avutil=$FFMPEG_PATH/lib/libavutil.so \
-    -D pkgcfg_lib_FFMPEG_avutil=$FFMPEG_PATH/lib/pkgconfig/libavutil.pc \
-    -D FFMPEG_ABSOLUTE_swscale=$FFMPEG_PATH/lib/libswscale.so \
-    -D pkgcfg_lib_FFMPEG_swscale=$FFMPEG_PATH/lib/pkgconfig/libswscale.pc \
     -D CMAKE_INSTALL_PREFIX=./binaries/ \
     -D WITH_TBB=ON \
     -D WITH_PROTOBUF=ON \
