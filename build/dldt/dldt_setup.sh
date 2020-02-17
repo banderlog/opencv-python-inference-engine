@@ -31,6 +31,9 @@
 #  for ENABLE_SSE42/AVX2/AVX512F see dldt/inference-engine/src/extension/cmake/OptimizationFlags.cmake 
 #
 # if you'll set -D ENABLE_PLUGIN_RPATH=ON, you'll need to chrpath ~4 *.so, better to setrpath one .so
+#
+# >We moved root CMakeLists.txt from dldt/inference-engine to dldt
+# >[name=<https://github.com/opencv/dldt/issues/284>]
 
 cmake -D CMAKE_BUILD_TYPE=Release \
     -D THREADING=TBB \
@@ -56,4 +59,4 @@ cmake -D CMAKE_BUILD_TYPE=Release \
     -D ENABLE_SSE42=ON \
     -D ENABLE_AVX2=ON \
     -D ENABLE_AVX512F=OFF \
-    -D ENABLE_CLDNN=OFF ../../dldt/inference-engine/
+    -D ENABLE_CLDNN=OFF ../../dldt/

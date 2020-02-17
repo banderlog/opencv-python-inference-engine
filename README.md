@@ -107,7 +107,13 @@ I compiled it on Ubuntu 18.04 Linux Container.
 sudo apt-get update
 sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath patchelf
 ```
+#### Optional ranger-fm installation
 
+```
+sudo apt install python3-pip
+pip3 install ranger-fm --user
+export PATH=~/.local/bin:$PATH
+```
 ### Preparing
 
 1. Download releases of [dldt](https://github.com/opencv/dldt/releases), [opencv](https://github.com/opencv/opencv/releases) and [ffmpeg](https://github.com/FFmpeg/FFmpeg/releases) (or clone their repos)
@@ -120,9 +126,9 @@ cd dldt/inference-engine/thirdparty/ade
 git clone https://github.com/opencv/ade/ ./
 git reset --hard cbe2db6
 
-cd ../ngraph
+cd ../../../ngraph
 git clone https://github.com/NervanaSystems/ngraph ./
-git reset --hard ac02fb9
+git reset --hard b0bb801
 ```
 
 4. Next, we will need a python3 virtual environment with `numpy`:
