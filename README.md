@@ -7,6 +7,8 @@ It is *Unofficial* pre-built OpenCV+dldt_module package for Python.
 **Why:**  
 There is a [guy with an exellent pre-built set of OpenCV packages](https://github.com/skvark/opencv-python), but they are all came without [dldt module](https://github.com/opencv/dldt). And you need that module if you want to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/).
 
+**UPD:** Presumably, you could also use speech2text model now -- [source](https://docs.openvinotoolkit.org/latest/_inference_engine_samples_speech_libs_and_demos_Speech_libs_and_demos.html)
+
 **Limitations**:
 + Package comes without contrib modules.
 + You need to [add udev rules](https://github.com/opencv/dldt/blob/2019/inference-engine/README.md#for-linux-raspbian-stretch-os) if you want working MYRIAD plugin.
@@ -148,10 +150,10 @@ make -j8
 make install
 
 
-# see <https://github.com/opencv/dldt/issues/248>
 cd ../dldt
 ./dldt_setup.sh
 make -j8
+
 
 cd ../opencv
 ABS_PORTION=YOUR_ABSOLUTE_PATH_TO_opencv-python-inference-engine_dir ./opencv_setup.sh
