@@ -1,3 +1,5 @@
+*cache*
+.ipynb_checkpoints
 build/*
 !build/opencv
 build/opencv/*
@@ -27,3 +29,5 @@ venv
 *.swp
 *.whl
 TODO.txt
+*.bin
+*.weights
