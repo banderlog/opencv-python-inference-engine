@@ -174,13 +174,11 @@ cp dldt/inference-engine/temp/tbb/lib/libtbb.so.2 create_wheel/cv2/
 
 cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
 
-# change RPATH
-chrpath -r '$ORIGIN' create_wheel/cv2/cv2.so 
 
-# add RPATH
-patchelf --set-rpath \$ORIGIN create_wheel/cv2/libinference_engine.so
+cd create_wheel
+# change RPATH
+for i in  cv2/*.so; do chrpath -r '$ORIGIN' $i; done
 
 # final .whl will be in /create_wheel/dist/
-cd create_wheel
 ../venv/bin/python3 setup.py bdist_wheel
 ```

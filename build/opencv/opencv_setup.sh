@@ -20,6 +20,9 @@ PY_LIB_PATH=`find $ABS_PORTION/venv/lib/ -iname libpython3.${PY_VER}m.so`
 # for CPU_BASELINE and CPU_DISPATCH see https://github.com/opencv/opencv/wiki/CPU-optimizations-build-options
 # they should match with ones for  dldt/inference-engine/src/extension/cmake/OptimizationFlags.cmake 
 
+# -DINF_ENGINE_RELEASE= should match dldt version
+# See https://github.com/opencv/dldt/issues/248#issuecomment-590102331
+
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D OPENCV_FORCE_3RDPARTY_BUILD=ON \
     -D OPENCV_SKIP_PYTHON_LOADER=ON \
@@ -73,5 +76,6 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D INF_ENGINE_INCLUDE_DIRS=$ABS_PORTION/dldt/inference-engine/include \
     -D INF_ENGINE_LIB_DIRS=$ABS_PORTION/dldt/bin/intel64/Release/lib \
     -D WITH_INF_ENGINE=ON \
+    -D INF_ENGINE_RELEASE=2020010000 \
     -D CPU_BASELINE=SSE4_2 \
     -D CPU_DISPATCH=AVX,AVX2 ../../opencv
