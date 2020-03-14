@@ -1,3 +1,4 @@
 tensorflow-cpu
 scikit-image
 scipy
+ipython
