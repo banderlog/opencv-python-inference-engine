@@ -1,5 +1,9 @@
 # Tests for opencv-python-inference-engine wheel
 
+## Requirements
+
+`sudo apt install virtualenv`
+
 ## Usage
 
 ### Features
