@@ -21,22 +21,36 @@ I prefer to do such things in `ipython` or `jupyter` with `%timeit`.
 
 ```python
 import cv2
-from pixellink import PixelLinkDetector
+
+class PixelLinkDetectorTest():
+    """ Cut version of PixelLinkDetector """
+    def __init__(self, xml_model_path: str):
+        self.net = cv2.dnn.readNet(xml_model_path, xml_model_path[:-3] + 'bin')
+
+    def detect(self, img: 'np.ndarray') -> None:
+        blob = cv2.dnn.blobFromImage(img, 1, (1280, 768))
+        self.net.setInput(blob)
+        out_layer_names = self.net.getUnconnectedOutLayersNames()
+        return self.net.forward(out_layer_names)
+
+
+# check opencv version
+cv2.__version__
 
 # read img and network
 img = cv2.imread('helloworld.png')
-detector = PixelLinkDetector('text-detection-0004.xml')
+detector = PixelLinkDetectorTest('text-detection-0004.xml')
 
 # select target & backend, please read the documentation for details:
 # <https://docs.opencv.org/4.2.0/db/d30/classcv_1_1dnn_1_1Net.html#a9dddbefbc7f3defbe3eeb5dc3d3483f4>
-detector._net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
-detector._net.setPreferableBackend(cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE)
+detector.net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
+detector.net.setPreferableBackend(cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE)
 
 # 1st inference does not count
-detector.detect(img)
+links, pixels = detector.detect(img)
 
 # use magic function
-%timeit detector.detect(img)
+%timeit links, pixels = detector.detect(img)
 ```
 
 
