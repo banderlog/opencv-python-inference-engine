@@ -14,7 +14,7 @@ red () {
 }
 
 green "DOWNLOAD ALL STUFF"
-wget -c https://github.com/opencv/opencv/archive/4.2.0.tar.gz 
+wget -c https://github.com/opencv/opencv/archive/4.2.0.tar.gz
 wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.2.2.tar.gz
 wget -c https://github.com/opencv/dldt/archive/2020.1.tar.gz
 
