@@ -113,7 +113,8 @@ sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 v
 ### Preparing
 
 0. `git clone https://github.com/banderlog/opencv-python-inference-engine`
-1. run `download_all_stuff.sh` (refer for script code for details)
+1. `cd opencv-python-inference-engine`
+2. run `download_all_stuff.sh` (refer for script code for details)
 
 ### Compilation
 
