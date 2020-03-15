@@ -113,29 +113,7 @@ sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 v
 ### Preparing
 
 0. `git clone https://github.com/banderlog/opencv-python-inference-engine`
-1. Download releases of [dldt](https://github.com/opencv/dldt/releases), [opencv](https://github.com/opencv/opencv/releases) and [ffmpeg](https://github.com/FFmpeg/FFmpeg/releases) (or clone their repos)
-2. Unpack archives to `dldt`,`opencv` and `ffmpeg` folders (e.g.: `tar -xf 2020.1.tar.gz --strip-components=1 -C ./opencv-python-inference-engine/dldt/`).
-
-3. You'll need to get 3rd party `ade` and `ngraph` repos of certain commit for dldt ([#2](https://github.com/banderlog/opencv-python-inference-engine/issues/2)):
-
-```bash
-cd ./opencv-python-inference-engine/dldt/inference-engine/thirdparty/ade
-git clone https://github.com/opencv/ade/ ./
-git reset --hard cbe2db6
-
-cd ../../../ngraph
-git clone https://github.com/NervanaSystems/ngraph ./
-git reset --hard b0bb801
-```
-
-4. Next, we will need a python3 virtual environment with `numpy`:
-
-```bash
-# return to "opencv-python-inference-engine" dir
-cd ../../
-virtualenv --clear --always-copy -p /usr/bin/python3 ./venv
-./venv/bin/pip3 install numpy
-```
+1. run `download_all_stuff.sh` (refer for script code for details)
 
 ### Compilation
 
