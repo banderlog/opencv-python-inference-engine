@@ -109,6 +109,7 @@ I compiled it on Ubuntu 18.04 Linux Container.
 sudo apt-get update
 sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath patchelf
 ```
+**NB:** You will need ~6GB RAM and ~10GB disk space
 
 ### Preparing
 
@@ -153,7 +154,7 @@ cp dldt/inference-engine/temp/tbb/lib/libtbb.so.2 create_wheel/cv2/
 
 cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
 
-cp mklml_lnx/lib/libmklml_gnu.so create/wheel/cv2
+cp mklml_lnx/lib/libmklml_gnu.so create/wheel/cv2/
 
 
 cd create_wheel
