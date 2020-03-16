@@ -13,10 +13,6 @@
 # MKL-DNN -- plugin for CPU
 # CLDNN -- plugin for GPU
 #
-#  For MYRIAD PLUGING:
-#    -D ENABLE_VPU=ON \
-#    -D ENABLE_MYRIAD=ON \
-#
 # FOR CROSSCOMPILATION
 # `-D OpenCV_DIR=../../opencv`  is wrong
 #       NB: OpenCV_DIR is an environmental variable, not cmake's.
@@ -30,7 +26,6 @@
 #
 #  for ENABLE_SSE42/AVX2/AVX512F see dldt/inference-engine/src/extension/cmake/OptimizationFlags.cmake 
 #
-# if you'll set -D ENABLE_PLUGIN_RPATH=ON, you'll need to chrpath ~4 *.so, better to setrpath one .so
 #
 # >We moved root CMakeLists.txt from dldt/inference-engine to dldt
 # >[name=<https://github.com/opencv/dldt/issues/284>]
@@ -39,24 +34,22 @@ cmake -D CMAKE_BUILD_TYPE=Release \
     -D THREADING=TBB \
     -D ENABLE_VPU=ON \
     -D ENABLE_MYRIAD=ON \
-    -D GEMM=JIT \
+    -D GEMM=MKL \
+    -D MKLROOT=/home/ubuntu/opencv-python-inference-engine/mklml_lnx/ \
     -D ENABLE_OPENCV=ON \
     -D ENABLE_MKL_DNN=ON \
     -D BUILD_SHARED_LIBS=OFF \
     -D BUILD_TESTS=OFF \
-    -D ENABLE_PLUGIN_RPATH=OFF \
     -D ENABLE_PYTHON=OFF \
     -D ENABLE_TESTS=OFF \
     -D ENABLE_SAMPLES=OFF \
-    -D ENABLE_STRESS_UNIT_TESTS=OFF \
     -D ENABLE_GAPI_TESTS=OFF \
     -D GAPI_TEST_PERF=OFF \
-    -D ENABLE_SEGMENTATION_TESTS=OFF \
-    -D ENABLE_OBJECT_DETECTION_TESTS=OFF \
     -D ENABLE_GNA=OFF \
     -D ENABLE_PROFILING_ITT=OFF \
     -D ENABLE_ALTERNATIVE_TEMP=OFF \
     -D ENABLE_SSE42=ON \
     -D ENABLE_AVX2=ON \
     -D ENABLE_AVX512F=OFF \
+    -D ENABLE_NGRAPH=ON \
     -D ENABLE_CLDNN=OFF ../../dldt/

@@ -1,5 +1,7 @@
 *cache*
 .ipynb_checkpoints
+mklml_lnx/*
+!mklml_lnx/.gitkeep
 build/*
 !build/opencv
 build/opencv/*

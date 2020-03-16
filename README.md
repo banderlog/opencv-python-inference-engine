@@ -153,6 +153,8 @@ cp dldt/inference-engine/temp/tbb/lib/libtbb.so.2 create_wheel/cv2/
 
 cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
 
+cp mklml_lnx/lib/libmklml_gnu.so create/wheel/cv2
+
 
 cd create_wheel
 # change RPATH
