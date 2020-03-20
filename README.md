@@ -105,10 +105,11 @@ I compiled it on Ubuntu 18.04 Linux Container.
 + `chrpath`
 + `patchelf`
 + `gfortran`
++ `openblas`
 
 ```
 sudo apt-get update
-sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath patchelf gfortran
+sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath patchelf gfortran libopenblas-dev
 ```
 **NB:** You will need ~6GB RAM and ~10GB disk space
 
@@ -132,11 +133,12 @@ make install
 
 
 cd ../dldt
-./dldt_setup.sh
+./dldt_setup.sh &&
 make -j8
 
 
 cd ../opencv
+./opencv_setup.sh &&
 make -j8
 ```
 
@@ -159,15 +161,14 @@ cp /usr/lib/x86_64-linux-gnu/libopenblasp-r0.2.20.so create_wheel/cv2/libopenbla
 cp /usr/lib/x86_64-linux-gnu/libgfortran.so.4.0.0 create_wheel/cv2/libgfortran.so.4
 cp /usr/lib/x86_64-linux-gnu/libquadmath.so.0.0.0 create_wheel/cv2/libquadmath.so.0
 
-
-
-cd create_wheel
-# change RPATH
-for i in  cv2/*.so; do chrpath -r '$ORIGIN' $i; done
-
 # add RPATH
 patchelf --set-rpath \$ORIGIN create_wheel/cv2/libopenblas.so.0
 patchelf --set-rpath \$ORIGIN create_wheel/cv2/libgfortran.so.4
+
+
+# change RPATH
+cd create_wheel
+for i in  cv2/*.so; do chrpath -r '$ORIGIN' $i; done
 
 # final .whl will be in /create_wheel/dist/
 ../venv/bin/python3 setup.py bdist_wheel
