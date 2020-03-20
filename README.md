@@ -124,9 +124,9 @@ sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 v
 ```bash
 
 cd build/ffmpeg
-./ffmpeg_setup.sh
-./ffmpeg_premake.sh
-make -j8
+./ffmpeg_setup.sh &&
+./ffmpeg_premake.sh &&
+make -j8 &&
 make install
 
 
@@ -154,7 +154,11 @@ cp dldt/inference-engine/temp/tbb/lib/libtbb.so.2 create_wheel/cv2/
 
 cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
 
-cp mklml_lnx/lib/libmklml_gnu.so create/wheel/cv2/
+#cp mklml_lnx/lib/libmklml_gnu.so create/wheel/cv2/
+cp /usr/lib/x86_64-linux-gnu/libopenblasp-r0.2.20.so create_wheel/cv2/libopenblas.so.0
+cp /usr/lib/x86_64-linux-gnu/libgfortran.so.4.0.0 create_wheel/cv2/libgfortran.so.4
+cp /usr/lib/x86_64-linux-gnu/libquadmath.so.0.0.0 create_wheel/cv2/libquadmath.so.0
+
 
 
 cd create_wheel
