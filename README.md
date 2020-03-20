@@ -137,7 +137,6 @@ make -j8
 
 
 cd ../opencv
-ABS_PORTION=YOUR_ABSOLUTE_PATH_TO_opencv-python-inference-engine_dir ./opencv_setup.sh
 make -j8
 ```
 
