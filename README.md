@@ -166,6 +166,10 @@ cd create_wheel
 # change RPATH
 for i in  cv2/*.so; do chrpath -r '$ORIGIN' $i; done
 
+# add RPATH
+patchelf --set-rpath \$ORIGIN create_wheel/cv2/libopenblas.so.0
+patchelf --set-rpath \$ORIGIN create_wheel/cv2/libgfortran.so.4
+
 # final .whl will be in /create_wheel/dist/
 ../venv/bin/python3 setup.py bdist_wheel
 ```
