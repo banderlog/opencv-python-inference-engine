@@ -1,9 +1,12 @@
 #!/bin/bash
-if [[ -z "$ABS_PORTION" ]]; then
-    echo "You forgot to:"
-    echo "ABS_PORTION=%YOUR_ABSOLUTE_PATH_TO_opencv-python-inference-engine_dir% ./opencv_setup.sh"
-    exit
-fi
+
+tmp=$(pwd)
+ABS_PORTION=${tmp%%"/build/opencv"}
+#if [[ -z "$ABS_PORTION" ]]; then
+#    echo "You forgot to:"
+#    echo "ABS_PORTION=%YOUR_ABSOLUTE_PATH_TO_opencv-python-inference-engine_dir% ./opencv_setup.sh"
+#    exit
+#fi
 
 
 FFMPEG_PATH=$ABS_PORTION/build/ffmpeg/binaries
@@ -73,13 +76,13 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D WITH_VTK=OFF \
     -D BUILD_JPEG=OFF \
     -D WITH_CUDA=OFF \
-    -D WITH_ITT=ON \
+    -D WITH_ITT=OFF \
     -D WITH_IPP=ON \
+    -D WITH_NGRAPH=OFF \
     -D INF_ENGINE_INCLUDE_DIRS=$ABS_PORTION/dldt/inference-engine/include \
     -D INF_ENGINE_LIB_DIRS=$ABS_PORTION/dldt/bin/intel64/Release/lib \
     -D ngraph_DIR=$ABS_PORTION/build/dldt/ngraph \
     -D WITH_INF_ENGINE=ON \
     -D INF_ENGINE_RELEASE=2020010000 \
-    -D WITH_NGRAPH=ON \
     -D CPU_BASELINE=SSE4_2 \
     -D CPU_DISPATCH=AVX,AVX2,FP16,AVX512 ../../opencv

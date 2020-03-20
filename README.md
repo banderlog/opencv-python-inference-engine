@@ -104,10 +104,11 @@ I compiled it on Ubuntu 18.04 Linux Container.
 + `libusb-1.0-0-dev` (for dldt  >= 2019_R1.0.1)
 + `chrpath`
 + `patchelf`
++ `gfortran`
 
 ```
 sudo apt-get update
-sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath patchelf
+sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath patchelf gfortran
 ```
 **NB:** You will need ~6GB RAM and ~10GB disk space
 

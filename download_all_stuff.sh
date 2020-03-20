@@ -17,7 +17,7 @@ green "DOWNLOAD ALL STUFF"
 wget -c https://github.com/opencv/opencv/archive/4.2.0.tar.gz
 wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.2.2.tar.gz
 wget -c https://github.com/opencv/dldt/archive/2020.1.tar.gz
-wget -c https://github.com/intel/mkl-dnn/releases/download/v0.19/mklml_lnx_2019.0.5.20190502.tgz
+#wget -c https://github.com/intel/mkl-dnn/releases/download/v0.19/mklml_lnx_2019.0.5.20190502.tgz
 
 green "CLEAN LIB DIRS"
 rm -drf ./dldt/*
@@ -29,7 +29,7 @@ green "UNZIP ALL STUFF"
 tar -xf 2020.1.tar.gz --strip-components=1 -C ./dldt/
 tar -xf n4.2.2.tar.gz --strip-components=1 -C ./ffmpeg/
 tar -xf 4.2.0.tar.gz --strip-components=1 -C ./opencv/
-tar -xf mklml_lnx_2019.0.5.20190502.tgz --strip-components=1 -C ./mklml_lnx/
+#tar -xf mklml_lnx_2019.0.5.20190502.tgz --strip-components=1 -C ./mklml_lnx/
 
 green "GIT RESET FOR ade"
 cd ./dldt/inference-engine/thirdparty/ade

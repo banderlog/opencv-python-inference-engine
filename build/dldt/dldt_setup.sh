@@ -30,12 +30,14 @@
 # >We moved root CMakeLists.txt from dldt/inference-engine to dldt
 # >[name=<https://github.com/opencv/dldt/issues/284>]
 
+#    -D BLAS_INCLUDE_DIRS="/home/ubuntu/OpenBLAS-0.3.9/OUT/include/"\
+#    -D BLAS_LIBRARIES="/home/ubuntu/OpenBLAS-0.3.9/OUT/libopenblas.so.0" \
+
 cmake -D CMAKE_BUILD_TYPE=Release \
+    -D GEMM=OPENBLAS \
     -D THREADING=TBB \
     -D ENABLE_VPU=ON \
     -D ENABLE_MYRIAD=ON \
-    -D GEMM=MKL \
-    -D MKLROOT=/home/ubuntu/opencv-python-inference-engine/mklml_lnx/ \
     -D ENABLE_OPENCV=ON \
     -D ENABLE_MKL_DNN=ON \
     -D BUILD_SHARED_LIBS=OFF \
@@ -52,4 +54,7 @@ cmake -D CMAKE_BUILD_TYPE=Release \
     -D ENABLE_AVX2=ON \
     -D ENABLE_AVX512F=OFF \
     -D ENABLE_NGRAPH=ON \
+    -D NGRAPH_UNIT_TEST_ENABLE=OFF \
+    -D BLAS_LIBRARIES="/usr/lib/x86_64-linux-gnu/libopenblasp-r0.2.20.so" \
+    -D BLAS_INCLUDE_DIRS="/usr/include/x86_64-linux-gnu/" \
     -D ENABLE_CLDNN=OFF ../../dldt/
