@@ -81,13 +81,10 @@ I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass
 + `chrpath`
 + `libusb-1.0-0-dev` (for MYRIAD plugin)
 + `nasm` (for ffmpeg)
-+ `patchelf` (for openblas)
-+ `gfortran` (for openblas)
-+ `openblas` (for openblas)
 
 ```
 sudo apt-get update
-sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath patchelf gfortran libopenblas-dev
+sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath
 ```
 ### Preparing
 
@@ -99,7 +96,7 @@ sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 v
 
 ```bash
 cd openblas
-make FC=gfortran -j8 &&
+make -j8 &&
 make install PREFIX=../build/openblas
 
 cd ../build/ffmpeg
@@ -131,14 +128,7 @@ cp dldt/inference-engine/temp/tbb/lib/libtbb.so.2 create_wheel/cv2/
 
 cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
 
-#cp mklml_lnx/lib/libmklml_gnu.so create/wheel/cv2/
-cp build/openblas/lib/libopenblas.so.0 create_wheel/cv2/libopenblas.so.0
-cp /usr/lib/x86_64-linux-gnu/libgfortran.so.4.0.0 create_wheel/cv2/libgfortran.so.4
-cp /usr/lib/x86_64-linux-gnu/libquadmath.so.0.0.0 create_wheel/cv2/libquadmath.so.0
-
-# add RPATH
-patchelf --set-rpath \$ORIGIN create_wheel/cv2/libopenblas.so.0
-patchelf --set-rpath \$ORIGIN create_wheel/cv2/libgfortran.so.4
+cp build/openblas/lib/libopenblas.so.0 create_wheel/cv2/
 
 # change RPATH
 cd create_wheel
@@ -188,18 +178,13 @@ Our opensource MKL-DNN experiment will end with 125MB `libmklml_gnu.so` and infe
 
 #### OpenBLAS
 
-1. Download and compile OpenBLAS
-
-+ [Installation guide](https://github.com/xianyi/OpenBLAS/wiki/Installation-Guide)
-+ [User Manual](https://github.com/xianyi/OpenBLAS/wiki/User-Manual)
-
-Basically:
-```
-make FC=gfortran
-make install PREFIX=your_installation_directory
-```
-
+1. Download and compile OpenBLAS (as above)
 2. Set `D BLAS_LIBRARIES`, `-D BLAS_INCLUDE_DIRS`, `-D GEMM=OPENBLAS` (see `dldt_setup.sh` for details).
+
++ [OpenBLAS Installation guide](https://github.com/xianyi/OpenBLAS/wiki/Installation-Guide)
++ [OpenBLAS User Manual](https://github.com/xianyi/OpenBLAS/wiki/User-Manual)
+
+If you compile it with `make FC=gfortran`, you'll need to put `libgfortran.so.4` and `libquadmath.so.0` to wheel and set them rpath via `patchelf --set-rpath \$ORIGIN *.so`
 
 https://github.com/opencv/dldt/issues/428
 

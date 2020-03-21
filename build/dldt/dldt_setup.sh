@@ -1,11 +1,8 @@
-# GEMM (General matrix-matrix multiplication) kernel that computes a
-# scalar-matrix-matrix product and adds the result to a scalar-matrix product
-# GEMM should be set to MKL, OPENBLAS or JIT. Default option is JIT
+#!/bin/bash
+
+# GEMM (General matrix-matrix multiplication)
 #
-# -D BUILD_SHARED_LIBS=ON \ always crash
-#
-# >We moved root CMakeLists.txt from dldt/inference-engine to dldt
-# >[name=<https://github.com/opencv/dldt/issues/284>]
+# -D BUILD_SHARED_LIBS=ON always crash
 
 tmp=$(pwd)
 BLAS_LIB="${tmp%dldt}openblas/lib/libopenblas.so.0"

@@ -14,16 +14,28 @@ red () {
 }
 
 green "DOWNLOAD ALL STUFF"
-wget -c https://github.com/opencv/opencv/archive/4.2.0.tar.gz
-wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.2.2.tar.gz
-wget -c https://github.com/opencv/dldt/archive/2020.1.tar.gz
-wget -c https://github.com/xianyi/OpenBLAS/archive/v0.3.9.tar.gz
+#wget -c https://github.com/opencv/opencv/archive/4.2.0.tar.gz
+#wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.2.2.tar.gz
+#wget -c https://github.com/opencv/dldt/archive/2020.1.tar.gz
+#wget -c https://github.com/xianyi/OpenBLAS/archive/v0.3.9.tar.gz
 
 green "CLEAN LIB DIRS"
 rm -drf ./dldt/*
 rm -drf ./ffmpeg/*
 rm -drf ./opencv/*
-rm -drf ./mklml_lnx/*
+rm -drf ./openblas/*
+
+green "CLEAN BUILD DIRS"
+find build/dldt/ -mindepth 1 -not -name 'dldt_setup.sh' -delete
+find build/opencv/ -mindepth 1 -not -name 'opencv_setup.sh' -delete
+find build/ffmpeg/ -mindepth 1 -not -name 'ffmpeg_*.sh' -delete
+rm -drf build/openblas/*
+
+green "CLEAN WHEEL DIR"
+find create_wheel/cv2/ -type f -not -name '__init__.py' -delete
+rm -drf create_wheel/build
+rm -drf create_wheel/dist
+rm -drf create_wheel/*egg-info
 
 green "UNZIP ALL STUFF"
 tar -xf 2020.1.tar.gz --strip-components=1 -C ./dldt/
