@@ -95,12 +95,12 @@ sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 v
 ### Compilation
 
 ```bash
-cd openblas
+cd build/openblas
 ./openblas_setup.sh &&
 make -j8 &&
 make install
 
-cd ../build/ffmpeg
+cd ../ffmpeg
 ./ffmpeg_setup.sh &&
 ./ffmpeg_premake.sh &&
 make -j8 &&
