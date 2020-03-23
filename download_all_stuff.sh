@@ -14,10 +14,15 @@ red () {
 }
 
 green "DOWNLOAD ALL STUFF"
-#wget -c https://github.com/opencv/opencv/archive/4.2.0.tar.gz
-#wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.2.2.tar.gz
-#wget -c https://github.com/opencv/dldt/archive/2020.1.tar.gz
-#wget -c https://github.com/xianyi/OpenBLAS/archive/v0.3.9.tar.gz
+wget -c https://github.com/opencv/opencv/archive/4.2.0.tar.gz
+wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.2.2.tar.gz
+wget -c https://github.com/opencv/dldt/archive/2020.1.tar.gz
+
+green "GET OPENBLAS"
+cd ./openblas/
+git clone --single-branch -b develop https://github.com/xianyi/OpenBLAS ./
+git reset --hard 9f67d0
+cd ../
 
 green "CLEAN LIB DIRS"
 rm -drf ./dldt/*
@@ -41,7 +46,6 @@ green "UNZIP ALL STUFF"
 tar -xf 2020.1.tar.gz --strip-components=1 -C ./dldt/
 tar -xf n4.2.2.tar.gz --strip-components=1 -C ./ffmpeg/
 tar -xf 4.2.0.tar.gz --strip-components=1 -C ./opencv/
-tar -xf v0.3.9.tar.gz --strip-components=1 -C ./openblas/
 
 green "GIT RESET FOR ade"
 cd ./dldt/inference-engine/thirdparty/ade
