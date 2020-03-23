@@ -6,7 +6,7 @@
 
 tmp=$(pwd)
 BLAS_LIB="${tmp%dldt}openblas/lib/libopenblas.so.0"
-BLAS_INC="${tmp%dldt}openblas/include"
+BLAS_INC="${tmp%dldt}openblas/include/openblas"
 
 if [ ! -f $BLAS_LIB ] || [ ! -d $BLAS_INC ]; then
     echo "!!! Check paths for openblas lib !!!"
