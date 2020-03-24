@@ -1,6 +1,4 @@
 #!/bin/bash
-# Maybe, prefix should contain full absolute path
-# it will jelp to generate proper .pc files
 PATH_TO_SCRIPT=`dirname $(realpath $0)`
 
 ../../ffmpeg/configure \

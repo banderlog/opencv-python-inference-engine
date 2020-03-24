@@ -1,62 +1,41 @@
-# GEMM (General matrix-matrix multiplication) kernel that computes a
-# scalar-matrix-matrix product and adds the result to a scalar-matrix product
-# GEMM should be set to MKL, OPENBLAS or JIT. Default option is JIT
+#!/bin/bash
+
+# GEMM (General matrix-matrix multiplication)
 #
-# The GNA plugin was developed for low power scoring of neural networks on the
-# Intel® Speech Enabling Developer Kit, the Amazon Alexa* Premium Far-Field
-# Developer Kit, Intel® Pentium® Silver processor J5005, Intel® Celeron®
-# processor J4005, Intel® Core™ i3-8121U processor, and others.
-#
-# The Instrumentation and Tracing Technology (ITT) API enables your application
-# to generate and control the collection of trace data during its executio
-#
-# MKL-DNN -- plugin for CPU
-# CLDNN -- plugin for GPU
-#
-#  For MYRIAD PLUGING:
-#    -D ENABLE_VPU=ON \
-#    -D ENABLE_MYRIAD=ON \
-#
-# FOR CROSSCOMPILATION
-# `-D OpenCV_DIR=../../opencv`  is wrong
-#       NB: OpenCV_DIR is an environmental variable, not cmake's.
-#       And it should point to "The directory containing a CMake configuration file for OpenCV"
-#       something like `OpenCV_DIR=${CUSTOM_OPENCV_INSTALLATION_PATH}/lib/cmake/opencv4/ ./dldt_setup.sh`
-#       but to use it, you have to build OpenCV first.
-#       Thus it will be necessary to build opencv without dldtd, that build dldt than build opencv with dldtd
-#       That's too complicated and unneeded. Better auto-download binary libs for your system as it was before.
-#
-# -D BUILD_SHARED_LIBS=ON \ always crash
-#
-#  for ENABLE_SSE42/AVX2/AVX512F see dldt/inference-engine/src/extension/cmake/OptimizationFlags.cmake 
-#
-# if you'll set -D ENABLE_PLUGIN_RPATH=ON, you'll need to chrpath ~4 *.so, better to setrpath one .so
-#
-# >We moved root CMakeLists.txt from dldt/inference-engine to dldt
-# >[name=<https://github.com/opencv/dldt/issues/284>]
+# -D BUILD_SHARED_LIBS=ON always crash
+
+tmp=$(pwd)
+BLAS_LIB="${tmp%dldt}openblas/lib/libopenblas.so.0"
+BLAS_INC="${tmp%dldt}openblas/include/openblas"
+
+if [ ! -f $BLAS_LIB ] || [ ! -d $BLAS_INC ]; then
+    echo "!!! Check paths for openblas lib !!!"
+    echo "I tried: $BLAS_LIB and $BLAS_INC"
+    exit
+fi
 
 cmake -D CMAKE_BUILD_TYPE=Release \
-    -D THREADING=TBB \
-    -D ENABLE_VPU=ON \
-    -D ENABLE_MYRIAD=ON \
-    -D GEMM=JIT \
-    -D ENABLE_OPENCV=ON \
-    -D ENABLE_MKL_DNN=ON \
-    -D BUILD_SHARED_LIBS=OFF \
-    -D BUILD_TESTS=OFF \
-    -D ENABLE_PLUGIN_RPATH=OFF \
-    -D ENABLE_PYTHON=OFF \
-    -D ENABLE_TESTS=OFF \
-    -D ENABLE_SAMPLES=OFF \
-    -D ENABLE_STRESS_UNIT_TESTS=OFF \
-    -D ENABLE_GAPI_TESTS=OFF \
-    -D GAPI_TEST_PERF=OFF \
-    -D ENABLE_SEGMENTATION_TESTS=OFF \
-    -D ENABLE_OBJECT_DETECTION_TESTS=OFF \
-    -D ENABLE_GNA=OFF \
-    -D ENABLE_PROFILING_ITT=OFF \
-    -D ENABLE_ALTERNATIVE_TEMP=OFF \
-    -D ENABLE_SSE42=ON \
-    -D ENABLE_AVX2=ON \
-    -D ENABLE_AVX512F=OFF \
-    -D ENABLE_CLDNN=OFF ../../dldt/
+      -D GEMM=OPENBLAS \
+      -D THREADING=TBB \
+      -D ENABLE_VPU=ON \
+      -D ENABLE_MYRIAD=ON \
+      -D ENABLE_OPENCV=ON \
+      -D ENABLE_MKL_DNN=ON \
+      -D BUILD_SHARED_LIBS=OFF \
+      -D BUILD_TESTS=OFF \
+      -D ENABLE_PYTHON=OFF \
+      -D ENABLE_TESTS=OFF \
+      -D ENABLE_SAMPLES=OFF \
+      -D ENABLE_GAPI_TESTS=OFF \
+      -D GAPI_TEST_PERF=OFF \
+      -D ENABLE_GNA=OFF \
+      -D ENABLE_PROFILING_ITT=OFF \
+      -D ENABLE_ALTERNATIVE_TEMP=OFF \
+      -D ENABLE_SSE42=ON \
+      -D ENABLE_AVX2=ON \
+      -D ENABLE_AVX512F=OFF \
+      -D ENABLE_NGRAPH=ON \
+      -D NGRAPH_UNIT_TEST_ENABLE=OFF \
+      -D BLAS_LIBRARIES="$BLAS_LIB" \
+      -D BLAS_INCLUDE_DIRS="$BLAS_INC" \
+      -D ENABLE_CLDNN=OFF ../../dldt/
