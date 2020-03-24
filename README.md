@@ -2,7 +2,7 @@
 
 # opencv-python-inference-engine
 
-This is *Unofficial* pre-built OpenCV with inference engine module Python wheel.
+This is *Unofficial* pre-built OpenCV with the inference engine part of [dldt module](https://github.com/opencv/dldt/) package for Python.
 
 ## Installing from `pip3`
 
@@ -15,7 +15,9 @@ pip3 install opencv-python-inference-engine
 
 ## Why  
 
-I needed an ability to fast deploy a small package that able to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/) and use [Movidius NCS](https://software.intel.com/en-us/neural-compute-stick). Well known [opencv-python](https://github.com/skvark/opencv-python) can't do this. The official way is to use OpenVINO, but it is big and clumsy (just try to use it with python venv or fast download it on cloud instance).
+I needed an ability to fast deploy a small package that able to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/) and use [Movidius NCS](https://software.intel.com/en-us/neural-compute-stick).
+Wellr-known [opencv-python](https://github.com/skvark/opencv-python) can't do this.
+The official way is to use OpenVINO, but it is big and clumsy (just try to use it with python venv or fast download it on cloud instance).
 
 
 ## Description
@@ -41,7 +43,7 @@ I needed an ability to fast deploy a small package that able to run models from 
 ### Main differences from OpenVINO
 
 + No model-optimizer
-+ OPENBLAS instead of MKL (https://github.com/banderlog/opencv-python-inference-engine/issues)
++ OpenBLAS instead of MKL ([details](https://github.com/banderlog/opencv-python-inference-engine/issues))
 + No [ITT](https://software.intel.com/en-us/articles/intel-itt-api-open-source)
 + No [IPP](https://software.intel.com/en-us/ipp)
 + No [Intel Media SDK](https://software.intel.com/en-us/media-sdk)
@@ -54,14 +56,14 @@ For additional info read `cv2.getBuildInformation()` output.
 
 ### Versioning
 
-First 3 letters are the version of OpenCV, the last one -- package version. E.g, `4.1.0.2` -- 2nd version of based on 4.1.0 OpenCV package. Package versions are not continuously numbered -- each new OpenCV version starts its own numbering.
+The first 3 letters are the version of OpenCV, the last one -- package version. E.g, `4.1.0.2` -- 2nd version of based on 4.1.0 OpenCV package. Package versions are not continuously numbered -- each new OpenCV version starts its own numbering.
 
 
 ## Downloading intel models
 
-Official way is clamsy because you need to git clone the whole https://github.com/opencv/open_model_zoo (https://github.com/opencv/open_model_zoo/issues/522)
+The official way is clumsy because you need to git clone the whole [model_zoo](https://github.com/opencv/open_model_zoo) ([details](https://github.com/opencv/open_model_zoo/issues/522))
 
-Better to find model description [here](https://github.com/opencv/open_model_zoo/blob/master/models/intel/index.md) and download manually from [here](https://download.01.org/opencv/2020/openvinotoolkit/2020.1/open_model_zoo/models_bin/1/)
+Better to find a model description [here](https://github.com/opencv/open_model_zoo/blob/master/models/intel/index.md) and download manually from [here](https://download.01.org/opencv/2020/openvinotoolkit/2020.1/open_model_zoo/models_bin/1/)
 
 
 ## Compiling from source
@@ -162,7 +164,7 @@ Exporting `PKG_CONFIG_PATH` for `ffmpeg` somehow messes with default values.
 
 Just set `-D WITH_IPP=ON` in `opencv_setup.sh`.
 
-It will give +30MB to final `cv2.so` size. And it will boost _some_ opencv functions.
+It will give +30MB to the final `cv2.so` size. And it will boost _some_ opencv functions.
 
 ![](https://www.oreilly.com/library/view/learning-opencv-3/9781491937983/assets/lcv3_0105.png)
 (Image from [Learning OpenCV 3 by Gary Bradski, Adrian Kaehler](https://www.oreilly.com/library/view/learning-opencv-3/9781491937983/ch01.html))
@@ -175,19 +177,17 @@ You need to download MKL-DNN release and set two flags:`-D GEMM=MKL` , `-D MKLRO
 
 OpenVino comes with 30MB `libmkl_tiny_tbb.so`, but [you will not be able to compile it](https://github.com/intel/mkl-dnn/issues/674), because it made from proprietary MKL.
 
-Our opensource MKL-DNN experiment will end with 125MB `libmklml_gnu.so` and inference speed compatible to 35MB openblas ([details](https://github.com/banderlog/opencv-python-inference-engine/issues/5)).
+Our opensource MKL-DNN experiment will end with 125MB `libmklml_gnu.so` and inference speed compatible with 35MB openblas ([details](https://github.com/banderlog/opencv-python-inference-engine/issues/5)).
 
 #### OpenBLAS
 
-1. Download and compile OpenBLAS (as above)
-2. Set `D BLAS_LIBRARIES`, `-D BLAS_INCLUDE_DIRS`, `-D GEMM=OPENBLAS` (see `dldt_setup.sh` for details).
+Please refer here for details: https://github.com/xianyi/OpenBLAS/issues/2528
 
 + [OpenBLAS Installation guide](https://github.com/xianyi/OpenBLAS/wiki/Installation-Guide)
 + [OpenBLAS User Manual](https://github.com/xianyi/OpenBLAS/wiki/User-Manual)
 
 If you compile it with `make FC=gfortran`, you'll need to put `libgfortran.so.4` and `libquadmath.so.0` to wheel and set them rpath via `patchelf --set-rpath \$ORIGIN *.so`
 
-https://github.com/opencv/dldt/issues/428
 
 #### CUDA
 
@@ -199,9 +199,13 @@ I did not try it.
 
 #### Build `ffmpeg` with `tbb`
 
-Both `dldt` and `opencv` are compiled with `tbb` support, and `ffmpeg` compiled without it -- this does not feels right.
+Both `dldt` and `opencv` are compiled with `tbb` support, and `ffmpeg` compiled without it -- this does not feel right.
 There is some unproved solution for how to compile `ffmpeg` with `tbb` support: <https://stackoverflow.com/questions/6049798/ffmpeg-mt-and-tbb>  
 
+
+#### OpenMP
+
+It is possible to compile OpenBLAS, dldt and OpenCV with OpenMP. I am not sure that the result would be better than now, but who knows.
 
 #### Use opencv for NLP
 
