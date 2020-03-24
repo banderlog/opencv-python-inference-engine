@@ -88,6 +88,7 @@ I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass
 sudo apt-get update
 sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath
 ```
+
 ### Preparing
 
 1. `git clone https://github.com/banderlog/opencv-python-inference-engine`
