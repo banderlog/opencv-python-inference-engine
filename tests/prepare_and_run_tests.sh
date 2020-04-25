@@ -60,16 +60,33 @@ declare -a models=("text-detection-0004.xml"
 url_start="https://download.01.org/opencv/2020/openvinotoolkit/2020.1/open_model_zoo/models_bin/1"
 
 for i in "${models[@]}"; do
+    # if no such file
     if [ ! -f $i ]; then
+	# download
         wget "${url_start}/${i%.*}/FP32/${i}"
     else
+	# checksum
         sha256sum -c "${i}.sha256sum"
     fi
 done
 
+
 # for speed test
-wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1vbonFjVyleGRSd_wR-Khc1htsZybiHCG' -O se_net.bin
-wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Bz3EQwnes_iZ14iKAV6H__JZ2lynLmQz' -O se_net.xml
+# {filename: file_google_drive_id}
+declare -A se_net=(["se_net.bin"]="1vbonFjVyleGRSd_wR-Khc1htsZybiHCG"
+		   ["se_net.xml"]="1Bz3EQwnes_iZ14iKAV6H__JZ2lynLmQz")
+
+# for each key
+for i in "${!se_net[@]}"; do
+    # if file exist
+    if [ -f $i ]; then
+        # checksum
+        sha256sum -c "${i}.sha256sum"
+    else
+        # get fileid from associative array and download file
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=${se_net[$i]}" -O $i
+    fi
+done
 
 green "RUN TESTS with ./venv_t/bin/python ./tests.py"
 ./venv_t/bin/python ./tests.py
