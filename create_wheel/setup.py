@@ -15,11 +15,11 @@ class EmptyListWithLength(list):
 
 setuptools.setup(
     name="opencv-python-inference-engine",
-    version="4.2.0.4",
+    version="4.3.0.1",
     url="https://github.com/banderlog/opencv-python-inference-engine",
     maintainer="Kabakov Borys",
     license='MIT, BSD, Intel Simplified Software License',
-    description="Wrapper package for OpenCV 4.2.0 with Inference Engine 2020.1 python bindings",
+    description="Wrapper package for OpenCV 4.3.0 with Inference Engine 2020.2 python bindings",
     long_description=long_description,
     long_description_content_type="text/markdown",
     ext_modules=EmptyListWithLength(),

@@ -14,6 +14,8 @@ if [ ! -f $BLAS_LIB ] || [ ! -d $BLAS_INC ]; then
     exit
 fi
 
+# Manually-specified variables were not used by the project:
+# -D ENABLE_NGRAPH=ON \
 cmake -D CMAKE_BUILD_TYPE=Release \
       -D GEMM=OPENBLAS \
       -D THREADING=TBB \
@@ -34,8 +36,9 @@ cmake -D CMAKE_BUILD_TYPE=Release \
       -D ENABLE_SSE42=ON \
       -D ENABLE_AVX2=ON \
       -D ENABLE_AVX512F=OFF \
-      -D ENABLE_NGRAPH=ON \
       -D NGRAPH_UNIT_TEST_ENABLE=OFF \
+      -D NGRAPH_ONNX_IMPORT_ENABLE=ON \
+      -D NGRAPH_JSON_ENABLE=ON \
       -D BLAS_LIBRARIES="$BLAS_LIB" \
       -D BLAS_INCLUDE_DIRS="$BLAS_INC" \
       -D ENABLE_CLDNN=OFF ../../dldt/

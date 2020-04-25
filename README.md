@@ -43,7 +43,7 @@ The official way is to use OpenVINO, but it is big and clumsy (just try to use i
 ### Main differences from OpenVINO
 
 + No model-optimizer
-+ OpenBLAS instead of MKL ([details](https://github.com/banderlog/opencv-python-inference-engine/issues))
++ OpenBLAS instead of MKL ([details](https://github.com/banderlog/opencv-python-inference-engine/issues/5#issuecomment-599563729))
 + No [ITT](https://software.intel.com/en-us/articles/intel-itt-api-open-source)
 + No [IPP](https://software.intel.com/en-us/ipp)
 + No [Intel Media SDK](https://software.intel.com/en-us/media-sdk)
@@ -74,8 +74,13 @@ I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass
 
 ### Requirements
 
+From [opencv](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html), [dldt](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html),
+ [ffmpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), [openBLAS](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu) and [ngraph](https://www.ngraph.ai/documentation/buildlb)
+
 + `build-essential`
-+ `cmake`
++ `>=cmake-3.11`
++ `autoconf` (for ngraph)
++ `libtool-bin` (for ngraph)
 + `git`
 + `pkg-config`
 + `python3-dev`
@@ -84,9 +89,17 @@ I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass
 + `libusb-1.0-0-dev` (for MYRIAD plugin)
 + `nasm` (for ffmpeg)
 
-```
+```bash
+# We need newer `cmake` for dldt (commands from  <https://apt.kitware.com/>)
+wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
+sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+
 sudo apt-get update
-sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath
+sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath autoconf libtool-bin
+
+# for ngraph
+# the `dldt/_deps/ext_onnx-src/onnx/gen_proto.py` has `#!/usr/bin/env python` string and will throw an error otherwise
+sudo ln -s  /usr/bin/python3 /usr/bin/python
 ```
 
 ### Preparing

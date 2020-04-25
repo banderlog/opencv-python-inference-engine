@@ -14,9 +14,10 @@ red () {
 }
 
 green "DOWNLOAD ALL ARCHIVES"
-wget -c https://github.com/opencv/opencv/archive/4.2.0.tar.gz
-wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.2.2.tar.gz
-wget -c https://github.com/opencv/dldt/archive/2020.1.tar.gz
+wget -c https://github.com/opencv/opencv/archive/4.3.0.tar.gz -O opencv.tar.gz
+wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.2.2.tar.gz -O ffmpeg.tar.gz
+wget -c https://github.com/openvinotoolkit/openvino/archive/2020.2.tar.gz -O dldt.tar.gz
+
 
 green "CLEAN LIB DIRS"
 rm -drf ./dldt/*
@@ -37,9 +38,9 @@ rm -drf create_wheel/dist
 rm -drf create_wheel/*egg-info
 
 green "UNZIP ALL STUFF"
-tar -xf 2020.1.tar.gz --strip-components=1 -C ./dldt/
-tar -xf n4.2.2.tar.gz --strip-components=1 -C ./ffmpeg/
-tar -xf 4.2.0.tar.gz --strip-components=1 -C ./opencv/
+tar -xf dldt.tar.gz --strip-components=1 -C ./dldt/
+tar -xf ffmpeg.tar.gz --strip-components=1 -C ./ffmpeg/
+tar -xf opencv.tar.gz --strip-components=1 -C ./opencv/
 
 green "GIT RESET FOR ade"
 cd ./dldt/inference-engine/thirdparty/ade
@@ -49,12 +50,12 @@ git reset --hard cbe2db6
 green "GIT RESET FOR ngraph"
 cd ../../../ngraph
 git clone https://github.com/NervanaSystems/ngraph ./
-git reset --hard b0bb801
+git reset --hard edc65ca
 
 green "GET RESET FOR OpenBLAS"
 cd ../../openblas/
 git clone --single-branch -b develop https://github.com/xianyi/OpenBLAS ./
-git reset --hard 9f67d0
+git reset --hard 9f67d03  # 2020-Mar-23
 
 green "CREATE VENV"
 cd ../

@@ -67,6 +67,10 @@ for i in "${models[@]}"; do
     fi
 done
 
+# for speed test
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1vbonFjVyleGRSd_wR-Khc1htsZybiHCG' -O se_net.bin
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Bz3EQwnes_iZ14iKAV6H__JZ2lynLmQz' -O se_net.xml
 
 green "RUN TESTS with ./venv_t/bin/python ./tests.py"
 ./venv_t/bin/python ./tests.py
+./venv_t/bin/ipython ./speed_test.py
