@@ -191,7 +191,7 @@ You need to download MKL-DNN release and set two flags:`-D GEMM=MKL` , `-D MKLRO
 
 OpenVino comes with 30MB `libmkl_tiny_tbb.so`, but [you will not be able to compile it](https://github.com/intel/mkl-dnn/issues/674), because it made from proprietary MKL.
 
-Our opensource MKL-DNN experiment will end with 125MB `libmklml_gnu.so` and inference speed compatible with 35MB openblas ([details](https://github.com/banderlog/opencv-python-inference-engine/issues/5)).
+Our opensource MKL-DNN experiment will end with 125MB `libmklml_gnu.so` and inference speed compatible with 5MB openblas ([details](https://github.com/banderlog/opencv-python-inference-engine/issues/5)).
 
 #### OpenBLAS
 
