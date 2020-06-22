@@ -15,15 +15,16 @@ red () {
 
 green "DOWNLOAD ALL ARCHIVES"
 wget -c https://github.com/opencv/opencv/archive/4.3.0.tar.gz -O opencv.tar.gz
-wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.2.2.tar.gz -O ffmpeg.tar.gz
-wget -c https://github.com/openvinotoolkit/openvino/archive/2020.2.tar.gz -O dldt.tar.gz
+wget -c https://github.com/openvinotoolkit/openvino/archive/2020.3.0.tar.gz -O dldt.tar.gz
+wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.3.tar.gz -O ffmpeg.tar.gz
+wget -c https://github.com/xianyi/OpenBLAS/archive/v0.3.10.tar.gz -O openblas.tar.gz
 
 
 green "CLEAN LIB DIRS"
 rm -drf ./dldt/*
 rm -drf ./ffmpeg/*
 rm -drf ./opencv/*
-find ./openblas/ -mindepth 1 -delete
+rm -drf ./openblas/*
 
 green "CLEAN BUILD DIRS"
 find build/dldt/ -mindepth 1 -not -name 'dldt_setup.sh' -delete
@@ -38,9 +39,10 @@ rm -drf create_wheel/dist
 rm -drf create_wheel/*egg-info
 
 green "UNZIP ALL STUFF"
+tar -xf opencv.tar.gz --strip-components=1 -C ./opencv/
 tar -xf dldt.tar.gz --strip-components=1 -C ./dldt/
 tar -xf ffmpeg.tar.gz --strip-components=1 -C ./ffmpeg/
-tar -xf opencv.tar.gz --strip-components=1 -C ./opencv/
+tar -xf openblas.tar.gz --strip-components=1 -C ./openblas/
 
 green "GIT RESET FOR ade"
 cd ./dldt/inference-engine/thirdparty/ade
@@ -51,11 +53,6 @@ green "GIT RESET FOR ngraph"
 cd ../../../ngraph
 git clone https://github.com/NervanaSystems/ngraph ./
 git reset --hard edc65ca
-
-green "GET RESET FOR OpenBLAS"
-cd ../../openblas/
-git clone --single-branch -b develop https://github.com/xianyi/OpenBLAS ./
-git reset --hard 9f67d03  # 2020-Mar-23
 
 green "CREATE VENV"
 cd ../
