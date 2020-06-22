@@ -1,4 +1,4 @@
-tensorflow-cpu
+tensorflow-cpu==2.2.0
+scipy==1.4.1
 scikit-image
-scipy
 ipython
