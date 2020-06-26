@@ -22,7 +22,7 @@ if ([ ! $# -ge 1 ] && ! $(ls ../create_wheel/dist/opencv_python_inference_engine
     exit 1
 fi
 
-
+echo "======================================================================"
 green "CREATE SEPARATE TEST VENV"
 if [ ! -d ./venv_t ]; then
 	virtualenv --clear --always-copy -p /usr/bin/python3 ./venv_t
@@ -88,6 +88,8 @@ for i in "${!se_net[@]}"; do
     fi
 done
 
+green "For \"$1\""
 green "RUN TESTS with ./venv_t/bin/python ./tests.py"
 ./venv_t/bin/python ./tests.py
+green "RUN TESTS with ./venv_t/bin/python ./speed_test.py"
 ./venv_t/bin/ipython ./speed_test.py
