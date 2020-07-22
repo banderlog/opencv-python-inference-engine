@@ -17,18 +17,8 @@ red () {
 
 ROOT_DIR=$(pwd)
 
-green "DOWNLOAD ALL ARCHIVES"
-wget -c https://github.com/opencv/opencv/archive/4.4.0.tar.gz -O opencv.tar.gz
-wget -c https://github.com/openvinotoolkit/openvino/archive/2020.4.tar.gz -O dldt.tar.gz
-wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.3.1.tar.gz -O ffmpeg.tar.gz
-wget -c https://github.com/xianyi/OpenBLAS/archive/v0.3.10.tar.gz -O openblas.tar.gz
-
-
-green "CLEAN LIB DIRS"
-rm -drf ./dldt/*
-rm -drf ./ffmpeg/*
-rm -drf ./opencv/*
-rm -drf ./openblas/*
+green "RESET GIT SUBMODULES"
+git submodule update --init --recursive
 
 green "CLEAN BUILD DIRS"
 find build/dldt/ -mindepth 1 -not -name 'dldt_setup.sh' -delete
@@ -41,27 +31,6 @@ find create_wheel/cv2/ -type f -not -name '__init__.py' -delete
 rm -drf create_wheel/build
 rm -drf create_wheel/dist
 rm -drf create_wheel/*egg-info
-
-green "UNZIP ALL STUFF"
-tar -xf opencv.tar.gz --strip-components=1 -C ./opencv/
-tar -xf dldt.tar.gz --strip-components=1 -C ./dldt/
-tar -xf ffmpeg.tar.gz --strip-components=1 -C ./ffmpeg/
-tar -xf openblas.tar.gz --strip-components=1 -C ./openblas/
-
-green "GIT RESET FOR ade"
-cd ./dldt/inference-engine/thirdparty/ade
-git clone https://github.com/opencv/ade/ ./
-git reset --hard cbe2db6
-
-green "GIT RESET FOR mkl-dnn"
-cd ../mkl-dnn
-git clone https://github.com/openvinotoolkit/oneDNN/ ./
-git reset --hard 2706f56
-
-green "GIT RESET FOR IE samples gflags"
-cd ../../samples/thirdparty/gflags/
-git clone https://github.com/gflags/gflags ./
-git reset --hard 46f73f8
 
 
 green "CREATE VENV"
