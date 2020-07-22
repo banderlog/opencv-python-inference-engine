@@ -104,9 +104,11 @@ sudo ln -s  /usr/bin/python3 /usr/bin/python
 
 ### Preparing
 
-1. `git clone https://github.com/banderlog/opencv-python-inference-engine`
-2. `cd opencv-python-inference-engine`
-3. run `download_all_stuff.sh` (refer for script code for details)
+```bash
+git clone https://github.com/banderlog/opencv-python-inference-engine
+cd opencv-python-inference-engine
+./download_all_stuff.sh
+```
 
 ### Compilation
 
@@ -126,6 +128,7 @@ cd ../dldt
 ./dldt_setup.sh &&
 make -j6
 
+# NB: check `-D INF_ENGINE_RELEASE` value
 cd ../opencv
 ./opencv_setup.sh &&
 make -j6
