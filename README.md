@@ -113,22 +113,22 @@ sudo ln -s  /usr/bin/python3 /usr/bin/python
 ```bash
 cd build/openblas
 ./openblas_setup.sh &&
-make -j8 &&
+make -j6 &&
 make install
 
 cd ../ffmpeg
 ./ffmpeg_setup.sh &&
 ./ffmpeg_premake.sh &&
-make -j8 &&
+make -j6 &&
 make install
 
 cd ../dldt
 ./dldt_setup.sh &&
-make -j8
+make -j6
 
 cd ../opencv
 ./opencv_setup.sh &&
-make -j8
+make -j6
 ```
 
 ### Wheel creation

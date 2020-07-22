@@ -9,14 +9,18 @@ green () {
   echo -e "${green}${1}${end}"
 }
 
+
 red () {
   echo -e "${red}${1}${end}"
 }
 
+
+ROOT_DIR=$(pwd)
+
 green "DOWNLOAD ALL ARCHIVES"
-wget -c https://github.com/opencv/opencv/archive/4.3.0.tar.gz -O opencv.tar.gz
-wget -c https://github.com/openvinotoolkit/openvino/archive/2020.3.0.tar.gz -O dldt.tar.gz
-wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.3.tar.gz -O ffmpeg.tar.gz
+wget -c https://github.com/opencv/opencv/archive/4.4.0.tar.gz -O opencv.tar.gz
+wget -c https://github.com/openvinotoolkit/openvino/archive/2020.4.tar.gz -O dldt.tar.gz
+wget -c https://github.com/FFmpeg/FFmpeg/archive/n4.3.1.tar.gz -O ffmpeg.tar.gz
 wget -c https://github.com/xianyi/OpenBLAS/archive/v0.3.10.tar.gz -O openblas.tar.gz
 
 
@@ -49,13 +53,19 @@ cd ./dldt/inference-engine/thirdparty/ade
 git clone https://github.com/opencv/ade/ ./
 git reset --hard cbe2db6
 
-green "GIT RESET FOR ngraph"
-cd ../../../ngraph
-git clone https://github.com/NervanaSystems/ngraph ./
-git reset --hard edc65ca
+green "GIT RESET FOR mkl-dnn"
+cd ../mkl-dnn
+git clone https://github.com/openvinotoolkit/oneDNN/ ./
+git reset --hard 2706f56
+
+green "GIT RESET FOR IE samples gflags"
+cd ../../samples/thirdparty/gflags/
+git clone https://github.com/gflags/gflags ./
+git reset --hard 46f73f8
+
 
 green "CREATE VENV"
-cd ../
+cd $ROOT_DIR
 
 if [[ ! -d ./venv ]]; then
 	virtualenv --clear --always-copy -p /usr/bin/python3 ./venv
