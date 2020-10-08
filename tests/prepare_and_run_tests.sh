@@ -12,6 +12,7 @@ red () {
   echo -e "${red}${1}${end}"
 }
 
+
 # check if (no ARG and no some appropriate files are compiled) or
 # (some args provided but arg1 is not existing file)
 # of course, you could shoot your leg here in different ways
@@ -33,13 +34,14 @@ green "INSTALLING DEPENDENCIES"
 if [ $1 ]; then
     # install ARGV1
     green "Installing from provided path"
-    ./venv_t/bin/pip3 install --force-reinstall "$1"
+    WHEEL="$1"
 else
     # install compiled wheel
     green "Installing from default path"
-    ./venv_t/bin/pip3 install --force-reinstall ../create_wheel/dist/opencv_python_inference_engine*.whl
+    WHEEL=$(realpath ../create_wheel/dist/opencv_python_inference_engine*.whl)
 fi
 
+./venv_t/bin/pip3 install --force-reinstall "$WHEEL"
 ./venv_t/bin/pip3 install -r requirements.txt
 
 
@@ -88,7 +90,7 @@ for i in "${!se_net[@]}"; do
     fi
 done
 
-green "For \"$1\""
+green "For \"$WHEEL\""
 green "RUN TESTS with ./venv_t/bin/python ./tests.py"
 ./venv_t/bin/python ./tests.py
 green "RUN TESTS with ./venv_t/bin/python ./speed_test.py"

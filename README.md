@@ -156,6 +156,7 @@ cd create_wheel
 for i in  cv2/*.so; do chrpath -r '$ORIGIN' $i; done
 
 # final .whl will be in /create_wheel/dist/
+# NB: check versions in the `setup.py`
 ../venv/bin/python3 setup.py bdist_wheel
 ```
 
