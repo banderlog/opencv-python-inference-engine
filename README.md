@@ -16,7 +16,7 @@ pip3 install opencv-python-inference-engine
 ## Why  
 
 I needed an ability to fast deploy a small package that able to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/) and use [Movidius NCS](https://software.intel.com/en-us/neural-compute-stick).
-Wellr-known [opencv-python](https://github.com/skvark/opencv-python) can't do this.
+Well-known [opencv-python](https://github.com/skvark/opencv-python) can't do this.
 The official way is to use OpenVINO, but it is big and clumsy (just try to use it with python venv or fast download it on cloud instance).
 
 
@@ -68,7 +68,7 @@ Better to find a model description [here](https://github.com/opencv/open_model_z
 
 ## Compiling from source
 
-You will need ~6GB RAM and ~10GB disk space
+You will need ~7GB RAM and ~10GB disk space
 
 I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass launch -c 6 -d 10G -m 7G`.
 
