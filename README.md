@@ -91,11 +91,12 @@ From [opencv](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html)
 
 ```bash
 # We need newer `cmake` for dldt (commands from  <https://apt.kitware.com/>)
-wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
-sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+sudo apt remove --purge cmake
+hash -r
+sudo snap install cmake --classic
 
 sudo apt-get update
-sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath autoconf libtool-bin
+sudo apt install build-essential git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath autoconf libtool-bin
 
 # for ngraph
 # the `dldt/_deps/ext_onnx-src/onnx/gen_proto.py` has `#!/usr/bin/env python` string and will throw an error otherwise
