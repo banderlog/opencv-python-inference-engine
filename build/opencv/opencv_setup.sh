@@ -5,6 +5,8 @@
 #
 # -DINF_ENGINE_RELEASE= should match dldt version
 # See <https://github.com/opencv/dldt/issues/248#issuecomment-590102331>
+# From <https://github.com/opencv/opencv/blob/c8ebe0eb86fca1c2de9de516e27be685eaba3e69/cmake/OpenCVDetectInferenceEngine.cmake#L134>
+# 	"Force IE version, should be in form YYYYAABBCC (e.g. 2020.1.0.2 -> 2020010002)")
 
 tmp=$(pwd)
 ABS_PORTION=${tmp%%"/build/opencv"}

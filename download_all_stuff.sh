@@ -18,7 +18,7 @@ red () {
 ROOT_DIR=$(pwd)
 
 green "RESET GIT SUBMODULES"
-# use `git checkout tags/<tag>` for update
+# use `git pull && git checkout tags/<tag>` for update
 git submodule update --init --recursive
 
 green "CLEAN BUILD DIRS"

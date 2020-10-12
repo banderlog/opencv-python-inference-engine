@@ -130,6 +130,7 @@ cd ../dldt
 make -j6
 
 # NB: check `-D INF_ENGINE_RELEASE` value
+# should be in form YYYYAABBCC (e.g. 2020.1.0.2 -> 2020010002)")
 cd ../opencv
 ./opencv_setup.sh &&
 make -j6
