@@ -33,7 +33,6 @@ rm -drf create_wheel/build
 rm -drf create_wheel/dist
 rm -drf create_wheel/*egg-info
 
-
 green "CREATE VENV"
 cd $ROOT_DIR
 
