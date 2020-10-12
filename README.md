@@ -16,7 +16,7 @@ pip3 install opencv-python-inference-engine
 ## Why  
 
 I needed an ability to fast deploy a small package that able to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/) and use [Movidius NCS](https://software.intel.com/en-us/neural-compute-stick).
-Wellr-known [opencv-python](https://github.com/skvark/opencv-python) can't do this.
+Well-known [opencv-python](https://github.com/skvark/opencv-python) can't do this.
 The official way is to use OpenVINO, but it is big and clumsy (just try to use it with python venv or fast download it on cloud instance).
 
 
@@ -68,7 +68,7 @@ Better to find a model description [here](https://github.com/opencv/open_model_z
 
 ## Compiling from source
 
-You will need ~6GB RAM and ~10GB disk space
+You will need ~7GB RAM and ~10GB disk space
 
 I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass launch -c 6 -d 10G -m 7G`.
 
@@ -91,11 +91,12 @@ From [opencv](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html)
 
 ```bash
 # We need newer `cmake` for dldt (commands from  <https://apt.kitware.com/>)
-wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
-sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+sudo apt remove --purge cmake
+hash -r
+sudo snap install cmake --classic
 
 sudo apt-get update
-sudo apt install build-essential cmake git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath autoconf libtool-bin
+sudo apt install build-essential git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath autoconf libtool-bin
 
 # for ngraph
 # the `dldt/_deps/ext_onnx-src/onnx/gen_proto.py` has `#!/usr/bin/env python` string and will throw an error otherwise
@@ -104,9 +105,11 @@ sudo ln -s  /usr/bin/python3 /usr/bin/python
 
 ### Preparing
 
-1. `git clone https://github.com/banderlog/opencv-python-inference-engine`
-2. `cd opencv-python-inference-engine`
-3. run `download_all_stuff.sh` (refer for script code for details)
+```bash
+git clone https://github.com/banderlog/opencv-python-inference-engine
+cd opencv-python-inference-engine
+./download_all_stuff.sh
+```
 
 ### Compilation
 
@@ -126,6 +129,8 @@ cd ../dldt
 ./dldt_setup.sh &&
 make -j6
 
+# NB: check `-D INF_ENGINE_RELEASE` value
+# should be in form YYYYAABBCC (e.g. 2020.1.0.2 -> 2020010002)")
 cd ../opencv
 ./opencv_setup.sh &&
 make -j6
@@ -152,6 +157,7 @@ cd create_wheel
 for i in  cv2/*.so; do chrpath -r '$ORIGIN' $i; done
 
 # final .whl will be in /create_wheel/dist/
+# NB: check versions in the `setup.py`
 ../venv/bin/python3 setup.py bdist_wheel
 ```
 

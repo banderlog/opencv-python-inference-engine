@@ -1,0 +1,12 @@
+[submodule "dldt"]
+	path = dldt
+	url = https://github.com/openvinotoolkit/openvino
+[submodule "opencv"]
+	path = opencv
+	url = https://github.com/opencv/opencv
+[submodule "openblas"]
+	path = openblas
+	url = https://github.com/xianyi/OpenBLAS
+[submodule "ffmpeg"]
+	path = ffmpeg
+	url = https://github.com/FFmpeg/FFmpeg

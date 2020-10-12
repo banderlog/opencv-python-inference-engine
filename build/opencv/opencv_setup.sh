@@ -5,6 +5,8 @@
 #
 # -DINF_ENGINE_RELEASE= should match dldt version
 # See <https://github.com/opencv/dldt/issues/248#issuecomment-590102331>
+# From <https://github.com/opencv/opencv/blob/c8ebe0eb86fca1c2de9de516e27be685eaba3e69/cmake/OpenCVDetectInferenceEngine.cmake#L134>
+# 	"Force IE version, should be in form YYYYAABBCC (e.g. 2020.1.0.2 -> 2020010002)")
 
 tmp=$(pwd)
 ABS_PORTION=${tmp%%"/build/opencv"}
@@ -73,7 +75,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D WITH_NGRAPH=ON \
       -D ngraph_DIR=$ABS_PORTION/build/dldt/ngraph \
       -D WITH_INF_ENGINE=ON \
-      -D INF_ENGINE_RELEASE=2020040000 \
+      -D INF_ENGINE_RELEASE=2021010000 \
       -D INF_ENGINE_INCLUDE_DIRS=$ABS_PORTION/dldt/inference-engine/include \
       -D INF_ENGINE_LIB_DIRS=$ABS_PORTION/dldt/bin/intel64/Release/lib \
       -D CPU_BASELINE=SSE4_2 \
