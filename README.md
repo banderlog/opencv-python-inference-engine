@@ -186,9 +186,6 @@ Just set `-D WITH_IPP=ON` in `opencv_setup.sh`.
 
 It will give +30MB to the final `cv2.so` size. And it will boost _some_ opencv functions.
 
-![](https://www.oreilly.com/library/view/learning-opencv-3/9781491937983/assets/lcv3_0105.png)
-(Image from [Learning OpenCV 3 by Gary Bradski, Adrian Kaehler](https://www.oreilly.com/library/view/learning-opencv-3/9781491937983/ch01.html))
-
 [Official Intel's IPP benchmarks](https://software.intel.com/en-us/ipp/benchmarks) (may ask for registration)
 
 #### MKL
