@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Build ffmpeg shared libraries without version suffix
 # from <https://stackoverflow.com/a/36937360/7599215>
 
