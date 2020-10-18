@@ -90,7 +90,7 @@ From [opencv](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html)
 + `nasm` (for ffmpeg)
 
 ```bash
-# We need newer `cmake` for dldt (commands from  <https://apt.kitware.com/>)
+# We need newer `cmake` for dldt (fastest way I know)
 sudo apt remove --purge cmake
 hash -r
 sudo snap install cmake --classic
@@ -180,7 +180,7 @@ Make next changes in `opencv-python-inference-engine/build/opencv/opencv_setup.s
 
 Exporting `PKG_CONFIG_PATH` for `ffmpeg` somehow messes with default values.
 
-#### IPP
+#### [IPP](https://answers.opencv.org/question/12811/whats-exactly-the-opencv-ipp-integration/)
 
 Just set `-D WITH_IPP=ON` in `opencv_setup.sh`.
 
@@ -199,34 +199,15 @@ OpenVino comes with 30MB `libmkl_tiny_tbb.so`, but [you will not be able to comp
 
 Our opensource MKL-DNN experiment will end with 125MB `libmklml_gnu.so` and inference speed compatible with 5MB openblas ([details](https://github.com/banderlog/opencv-python-inference-engine/issues/5)).
 
-#### OpenBLAS
-
-Please refer here for details: https://github.com/xianyi/OpenBLAS/issues/2528
-
-+ [OpenBLAS Installation guide](https://github.com/xianyi/OpenBLAS/wiki/Installation-Guide)
-+ [OpenBLAS User Manual](https://github.com/xianyi/OpenBLAS/wiki/User-Manual)
-
-If you compile it with `make FC=gfortran`, you'll need to put `libgfortran.so.4` and `libquadmath.so.0` to wheel and set them rpath via `patchelf --set-rpath \$ORIGIN *.so`
-
 
 #### CUDA
 
-I did not try it.
+I did not try it. And it is not in the package for certain [reasons](https://github.com/banderlog/opencv-python-inference-engine/issues/9).
 
 + [Compile OpenCV’s ‘dnn’ module with NVIDIA GPU support](https://www.pyimagesearch.com/2020/02/10/opencv-dnn-with-nvidia-gpus-1549-faster-yolo-ssd-and-mask-r-cnn/)
 + [Use OpenCV’s ‘dnn’ module with NVIDIA GPUs, CUDA, and cuDNN](https://www.pyimagesearch.com/2020/02/03/how-to-use-opencvs-dnn-module-with-nvidia-gpus-cuda-and-cudnn/)
 
 
-#### Build `ffmpeg` with `tbb`
-
-Both `dldt` and `opencv` are compiled with `tbb` support, and `ffmpeg` compiled without it -- this does not feel right.
-There is some unproved solution for how to compile `ffmpeg` with `tbb` support: <https://stackoverflow.com/questions/6049798/ffmpeg-mt-and-tbb>  
-
-
 #### OpenMP
 
 It is possible to compile OpenBLAS, dldt and OpenCV with OpenMP. I am not sure that the result would be better than now, but who knows.
-
-#### Use opencv for NLP
-
-Presumably, you could also use speech2text model now -- [source](https://docs.openvinotoolkit.org/latest/_inference_engine_samples_speech_libs_and_demos_Speech_libs_and_demos.html)
