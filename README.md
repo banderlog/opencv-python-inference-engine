@@ -180,7 +180,9 @@ Make next changes in `opencv-python-inference-engine/build/opencv/opencv_setup.s
 
 Exporting `PKG_CONFIG_PATH` for `ffmpeg` somehow messes with default values.
 
-#### [IPP](https://answers.opencv.org/question/12811/whats-exactly-the-opencv-ipp-integration/)
+It will add ~16MB to the package.
+
+#### Integrated Performance Primitives
 
 Just set `-D WITH_IPP=ON` in `opencv_setup.sh`.
 
