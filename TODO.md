@@ -4,3 +4,4 @@
 + add [OpenCV's Apache 2 license](https://github.com/opencv/opencv/blob/master/LICENSE) into python package
 + remove `LICENSE-INTEL`, `LICENSE-3RD-PARTY`
 + check JIT speed
++ OpenBLAS 0.3.11 version
