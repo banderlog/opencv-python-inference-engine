@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 # This creates a list which is empty but returns a length of 1.
 # Should make the wheel a binary distribution and platlib compliant.
-#<https://github.com/skvark/opencv-python/blob/master/setup.py>
+# from <https://github.com/skvark/opencv-python/blob/master/setup.py>
 class EmptyListWithLength(list):
     def __len__(self):
         return 1
