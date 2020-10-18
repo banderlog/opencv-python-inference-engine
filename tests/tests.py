@@ -7,13 +7,13 @@ from rateme.utils import RateMe
 
 class TestPackage(unittest.TestCase):
 
-    def test_dnn(self):
+    def test_dnn_module(self):
         model = RateMe()
         img = cv2.imread('dislike.jpg')
         answer = model.predict(img)
         self.assertEqual(answer, 'dislike')
 
-    def test_ie(self):
+    def test_inference_engine(self):
         img = cv2.imread('helloworld.png')
         detector4 = PixelLinkDetector('text-detection-0004.xml')
         detector4.detect(img)
