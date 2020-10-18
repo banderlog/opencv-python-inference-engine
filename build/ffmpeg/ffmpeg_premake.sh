@@ -1,5 +1,6 @@
 #!/bin/bash
-# <https://stackoverflow.com/a/36937360/7599215>
+# Build ffmpeg shared libraries without version suffix
+# from <https://stackoverflow.com/a/36937360/7599215>
 OLD1='SLIBNAME_WITH_VERSION=$(SLIBNAME).$(LIBVERSION)'
 OLD2='SLIBNAME_WITH_MAJOR=$(SLIBNAME).$(LIBMAJOR)'
 OLD3='SLIB_INSTALL_NAME=$(SLIBNAME_WITH_VERSION)'
