@@ -7,3 +7,4 @@
 + OpenBLAS 0.3.11 version
 + do we still need `sudo ln -s  /usr/bin/python3 /usr/bin/python`?
 + add Ubuntu version check in tests
++ Make `git clone` for submodules faster
