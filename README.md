@@ -70,7 +70,7 @@ Better to find a model description [here](https://github.com/opencv/open_model_z
 
 You will need ~7GB RAM and ~10GB disk space
 
-I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass launch -c 6 -d 10G -m 7G`.
+I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass launch -c 6 -d 10G -m 7G 18.04`.
 
 ### Requirements
 
