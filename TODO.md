@@ -5,3 +5,4 @@
 + remove `LICENSE-INTEL`, `LICENSE-3RD-PARTY`
 + check JIT speed
 + OpenBLAS 0.3.11 version
++ do we still need `sudo ln -s  /usr/bin/python3 /usr/bin/python`?
