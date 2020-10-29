@@ -8,3 +8,4 @@
 + do we still need `sudo ln -s  /usr/bin/python3 /usr/bin/python`?
 + add Ubuntu version check in tests
 + Make `git clone` for submodules faster
++ https://stackoverflow.com/questions/64313825/what-the-difference-between-the-opencv-cv-version-status-values
