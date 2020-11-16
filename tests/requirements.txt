@@ -1,5 +1,5 @@
 numpy>=1.16.0,<1.19.0
-tensorflow-cpu==2.2.1
+tensorflow-cpu>=2.4.0
 scipy==1.4.1
 scikit-image
 ipython
