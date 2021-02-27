@@ -217,7 +217,7 @@ If you compile it with `make FC=gfortran`, you'll need to put `libgfortran.so.4`
 
 #### CUDA
 
-I did not try it. But is cannot be universal, it will only work with the certain combination of GPU+CUDA+cuDNN for which it will be compiled for.
+I did not try it. But it cannot be universal, it will only work with the certain combination of GPU+CUDA+cuDNN for which it will be compiled for.
 
 + [Compile OpenCV’s ‘dnn’ module with NVIDIA GPU support](https://www.pyimagesearch.com/2020/02/10/opencv-dnn-with-nvidia-gpus-1549-faster-yolo-ssd-and-mask-r-cnn/)
 + [Use OpenCV’s ‘dnn’ module with NVIDIA GPUs, CUDA, and cuDNN](https://www.pyimagesearch.com/2020/02/03/how-to-use-opencvs-dnn-module-with-nvidia-gpus-cuda-and-cudnn/)
