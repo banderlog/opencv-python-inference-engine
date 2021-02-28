@@ -45,5 +45,5 @@ cd $ROOT_DIR
 
 if [[ ! -d ./venv ]]; then
 	virtualenv --clear --always-copy -p /usr/bin/python3 ./venv
-	./venv/bin/pip3 install numpy
+	./venv/bin/pip3 install -r requirements.txt
 fi
