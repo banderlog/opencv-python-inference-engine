@@ -70,8 +70,9 @@ For additional info read `cv2.getBuildInformation()` output.
 
 ### Versioning
 
-The first 3 letters are the version of OpenCV, the last one -- package version. E.g, `4.1.0.2` -- 2nd version of based on 4.1.0 OpenCV package. Package versions are not continuously numbered -- each new OpenCV version starts its own numbering.
-
+The first 3 letters are the version of OpenCV, underscore, then inference engine (dldt/openvino) version, underscore, package version.
+E.g, `4.5.1_2120.2_0` -- first version of based on 4.5.1 OpenCV package with 2021.2 inference engine module.
+Package versions are not continuously numbered -- each new OpenCV-dldt version pair starts its own numbering.
 
 
 ## Compiling from source
