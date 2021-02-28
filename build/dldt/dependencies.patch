@@ -1,0 +1,227 @@
+7,10c7
+< include(models)
+< 
+< #we have number of dependencies stored on ftp
+< include(dependency_solver)
+---
+> # we have number of dependencies stored on ftp
+35d31
+< include(linux_name)
+43c39
+<     include(vpu_dependencies)
+---
+>     include(cmake/vpu_dependencies.cmake)
+63c59,60
+<                     ENVIRONMENT "OpenBLAS_DIR")
+---
+>                     ENVIRONMENT "OpenBLAS_DIR"
+>                     SHA256 "c75aac901d5297d6d60a4b1f941f0335d8fd7f52e0dff8c445f644e2e45e6fba")
+109c106,107
+<                 VERSION_REGEX ".*_([a-z]*_([a-z0-9]+\\.)*[0-9]+).*")
+---
+>                 VERSION_REGEX ".*_([a-z]*_([a-z0-9]+\\.)*[0-9]+).*"
+>                 SHA256 "62c68646747fb10f19b53217cb04a1e10ff93606f992e6b35eb8c31187c68fbf")
+115c113,114
+<                 VERSION_REGEX ".*_([a-z]*_([a-z0-9]+\\.)*[0-9]+).*")
+---
+>                 VERSION_REGEX ".*_([a-z]*_([a-z0-9]+\\.)*[0-9]+).*"
+>                 SHA256 "7832b16d82513ee880d97c27c7626f9525ebd678decf6a8fe6c38550f73227d9")
+121c120,121
+<                 VERSION_REGEX ".*_([a-z]*_([a-z0-9]+\\.)*[0-9]+).*")
+---
+>                 VERSION_REGEX ".*_([a-z]*_([a-z0-9]+\\.)*[0-9]+).*"
+>                 SHA256 "591ea4a7e08bbe0062648916f42bded71d24c27f00af30a8f31a29b5878ea0cc")
+127a128,134
+>     
+>     ie_cpack_add_component(omp)
+>     file(GLOB_RECURSE source_list "${OMP}/*${CMAKE_SHARED_LIBRARY_SUFFIX}*")
+>     install(FILES ${source_list} 
+>             DESTINATION "deployment_tools/inference_engine/external/omp/lib"
+>             COMPONENT omp)
+>     
+132c139
+<     reset_deps_cache(TBBROOT)
+---
+>     reset_deps_cache(TBBROOT TBB_DIR)
+134,162c141,170
+<     if(NOT DEFINED TBB_DIR AND NOT DEFINED ENV{TBB_DIR})
+<         if (WIN32 AND X86_64)
+<             #TODO: add target_path to be platform specific as well, to avoid following if
+<             RESOLVE_DEPENDENCY(TBB
+<                     ARCHIVE_WIN "tbb2020_20200415_win.zip"
+<                     TARGET_PATH "${TEMP}/tbb"
+<                     ENVIRONMENT "TBBROOT")
+<         elseif(ANDROID)  # Should be before LINUX due LINUX is detected as well
+<             RESOLVE_DEPENDENCY(TBB
+<                     ARCHIVE_ANDROID "tbb2020_20200404_android.tgz"
+<                     TARGET_PATH "${TEMP}/tbb"
+<                     ENVIRONMENT "TBBROOT")
+<         elseif(LINUX AND X86_64)
+<             RESOLVE_DEPENDENCY(TBB
+<                     ARCHIVE_LIN "tbb2020_20200415_lin_strip.tgz"
+<                     TARGET_PATH "${TEMP}/tbb")
+<         elseif(LINUX AND AARCH64)
+<             RESOLVE_DEPENDENCY(TBB
+<                     ARCHIVE_LIN "keembay/tbb2020_38404_kmb.tgz"
+<                     TARGET_PATH "${TEMP}/tbb_yocto"
+<                     ENVIRONMENT "TBBROOT")
+<         elseif(APPLE AND X86_64)
+<             RESOLVE_DEPENDENCY(TBB
+<                     ARCHIVE_MAC "tbb2020_20200404_mac.tgz"
+<                     TARGET_PATH "${TEMP}/tbb"
+<                     ENVIRONMENT "TBBROOT")
+<         else()
+<             message(FATAL_ERROR "TBB is not available on current platform")
+<         endif()
+---
+>     if (WIN32 AND X86_64)
+>         #TODO: add target_path to be platform specific as well, to avoid following if
+>         RESOLVE_DEPENDENCY(TBB
+>                 ARCHIVE_WIN "tbb2020_20200415_win.zip"
+>                 TARGET_PATH "${TEMP}/tbb"
+>                 ENVIRONMENT "TBBROOT"
+>                 SHA256 "f1c9b9e2861efdaa01552bd25312ccbc5feeb45551e5f91ae61e29221c5c1479")
+>     elseif(ANDROID)  # Should be before LINUX due LINUX is detected as well
+>         RESOLVE_DEPENDENCY(TBB
+>                 ARCHIVE_ANDROID "tbb2020_20200404_android.tgz"
+>                 TARGET_PATH "${TEMP}/tbb"
+>                 ENVIRONMENT "TBBROOT"
+>                 SHA256 "f42d084224cc2d643314bd483ad180b081774608844000f132859fca3e9bf0ce")
+>     elseif(LINUX AND X86_64)
+>         RESOLVE_DEPENDENCY(TBB
+>                 ARCHIVE_LIN "tbb2020_20200415_lin_strip.tgz"
+>                 TARGET_PATH "${TEMP}/tbb"
+>                 SHA256 "95b2f3b0b70c7376a0c7de351a355c2c514b42c4966e77e3e34271a599501008")
+>     elseif(LINUX AND AARCH64)
+>         RESOLVE_DEPENDENCY(TBB
+>                 ARCHIVE_LIN "keembay/tbb2020_38404_kmb_lic.tgz"
+>                 TARGET_PATH "${TEMP}/tbb_yocto"
+>                 ENVIRONMENT "TBBROOT"
+>                 SHA256 "321261ff2eda6d4568a473cb883262bce77a93dac599f7bd65d2918bdee4d75b")
+>     elseif(APPLE AND X86_64)
+>         RESOLVE_DEPENDENCY(TBB
+>                 ARCHIVE_MAC "tbb2020_20200404_mac.tgz"
+>                 TARGET_PATH "${TEMP}/tbb"
+>                 ENVIRONMENT "TBBROOT"
+>                 SHA256 "ad9cf52e657660058aa6c6844914bc0fc66241fec89a392d8b79a7ff69c3c7f6")
+164,168c172
+<         if(DEFINED TBB_DIR)
+<             get_filename_component(TBB ${TBB_DIR} DIRECTORY)
+<         else()
+<             get_filename_component(TBB $ENV{TBB_DIR} DIRECTORY)
+<         endif()
+---
+>         message(FATAL_ERROR "TBB is not available on current platform")
+171a176
+>     update_deps_cache(TBB_DIR "${TBB}/cmake" "Path to TBB cmake folder")
+184,185c189,190
+<     set(OPENCV_VERSION "4.5.0")
+<     set(OPENCV_BUILD "36")
+---
+>     set(OPENCV_VERSION "4.5.1")
+>     set(OPENCV_BUILD "044")
+205c210,211
+<                     VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+).*")
+---
+>                     VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+).*"
+>                     SHA256 "b5239e0e50b9009f95a29cb11f0840ec085fa07f6c4d3349adf090f1e51b0787")
+215c221,222
+<                     VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+).*")
+---
+>                     VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+).*"
+>                     SHA256 "5250bfe5860c15eb1b31963c78804ee9b301a19d8d6e920c06ef41de681cb99e")
+221c228,229
+<                     VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+).*")
+---
+>                     VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+).*"
+>                     SHA256 "f3ebc5cc72c86106c30cc711ac689e02281556bb43c09a89cd45cb99b6bef9a8")
+228c236,238
+<             elseif (LINUX_OS_NAME STREQUAL "CentOS 7" OR CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.9")
+---
+>                 set(OPENCV_HASH "0e787d6738092993bc92bb55975f52caabae45dc73473b5196d15e65e87d6b9d")
+>             elseif ((LINUX_OS_NAME STREQUAL "CentOS 7" OR
+>                      CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.9") AND X86_64)
+230c240,241
+<             elseif (LINUX_OS_NAME MATCHES "CentOS 8")
+---
+>                 set(OPENCV_HASH "9b813af064d463b31fa1603b11b6559532a031d59bb0782d234380955fd397e0")
+>             elseif (LINUX_OS_NAME MATCHES "CentOS 8" AND X86_64)
+232c243,244
+<             elseif (LINUX_OS_NAME STREQUAL "Ubuntu 16.04")
+---
+>                 set(OPENCV_HASH "8ec3e3552500dee334162386b98cc54a5608de1f1a18f283523fc0cc13ee2f83")
+>             elseif (LINUX_OS_NAME STREQUAL "Ubuntu 16.04" AND X86_64)
+234c246,247
+<             elseif (LINUX_OS_NAME STREQUAL "Ubuntu 18.04")
+---
+>                 set(OPENCV_HASH "cd46831b4d8d1c0891d8d22ff5b2670d0a465a8a8285243059659a50ceeae2c3")
+>             elseif (LINUX_OS_NAME STREQUAL "Ubuntu 18.04" AND X86_64)
+236c249,250
+<             elseif (LINUX_OS_NAME STREQUAL "Ubuntu 20.04")
+---
+>                 set(OPENCV_HASH "8ec3e3552500dee334162386b98cc54a5608de1f1a18f283523fc0cc13ee2f83")
+>             elseif ((LINUX_OS_NAME STREQUAL "Ubuntu 20.04" OR LINUX_OS_NAME STREQUAL "LinuxMint 20.1") AND X86_64)
+238c252,253
+<             else()
+---
+>                 set(OPENCV_HASH "2b7808d002864acdc5fc0b19cd30dadc31a37cc267931cad605f23f2383bfc21")
+>             elseif(NOT DEFINED OpenCV_DIR AND NOT DEFINED ENV{OpenCV_DIR})
+245c260,261
+<                     VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+).*")
+---
+>                     VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+).*"
+>                     SHA256 ${OPENCV_HASH})
+265a282,283
+> else()
+>     reset_deps_cache(OpenCV_DIR)
+268c286,288
+< include(ie_parallel)
+---
+> # TODO: remove global CMAKE_MODULE_PATH
+> list(APPEND CMAKE_MODULE_PATH "${IEDevScripts_DIR}")
+> include(cmake/ie_parallel.cmake)
+282c302,303
+<                 TARGET_PATH "${TEMP}/gna")
+---
+>                 TARGET_PATH "${TEMP}/gna"
+>                 SHA256 "b631d6cc5f6cca4a89a3f5dfa383066f3282fee25d633d9085c605bdd8090210")
+285a307
+>             set(GNA_HASH "cc954e67525006bf8bd353a6682e38bf208f6d74e973e0fc292850e721f17452")
+288a311
+>             set(GNA_HASH "20820e07392a1e876cf5577430c1c4c74b924d8f34cc17bfa3e36e641555e05d")
+293c316,317
+<                 VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+.[0-9]+).*")
+---
+>                 VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+.[0-9]+).*"
+>                 SHA256 ${GNA_HASH})
+313c337,338
+<                     TARGET_PATH "${TEMP}/speech_demo_1.0.0.755")
+---
+>                     TARGET_PATH "${TEMP}/speech_demo_1.0.0.755"
+>                     SHA256 "58adef14b8a749f70fa83888614cee34b941956e6e958e445e3f48885b3c20a0")
+320c345,346
+<                     TARGET_PATH "${TEMP}/speech_demo_1.0.0.755")
+---
+>                     TARGET_PATH "${TEMP}/speech_demo_1.0.0.755"
+>                     SHA256 "716201e377714ac50f3909c445d36d47a089de50a557d8ef65232de040671188")
+326c352,353
+<                     TARGET_PATH "${TEMP}/speech_demo_1.0.0.755")
+---
+>                     TARGET_PATH "${TEMP}/speech_demo_1.0.0.755"
+>                     SHA256 "7714b8776ec0183ed73eed6d3d965ee6d5c15d2dc49ee5ae118cc368c89c7a9d")
+336,350d362
+< 
+< configure_file(
+<         "${IE_MAIN_SOURCE_DIR}/cmake/share/InferenceEngineConfig.cmake.in"
+<         "${CMAKE_BINARY_DIR}/share/InferenceEngineConfig.cmake"
+<         @ONLY)
+< 
+< configure_file(
+<         "${IE_MAIN_SOURCE_DIR}/cmake/share/InferenceEngineConfig-version.cmake.in"
+<         "${CMAKE_BINARY_DIR}/share/InferenceEngineConfig-version.cmake"
+<         COPYONLY)
+< 
+< configure_file(
+<         "${IE_MAIN_SOURCE_DIR}/cmake/ie_parallel.cmake"
+<         "${CMAKE_BINARY_DIR}/share/ie_parallel.cmake"
+<         COPYONLY)

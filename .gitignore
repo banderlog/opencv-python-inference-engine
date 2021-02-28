@@ -18,6 +18,7 @@ build/opencv/*
 !build/dldt
 build/dldt/*
 !build/dldt/dldt_setup.sh
+!build/dldt/*.patch
 
 !build/ffmpeg
 build/ffmpeg/*

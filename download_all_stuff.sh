@@ -18,11 +18,11 @@ red () {
 ROOT_DIR=$(pwd)
 
 green "RESET GIT SUBMODULES"
-# use `git pull && git checkout tags/<tag>` for update
+# use `git fetch --unshallow && git checkout tags/<tag>` for update
 git submodule update --init --recursive --depth=1 --jobs=4
 
 green "CLEAN BUILD DIRS"
-find build/dldt/ -mindepth 1 -not -name 'dldt_setup.sh' -delete
+find build/dldt/ -mindepth 1 -not -name 'dldt_setup.sh' -not -name '*.patch' -delete
 find build/opencv/ -mindepth 1 -not -name 'opencv_setup.sh' -delete
 find build/ffmpeg/ -mindepth 1 -not -name 'ffmpeg_*.sh' -delete
 find build/openblas/ -mindepth 1 -not -name 'openblas_setup.sh' -delete
