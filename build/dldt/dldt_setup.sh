@@ -14,6 +14,10 @@ if [ ! -f $BLAS_LIB ] || [ ! -d $BLAS_INC ]; then
     exit
 fi
 
+# <https://github.com/openvinotoolkit/openvino/issues/4527>
+patch ../../dldt/inference-engine/cmake/dependencies.cmake dependencies.patch
+
+
 # Manually-specified variables were not used by the project:
 # -D ENABLE_NGRAPH=ON \
 cmake -D CMAKE_BUILD_TYPE=Release \
