@@ -1,5 +1,6 @@
 # TODO list
 
++ numpy version should be the same as for tensorflow-cpu
 + dldt config keeps downloaded libs -- this is bad
 + add examples
 + check JIT speed
