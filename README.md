@@ -12,15 +12,29 @@ Remove previously installed versions of `cv2`
 pip3 install opencv-python-inference-engine
 ```
 
+## Examples of usage
 
-## Why  
+I'll do more straightforward and well-documented examples of usage in the foreseeable future. But for now, please see the tests folder.
+
+You will need to preprocess data as a model requires and decode the output. A description of the decoding *should* be in the model documentation with examples in open-vino documentation, however, in some cases, the original article may be the only information source. Some models are very simple to encode/decode, others are tough (e.g., PixelLink in tests).
+
+
+## Downloading intel models
+
+The official way is clumsy because you need to git clone the whole [model_zoo](https://github.com/opencv/open_model_zoo) ([details](https://github.com/opencv/open_model_zoo/issues/522))
+
+Better to find a model description [here](https://github.com/opencv/open_model_zoo/blob/master/models/intel/index.md) and download manually from [here](https://download.01.org/opencv/2020/openvinotoolkit/2020.1/open_model_zoo/models_bin/1/)
+
+
+## Description
+
+
+### Why  
 
 I needed an ability to fast deploy a small package that able to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/) and use [Movidius NCS](https://software.intel.com/en-us/neural-compute-stick).
 Well-known [opencv-python](https://github.com/skvark/opencv-python) can't do this.
 The official way is to use OpenVINO, but it is big and clumsy (just try to use it with python venv or fast download it on cloud instance).
 
-
-## Description
 
 ### Limitations
 
@@ -58,12 +72,6 @@ For additional info read `cv2.getBuildInformation()` output.
 
 The first 3 letters are the version of OpenCV, the last one -- package version. E.g, `4.1.0.2` -- 2nd version of based on 4.1.0 OpenCV package. Package versions are not continuously numbered -- each new OpenCV version starts its own numbering.
 
-
-## Downloading intel models
-
-The official way is clumsy because you need to git clone the whole [model_zoo](https://github.com/opencv/open_model_zoo) ([details](https://github.com/opencv/open_model_zoo/issues/522))
-
-Better to find a model description [here](https://github.com/opencv/open_model_zoo/blob/master/models/intel/index.md) and download manually from [here](https://download.01.org/opencv/2020/openvinotoolkit/2020.1/open_model_zoo/models_bin/1/)
 
 
 ## Compiling from source
@@ -201,7 +209,8 @@ Our opensource MKL-DNN experiment will end with 125MB `libmklml_gnu.so` and infe
 
 #### CUDA
 
-I did not try it. And it is not in the package for certain [reasons](https://github.com/banderlog/opencv-python-inference-engine/issues/9).
+I did not try it. But it cannot be universal, it will only work with the certain combination of GPU+CUDA+cuDNN for which it will be compiled for.
+
 
 + [Compile OpenCV’s ‘dnn’ module with NVIDIA GPU support](https://www.pyimagesearch.com/2020/02/10/opencv-dnn-with-nvidia-gpus-1549-faster-yolo-ssd-and-mask-r-cnn/)
 + [Use OpenCV’s ‘dnn’ module with NVIDIA GPUs, CUDA, and cuDNN](https://www.pyimagesearch.com/2020/02/03/how-to-use-opencvs-dnn-module-with-nvidia-gpus-cuda-and-cudnn/)

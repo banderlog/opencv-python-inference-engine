@@ -19,7 +19,7 @@ ROOT_DIR=$(pwd)
 
 green "RESET GIT SUBMODULES"
 # use `git pull && git checkout tags/<tag>` for update
-git submodule update --init --recursive
+git submodule update --init --recursive --depth=1 --jobs=4
 
 green "CLEAN BUILD DIRS"
 find build/dldt/ -mindepth 1 -not -name 'dldt_setup.sh' -delete
