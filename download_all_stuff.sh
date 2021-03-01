@@ -27,6 +27,8 @@ green "RESET GIT SUBMODULES"
 git submodule update --init --recursive --depth=1 --jobs=4
 # restore changes
 git submodule foreach --recursive git restore .
+# remove untracked
+git submodule foreach --recursive git clean -dxf
 
 green "CLEAN BUILD DIRS"
 find build/dldt/ -mindepth 1 -not -name 'dldt_setup.sh' -not -name '*.patch' -delete
