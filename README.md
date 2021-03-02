@@ -29,7 +29,7 @@ Better to find a model description [here](https://github.com/opencv/open_model_z
 ## Description
 
 
-### Why  
+### Why
 
 I needed an ability to fast deploy a small package that able to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/) and use [Movidius NCS](https://software.intel.com/en-us/neural-compute-stick).
 Well-known [opencv-python](https://github.com/skvark/opencv-python) can't do this.
@@ -211,7 +211,6 @@ Our opensource MKL-DNN experiment will end with 125MB `libmklml_gnu.so` and infe
 #### CUDA
 
 I did not try it. But it cannot be universal, it will only work with the certain combination of GPU+CUDA+cuDNN for which it will be compiled for.
-
 
 + [Compile OpenCV’s ‘dnn’ module with NVIDIA GPU support](https://www.pyimagesearch.com/2020/02/10/opencv-dnn-with-nvidia-gpus-1549-faster-yolo-ssd-and-mask-r-cnn/)
 + [Use OpenCV’s ‘dnn’ module with NVIDIA GPUs, CUDA, and cuDNN](https://www.pyimagesearch.com/2020/02/03/how-to-use-opencvs-dnn-module-with-nvidia-gpus-cuda-and-cudnn/)
