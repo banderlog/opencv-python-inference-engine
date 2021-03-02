@@ -14,7 +14,7 @@ pip3 install opencv-python-inference-engine
 
 ## Examples of usage
 
-I'll do more straightforward and well-documented examples of usage in the foreseeable future. But for now, please see the tests folder.
+Please see the `examples.ipynb` in the `tests` folder.
 
 You will need to preprocess data as a model requires and decode the output. A description of the decoding *should* be in the model documentation with examples in open-vino documentation, however, in some cases, the original article may be the only information source. Some models are very simple to encode/decode, others are tough (e.g., PixelLink in tests).
 
