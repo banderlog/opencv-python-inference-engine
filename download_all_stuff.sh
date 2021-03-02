@@ -17,12 +17,21 @@ red () {
 
 ROOT_DIR=$(pwd)
 
+# check Ubuntu version (20.04 build will not work on 18.04)
+if test $(lsb_release -rs) != 18.04; then
+    red "\n!!! You are NOT on the Ubuntu 18.04 !!!\n"
+fi
+
 green "RESET GIT SUBMODULES"
-# use `git pull && git checkout tags/<tag>` for update
-git submodule update --init --recursive
+# use `git fetch --unshallow && git checkout tags/<tag>` for update
+git submodule update --init --recursive --depth=1 --jobs=4
+# restore changes command will differ between GIT versions (e.g., `restore`)
+git submodule foreach --recursive git checkout .
+# remove untracked
+git submodule foreach --recursive git clean -dxf
 
 green "CLEAN BUILD DIRS"
-find build/dldt/ -mindepth 1 -not -name 'dldt_setup.sh' -delete
+find build/dldt/ -mindepth 1 -not -name 'dldt_setup.sh' -not -name '*.patch' -delete
 find build/opencv/ -mindepth 1 -not -name 'opencv_setup.sh' -delete
 find build/ffmpeg/ -mindepth 1 -not -name 'ffmpeg_*.sh' -delete
 find build/openblas/ -mindepth 1 -not -name 'openblas_setup.sh' -delete
@@ -38,5 +47,5 @@ cd $ROOT_DIR
 
 if [[ ! -d ./venv ]]; then
 	virtualenv --clear --always-copy -p /usr/bin/python3 ./venv
-	./venv/bin/pip3 install numpy
+	./venv/bin/pip3 install -r requirements.txt
 fi

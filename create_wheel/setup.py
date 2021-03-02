@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 # This creates a list which is empty but returns a length of 1.
 # Should make the wheel a binary distribution and platlib compliant.
-#<https://github.com/skvark/opencv-python/blob/master/setup.py>
+# from <https://github.com/skvark/opencv-python/blob/master/setup.py>
 class EmptyListWithLength(list):
     def __len__(self):
         return 1
@@ -15,26 +15,25 @@ class EmptyListWithLength(list):
 
 setuptools.setup(
     name="opencv-python-inference-engine",
-    version="4.5.0.0",
+    version="4.5.1_2021.2_0",
     url="https://github.com/banderlog/opencv-python-inference-engine",
     maintainer="Kabakov Borys",
-    license='MIT, BSD, Intel Simplified Software License',
-    description="Wrapper package for OpenCV 4.5.0 with Inference Engine 2021.1 python bindings",
+    license='MIT, Apache 2.0',
+    description="Wrapper package for OpenCV with Inference Engine python bindings",
     long_description=long_description,
     long_description_content_type="text/markdown",
     ext_modules=EmptyListWithLength(),
     packages=['cv2'],
     package_data={'cv2': ['*.so*', '*.mvcmd', '*.xml']},
     include_package_data=True,
-    install_requires=['numpy'],
+    install_requires=['numpy~=1.19.2'],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'Intended Audience :: Education',
         'Intended Audience :: Information Technology',
         'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
         'Programming Language :: C++',
         'Operating System :: POSIX :: Linux',

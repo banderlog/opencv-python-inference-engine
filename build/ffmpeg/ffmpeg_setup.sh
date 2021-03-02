@@ -1,4 +1,5 @@
 #!/bin/bash
+
 PATH_TO_SCRIPT=`dirname $(realpath $0)`
 
 ../../ffmpeg/configure \

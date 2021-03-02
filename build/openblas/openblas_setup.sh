@@ -1,3 +1,10 @@
+#!/bin/bash
+
+# Please refer here for details: <https://github.com/xianyi/OpenBLAS/issues/2528>
+#
+# If you compile it with `make FC=gfortran`,
+# you'll need `libgfortran.so.4` and `libquadmath.so.0`
+
 cmake -D NO_LAPACKE=1 \
       -D CMAKE_BUILD_TYPE=Release \
       -D NOFORTRAN=ON \

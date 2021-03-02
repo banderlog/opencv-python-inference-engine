@@ -14,19 +14,27 @@ pip3 install opencv-python-inference-engine
 
 ## Examples of usage
 
-I'll do more straightforward and well-documented examples of usage in the foreseeable future. But for now, please see the tests folder.
+Please see the `examples.ipynb` in the `tests` folder.
 
 You will need to preprocess data as a model requires and decode the output. A description of the decoding *should* be in the model documentation with examples in open-vino documentation, however, in some cases, the original article may be the only information source. Some models are very simple to encode/decode, others are tough (e.g., PixelLink in tests).
 
 
-## Why  
+## Downloading intel models
+
+The official way is clumsy because you need to git clone the whole [model_zoo](https://github.com/opencv/open_model_zoo) ([details](https://github.com/opencv/open_model_zoo/issues/522))
+
+Better to find a model description [here](https://github.com/opencv/open_model_zoo/blob/master/models/intel/index.md) and download manually from [here](https://download.01.org/opencv/2020/openvinotoolkit/2020.1/open_model_zoo/models_bin/1/)
+
+
+## Description
+
+
+### Why
 
 I needed an ability to fast deploy a small package that able to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/) and use [Movidius NCS](https://software.intel.com/en-us/neural-compute-stick).
 Well-known [opencv-python](https://github.com/skvark/opencv-python) can't do this.
 The official way is to use OpenVINO, but it is big and clumsy (just try to use it with python venv or fast download it on cloud instance).
 
-
-## Description
 
 ### Limitations
 
@@ -62,21 +70,16 @@ For additional info read `cv2.getBuildInformation()` output.
 
 ### Versioning
 
-The first 3 letters are the version of OpenCV, the last one -- package version. E.g, `4.1.0.2` -- 2nd version of based on 4.1.0 OpenCV package. Package versions are not continuously numbered -- each new OpenCV version starts its own numbering.
-
-
-## Downloading intel models
-
-The official way is clumsy because you need to git clone the whole [model_zoo](https://github.com/opencv/open_model_zoo) ([details](https://github.com/opencv/open_model_zoo/issues/522))
-
-Better to find a model description [here](https://github.com/opencv/open_model_zoo/blob/master/models/intel/index.md) and download manually from [here](https://download.01.org/opencv/2020/openvinotoolkit/2020.1/open_model_zoo/models_bin/1/)
+The first 3 letters are the version of OpenCV, underscore, then inference engine (dldt/openvino) version, underscore, package version.
+E.g, `4.5.1_2120.2_0` -- first version of based on 4.5.1 OpenCV package with 2021.2 inference engine module.
+Package versions are not continuously numbered -- each new OpenCV-dldt version pair starts its own numbering.
 
 
 ## Compiling from source
 
 You will need ~7GB RAM and ~10GB disk space
 
-I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass launch -c 6 -d 10G -m 7G`.
+I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass launch -c 6 -d 10G -m 7G 18.04`.
 
 ### Requirements
 
@@ -96,7 +99,7 @@ From [opencv](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html)
 + `nasm` (for ffmpeg)
 
 ```bash
-# We need newer `cmake` for dldt (commands from  <https://apt.kitware.com/>)
+# We need newer `cmake` for dldt (fastest way I know)
 sudo apt remove --purge cmake
 hash -r
 sudo snap install cmake --classic
@@ -186,14 +189,13 @@ Make next changes in `opencv-python-inference-engine/build/opencv/opencv_setup.s
 
 Exporting `PKG_CONFIG_PATH` for `ffmpeg` somehow messes with default values.
 
-#### IPP
+It will add ~16MB to the package.
+
+#### Integrated Performance Primitives
 
 Just set `-D WITH_IPP=ON` in `opencv_setup.sh`.
 
 It will give +30MB to the final `cv2.so` size. And it will boost _some_ opencv functions.
-
-![](https://www.oreilly.com/library/view/learning-opencv-3/9781491937983/assets/lcv3_0105.png)
-(Image from [Learning OpenCV 3 by Gary Bradski, Adrian Kaehler](https://www.oreilly.com/library/view/learning-opencv-3/9781491937983/ch01.html))
 
 [Official Intel's IPP benchmarks](https://software.intel.com/en-us/ipp/benchmarks) (may ask for registration)
 
@@ -205,15 +207,6 @@ OpenVino comes with 30MB `libmkl_tiny_tbb.so`, but [you will not be able to comp
 
 Our opensource MKL-DNN experiment will end with 125MB `libmklml_gnu.so` and inference speed compatible with 5MB openblas ([details](https://github.com/banderlog/opencv-python-inference-engine/issues/5)).
 
-#### OpenBLAS
-
-Please refer here for details: https://github.com/xianyi/OpenBLAS/issues/2528
-
-+ [OpenBLAS Installation guide](https://github.com/xianyi/OpenBLAS/wiki/Installation-Guide)
-+ [OpenBLAS User Manual](https://github.com/xianyi/OpenBLAS/wiki/User-Manual)
-
-If you compile it with `make FC=gfortran`, you'll need to put `libgfortran.so.4` and `libquadmath.so.0` to wheel and set them rpath via `patchelf --set-rpath \$ORIGIN *.so`
-
 
 #### CUDA
 
@@ -223,16 +216,6 @@ I did not try it. But it cannot be universal, it will only work with the certain
 + [Use OpenCV’s ‘dnn’ module with NVIDIA GPUs, CUDA, and cuDNN](https://www.pyimagesearch.com/2020/02/03/how-to-use-opencvs-dnn-module-with-nvidia-gpus-cuda-and-cudnn/)
 
 
-#### Build `ffmpeg` with `tbb`
-
-Both `dldt` and `opencv` are compiled with `tbb` support, and `ffmpeg` compiled without it -- this does not feel right.
-There is some unproved solution for how to compile `ffmpeg` with `tbb` support: <https://stackoverflow.com/questions/6049798/ffmpeg-mt-and-tbb>  
-
-
 #### OpenMP
 
 It is possible to compile OpenBLAS, dldt and OpenCV with OpenMP. I am not sure that the result would be better than now, but who knows.
-
-#### Use opencv for NLP
-
-Presumably, you could also use speech2text model now -- [source](https://docs.openvinotoolkit.org/latest/_inference_engine_samples_speech_libs_and_demos_Speech_libs_and_demos.html)
