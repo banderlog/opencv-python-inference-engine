@@ -74,7 +74,7 @@ For additional info read `cv2.getBuildInformation()` output.
 E.g, `4.5.1_2120.2_0` -- first version of based on 4.5.1 OpenCV package with 2021.2 inference engine module.
 Package versions are not continuously numbered -- each new OpenCV-dldt version pair starts its own numbering.~~
 
-YYYY.MM.DD
+Above stuff is not [PEP440](https://www.python.org/dev/peps/pep-0440/) compliant. Had to switch to `YYYY.MM.DD`
 
 
 ## Compiling from source
