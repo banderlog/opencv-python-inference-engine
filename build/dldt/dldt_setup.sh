@@ -16,6 +16,7 @@ fi
 
 # <https://github.com/openvinotoolkit/openvino/issues/4527>
 # look for proper values at <https://download.01.org/opencv/master/openvinotoolkit/thirdparty/linux/opencv/>
+# calculate hash256 manually
 patch ../../dldt/inference-engine/cmake/dependencies.cmake dependencies.patch
 
 
