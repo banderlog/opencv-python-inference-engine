@@ -1,6 +1,13 @@
-184,185c197,198
-<     set(OPENCV_VERSION "4.5.0")
-<     set(OPENCV_BUILD "36")
----
->     set(OPENCV_VERSION "4.5.1")
->     set(OPENCV_BUILD "044")
+--- dependencies.cmake	2021-04-03 17:40:16.673904026 +0300
++++ dependencies_new.cmake	2021-04-03 17:53:53.238931759 +0300
+@@ -186,8 +186,8 @@
+ if (ENABLE_OPENCV)
+     reset_deps_cache(OpenCV_DIR)
+ 
+-    set(OPENCV_VERSION "4.5.1")
+-    set(OPENCV_BUILD "044")
++    set(OPENCV_VERSION "4.5.2")
++    set(OPENCV_BUILD "076")
+     set(OPENCV_BUILD_YOCTO "337")
+ 
+     if (AARCH64)

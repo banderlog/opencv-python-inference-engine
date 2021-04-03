@@ -15,6 +15,7 @@ if [ ! -f $BLAS_LIB ] || [ ! -d $BLAS_INC ]; then
 fi
 
 # <https://github.com/openvinotoolkit/openvino/issues/4527>
+# look for proper values at <https://download.01.org/opencv/master/openvinotoolkit/thirdparty/linux/opencv/>
 patch ../../dldt/inference-engine/cmake/dependencies.cmake dependencies.patch
 
 
