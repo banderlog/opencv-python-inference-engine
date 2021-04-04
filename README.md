@@ -89,9 +89,7 @@ From [opencv](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html)
  [ffmpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), [openBLAS](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu) and [ngraph](https://www.ngraph.ai/documentation/buildlb)
 
 + `build-essential`
-+ `>=cmake-3.11`
-+ `autoconf` (for ngraph)
-+ `libtool-bin` (for ngraph)
++ `>=cmake-3.13`
 + `git`
 + `pkg-config`
 + `python3-dev`
@@ -107,7 +105,7 @@ hash -r
 sudo snap install cmake --classic
 
 sudo apt-get update
-sudo apt install build-essential git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath autoconf libtool-bin
+sudo apt install build-essential git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath
 
 # for ngraph
 # the `dldt/_deps/ext_onnx-src/onnx/gen_proto.py` has `#!/usr/bin/env python` string and will throw an error otherwise
