@@ -16,6 +16,8 @@ fi
 # https://github.com/openvinotoolkit/openvino/issues/5100
 #      -D BUILD_SHARED_LIBS=OFF \
 #      -D BUILD_SHARED_LIBS=ON \
+# https://github.com/openvinotoolkit/openvino/issues/5209
+#      -D NGRAPH_TOOLS_ENABLE=OFF \
 cmake -D CMAKE_BUILD_TYPE=Release \
       -D THREADING=TBB \
       -D ENABLE_MKL_DNN=ON \
