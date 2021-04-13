@@ -1,4 +1,7 @@
 #!/bin/bash
+# deprecated: --enable-avresample , switch to libswresample
+# The libswresample library performs highly optimized audio resampling,
+#   rematrixing and sample format conversion operations. 
 
 PATH_TO_SCRIPT=`dirname $(realpath $0)`
 
@@ -40,4 +43,4 @@ PATH_TO_SCRIPT=`dirname $(realpath $0)`
 --disable-doc \
 --disable-static \
 --enable-pic \
---enable-shared 
+--enable-shared \

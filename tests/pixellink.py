@@ -5,7 +5,6 @@
 """
 import cv2
 import numpy as np
-from scipy.special import softmax
 from skimage.morphology import label
 from skimage.measure import regionprops
 from typing import List, Tuple
@@ -13,13 +12,17 @@ from skimage.measure._regionprops import RegionProperties
 
 
 class PixelLinkDetector():
-    """ Wrapper class for Intel's version of PixelLink text-detection-0001
+    """ Wrapper class for Intel's version of PixelLink text detector
+
+        See https://github.com/openvinotoolkit/open_model_zoo/blob/master/models/intel/ \
+            text-detection-0004/description/text-detection-0004.md
+
         :param xml_model_path: path to XML file
 
         **Example:**
 
         .. code-block:: python
-            detector = PixelLinkDetector('text-detection-0002.xml')
+            detector = PixelLinkDetector('text-detection-0004.xml')
             img = cv2.imread('tmp.jpg')
             # ~250ms on i7-6700K
             detector.detect(img)
@@ -35,7 +38,15 @@ class PixelLinkDetector():
         self._txt_threshold = txt_threshold
 
     def detect(self, img: np.ndarray) -> None:
-        """ GetPixelLink's outputs
+        """ GetPixelLink's outputs (BxCxHxW):
+                + [1x16x192x320] - logits related to linkage between pixels and their neighbors
+                + [1x2x192x320] - logits related to text/no-text classification for each pixel
+
+            B - batch size
+            C - number of channels
+            H - image height
+            W - image width
+
             :param img: image as ``numpy.ndarray``
         """
         self._img_shape = img.shape
@@ -47,19 +58,36 @@ class PixelLinkDetector():
         # for text-detection-00[34]
         self.links, self.pixels = self._net.forward(out_layer_names)
 
-    def get_mask(self) -> np.array:
+    def get_mask(self) -> np.ndarray:
         """ Get binary mask of detected text pixels
         """
         pixel_mask = self._get_pixel_scores() >= self._txt_threshold
         return pixel_mask.astype(np.uint8)
 
-    def _get_pixel_scores(self) -> np.array:
-        "get softmaxed properly shaped pixel scores"
-        tmp = np.transpose(self.pixels, (0, 2, 3, 1))
-        return softmax(tmp, axis=-1)[0, :, :, 1]
+    def _logsumexp(self, a: np.ndarray, axis=-1) -> np.ndarray:
+        """ Castrated function from scipy
+            https://github.com/scipy/scipy/blob/v1.6.2/scipy/special/_logsumexp.py
 
-    def _get_txt_regions(self, pixel_mask: np.array) -> List[RegionProperties]:
-        "kernels are class dependent"
+            Compute the log of the sum of exponentials of input elements.
+        """
+        a_max = np.amax(a, axis=axis, keepdims=True)
+        tmp = np.exp(a - a_max)
+        s = np.sum(tmp, axis=axis, keepdims=True)
+        out = np.log(s)
+        out += a_max
+        return out
+
+    def _get_pixel_scores(self) -> np.ndarray:
+        """ get softmaxed properly shaped pixel scores """
+        # move channels to the end
+        tmp = np.transpose(self.pixels, (0, 2, 3, 1))
+        # softmax from scipy
+        tmp = np.exp(tmp - self._logsumexp(tmp, axis=-1))
+        # select single batch, single chanel values
+        return tmp[0, :, :, 1]
+
+    def _get_txt_regions(self, pixel_mask: np.ndarray) -> List[RegionProperties]:
+        """ kernels are class dependent """
         img_h, img_w = self._img_shape[:2]
         _, mask = cv2.threshold(pixel_mask, 0, 1, cv2.THRESH_BINARY)
         # transmutatioins
@@ -67,9 +95,11 @@ class PixelLinkDetector():
         # on small image it will connect separate words
         txt_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
         mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, txt_kernel)
-        # label regions on mask of original img size
+        # connect regions on mask of original img size
         mask = cv2.resize(mask, (img_w, img_h), interpolation=cv2.INTER_NEAREST)
+        # Label connected regions of an integer array
         mask = label(mask, background=0, connectivity=2)
+        # Measure properties of labeled image regions.
         txt_regions = regionprops(mask)
         return txt_regions
 
@@ -99,4 +129,6 @@ class PixelLinkDetector():
         """
         mask = self.get_mask()
         bboxes = self._get_txt_bboxes(self._get_txt_regions(mask))
+        # sort by xmin, ymin
+        bboxes = sorted(bboxes, key=lambda x: (x[1], x[0]))
         return bboxes
