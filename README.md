@@ -70,11 +70,9 @@ For additional info read `cv2.getBuildInformation()` output.
 
 ### Versioning
 
-~~The first 3 letters are the version of OpenCV, underscore, then inference engine (dldt/openvino) version, underscore, package version.
-E.g, `4.5.1_2120.2_0` -- first version of based on 4.5.1 OpenCV package with 2021.2 inference engine module.
-Package versions are not continuously numbered -- each new OpenCV-dldt version pair starts its own numbering.~~
+`YYYY.MM.DD`, because it is the most simple way to track opencv/openvino versions.
 
-YYYY.MM.DD
+The newer the better.
 
 
 ## Compiling from source
@@ -88,24 +86,17 @@ I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass
 From [opencv](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html), [dldt](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html),
  [ffmpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), [openBLAS](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu) and [ngraph](https://www.ngraph.ai/documentation/buildlb)
 
-+ `build-essential`
-+ `>=cmake-3.16`
-+ `git`
-+ `pkg-config`
-+ `python3-dev`
-+ `virtualenv`
-+ `chrpath`
-+ `libusb-1.0-0-dev` (for MYRIAD plugin)
-+ `nasm` (for ffmpeg)
-
 ```bash
 # We need newer `cmake` for dldt (fastest way I know)
+# >=cmake-3.16
 sudo apt remove --purge cmake
 hash -r
 sudo snap install cmake --classic
 
 sudo apt-get update
-sudo apt install build-essential git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath
+# nasm for ffmpeg
+# libusb-1.0-0-dev for MYRIAD plugin
+sudo apt install build-essential git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath shellcheck
 
 # for ngraph
 # the `dldt/_deps/ext_onnx-src/onnx/gen_proto.py` has `#!/usr/bin/env python` string and will throw an error otherwise
