@@ -57,7 +57,6 @@ The official way is to use OpenVINO, but it is big and clumsy (just try to use i
 ### Main differences from OpenVINO
 
 + No model-optimizer
-+ OpenBLAS instead of MKL ([details](https://github.com/banderlog/opencv-python-inference-engine/issues/5#issuecomment-599563729))
 + No [ITT](https://software.intel.com/en-us/articles/intel-itt-api-open-source)
 + No [IPP](https://software.intel.com/en-us/ipp)
 + No [Intel Media SDK](https://software.intel.com/en-us/media-sdk)
@@ -84,7 +83,7 @@ I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass
 ### Requirements
 
 From [opencv](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html), [dldt](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html),
- [ffmpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), [openBLAS](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu) and [ngraph](https://www.ngraph.ai/documentation/buildlb)
+ [ffmpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), and [ngraph](https://www.ngraph.ai/documentation/buildlb)
 
 ```bash
 # We need newer `cmake` for dldt (fastest way I know)
@@ -114,12 +113,7 @@ cd opencv-python-inference-engine
 ### Compilation
 
 ```bash
-cd build/openblas
-./openblas_setup.sh &&
-make -j6 &&
-make install
-
-cd ../ffmpeg
+cd build/ffmpeg
 ./ffmpeg_setup.sh &&
 ./ffmpeg_premake.sh &&
 make -j6 &&
@@ -149,8 +143,6 @@ cp dldt/bin/intel64/Release/lib/plugins.xml create_wheel/cv2/
 cp dldt/inference-engine/temp/tbb/lib/libtbb.so.2 create_wheel/cv2/
 
 cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
-
-cp build/openblas/lib/libopenblas.so.0 create_wheel/cv2/
 
 # change RPATH
 cd create_wheel

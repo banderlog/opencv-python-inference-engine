@@ -1,15 +1,5 @@
 #!/bin/bash
 
-tmp=$(pwd)
-BLAS_LIB="${tmp%dldt}openblas/lib/libopenblas.so.0"
-BLAS_INC="${tmp%dldt}openblas/include/openblas"
-
-if [ ! -f $BLAS_LIB ] || [ ! -d $BLAS_INC ]; then
-    echo "!!! Check paths for openblas lib !!!"
-    echo "I tried: $BLAS_LIB and $BLAS_INC"
-    exit
-fi
-
 # https://github.com/openvinotoolkit/openvino/wiki/CMakeOptionsForCustomCompilation
 # https://github.com/openvinotoolkit/openvino/issues/4527
 #      -D ENABLE_OPENCV=OFF \
@@ -21,9 +11,7 @@ fi
 cmake -D CMAKE_BUILD_TYPE=Release \
       -D THREADING=TBB \
       -D ENABLE_MKL_DNN=ON \
-      -D GEMM=OPENBLAS \
-      -D BLAS_INCLUDE_DIRS="$BLAS_INC" \
-      -D BLAS_LIBRARIES="$BLAS_LIB" \
+      -D GEMM=JIT \
       -D ENABLE_FASTER_BUILD=ON \
       -D ENABLE_LTO=ON \
       -D ENABLE_VPU=ON \
