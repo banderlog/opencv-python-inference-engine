@@ -94,4 +94,4 @@ green "For \"$WHEEL\""
 green "RUN TESTS with ./venv_t/bin/python ./tests.py"
 ./venv_t/bin/python ./tests.py
 green "RUN TESTS with ./venv_t/bin/python ./speed_test.py"
-./venv_t/bin/ipython ./speed_test.py
+./venv_t/bin/python ./speed_test.py

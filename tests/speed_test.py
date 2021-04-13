@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from IPython import get_ipython
+import time
 
 # prepare all stuff and do the first inference
 # it will load all things into memory
@@ -16,4 +16,10 @@ net.setPreferableBackend(cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE)
 _ = net.forward()
 
 # measure the inference speed
-get_ipython().magic("timeit _ = net.forward()")
+RUNS = 10
+times = []
+for _ in range(RUNS):
+    start_time = time.time()
+    _ = net.forward()
+    times.append((time.time() - start_time) * 1000)
+print(f'Mean inference time {np.mean(times):.3f} ± {np.std(times):.3f} ms ({RUNS} runs)')
