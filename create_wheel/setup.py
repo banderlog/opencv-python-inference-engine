@@ -26,7 +26,7 @@ setuptools.setup(
     packages=['cv2'],
     package_data={'cv2': ['*.so*', '*.mvcmd', '*.xml']},
     include_package_data=True,
-    install_requires=['numpy~=1.19.2'],
+    install_requires=['numpy'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
