@@ -2,7 +2,7 @@
 
 # opencv-python-inference-engine
 
-This is *Unofficial* pre-built OpenCV with the inference engine part of [dldt module](https://github.com/opencv/dldt/) package for Python.
+This is *Unofficial* pre-built OpenCV with the inference engine part of [OpenVINO](https://github.com/openvinotoolkit/openvino) package for Python.
 
 ## Installing from `pip3`
 
@@ -23,7 +23,7 @@ You will need to preprocess data as a model requires and decode the output. A de
 
 The official way is clumsy because you need to git clone the whole [model_zoo](https://github.com/opencv/open_model_zoo) ([details](https://github.com/opencv/open_model_zoo/issues/522))
 
-Better to find a model description [here](https://github.com/opencv/open_model_zoo/blob/master/models/intel/index.md) and download manually from [here](https://download.01.org/opencv/2020/openvinotoolkit/2020.1/open_model_zoo/models_bin/1/)
+Better to find a model description [here](https://github.com/opencv/open_model_zoo/blob/master/models/intel/index.md) and download manually from [here](https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/)
 
 
 ## Description
@@ -31,7 +31,7 @@ Better to find a model description [here](https://github.com/opencv/open_model_z
 
 ### Why  
 
-I needed an ability to fast deploy a small package that able to run models from [Intel's model zoo](https://github.com/opencv/open_model_zoo/) and use [Movidius NCS](https://software.intel.com/en-us/neural-compute-stick).
+I needed an ability to fast deploy a small package that able to run models from [Intel's model zoo](https://github.com/openvinotoolkit/open_model_zoo) and use [Movidius NCS](https://software.intel.com/en-us/neural-compute-stick).
 Well-known [opencv-python](https://github.com/skvark/opencv-python) can't do this.
 The official way is to use OpenVINO, but it is big and clumsy (just try to use it with python venv or fast download it on cloud instance).
 
@@ -39,7 +39,7 @@ The official way is to use OpenVINO, but it is big and clumsy (just try to use i
 ### Limitations
 
 + Package comes without contrib modules.
-+ You need to [add udev rules](https://github.com/opencv/dldt/blob/2019/inference-engine/README.md#for-linux-raspbian-stretch-os) if you want working MYRIAD plugin.
++ You need to [add udev rules](https://www.intel.com/content/www/us/en/support/articles/000057005/boards-and-kits.html) if you want working MYRIAD plugin.
 + It was tested on Ubuntu 18.04, Ubuntu 18.10 as Windows 10 Subsystem and Gentoo.
 + It will not work for Ubuntu 16.04 and below (except v4.1.0.4).
 + I had not made builds for Windows or MacOS.
@@ -89,7 +89,7 @@ From [opencv](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html)
  [ffmpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), [openBLAS](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu) and [ngraph](https://www.ngraph.ai/documentation/buildlb)
 
 + `build-essential`
-+ `>=cmake-3.11`
++ `>=cmake-3.16`
 + `autoconf` (for ngraph)
 + `libtool-bin` (for ngraph)
 + `git`
@@ -174,8 +174,8 @@ for i in  cv2/*.so; do chrpath -r '$ORIGIN' $i; done
 
 ### Optional things to play with
 
-+ [dldt build instruction](https://github.com/opencv/dldt/blob/2020/build-instruction.md)
-+ [dldt cmake flags](https://github.com/opencv/dldt/blob/b2140c083a068a63591e8c2e9b5f6b240790519d/inference-engine/cmake/features_ie.cmake)
++ [dldt build instruction](https://github.com/openvinotoolkit/openvino/wiki/CMakeOptionsForCustomCompilation)
++ [dldt cmake flags](https://github.com/openvinotoolkit/openvino/blob/master/inference-engine/cmake/features.cmake)
 + [opencv cmake flags](https://github.com/opencv/opencv/blob/master/CMakeLists.txt)
 
 **NB:** removing `QUIET` from `find_package()` in project Cmake files, could help to solve some problems -- сmake will start to log them.
