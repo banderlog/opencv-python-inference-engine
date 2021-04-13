@@ -34,7 +34,6 @@ green "CLEAN BUILD DIRS"
 find build/dldt/ -mindepth 1 -not -name 'dldt_setup.sh' -not -name '*.patch' -delete
 find build/opencv/ -mindepth 1 -not -name 'opencv_setup.sh' -delete
 find build/ffmpeg/ -mindepth 1 -not -name 'ffmpeg_*.sh' -delete
-find build/openblas/ -mindepth 1 -not -name 'openblas_setup.sh' -delete
 
 green "CLEAN WHEEL DIR"
 find create_wheel/cv2/ -type f -not -name '__init__.py' -delete
