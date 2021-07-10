@@ -75,7 +75,7 @@ For additional info read `cv2.getBuildInformation()` output.
 
 You will need ~7GB RAM and ~10GB disk space
 
-I am using Ubuntu 18.04 [multipass](https://multipass.run/) instance: `multipass launch -c 6 -d 10G -m 7G 18.04`.
+I am using Ubuntu 18.04 (python 3.6) [multipass](https://multipass.run/) instance: `multipass launch -c 6 -d 10G -m 7G 18.04`.
 
 ### Requirements
 
