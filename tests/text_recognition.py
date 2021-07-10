@@ -37,7 +37,7 @@ class TextRecognizer():
         return outs
 
     def do_ocr(self, img: np.ndarray, bboxes: List[tuple]) -> List[str]:
-        """ Run OCR pipeline for a single words
+        """ Run OCR pipeline with greedy decoder for each single word (bbox)
 
             :param img: BGR image
             :param bboxes: list of sepaate word bboxes (ymin ,xmin ,ymax, xmax)
@@ -60,7 +60,7 @@ class TextRecognizer():
         for box in bboxes:
             # confidence distribution across symbols
             confs = self._get_confidences(img, box)
-            # get maximal confidence for the whole beam width
+            # get maximal confidence for the whole beam width aka greedy decoder
             idxs = confs[:, 0, :].argmax(axis=1)
             # drop blank characters '#' with id == 36 in charvec
             # isupposedly we taking only separate words as input
