@@ -104,6 +104,7 @@ sudo ln -s  /usr/bin/python3 /usr/bin/python
 ```bash
 git clone https://github.com/banderlog/opencv-python-inference-engine
 cd opencv-python-inference-engine
+# git checkout dev
 ./download_all_stuff.sh
 ```
 
