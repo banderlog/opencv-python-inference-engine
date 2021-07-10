@@ -19,7 +19,6 @@ cd tests
 
 Something like below. The general idea is to test only inference speed, without preprocessing and decoding.
 Also, 1st inference must not count, because it will load all stuff into memory.
-I prefer to do such things in `ipython` or `jupyter` with `%timeit`.
 
 **NB:** be strict about Backend and Target
 
