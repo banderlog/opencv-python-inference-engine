@@ -68,30 +68,10 @@ for i in "${models[@]}"; do
         wget "${url_start}/${i%.*}/FP32/${i}"
     else
 	# checksum
-        sha256sum -c "${i}.sha256sum"
-    fi
-done
-
-
-# for speed test
-# {filename: file_google_drive_id}
-declare -A se_net=(["se_net.bin"]="1vbonFjVyleGRSd_wR-Khc1htsZybiHCG"
-		   ["se_net.xml"]="1Bz3EQwnes_iZ14iKAV6H__JZ2lynLmQz")
-
-# for each key
-for i in "${!se_net[@]}"; do
-    # if file exist
-    if [ -f $i ]; then
-        # checksum
-        sha256sum -c "${i}.sha256sum"
-    else
-        # get fileid from associative array and download file
-        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=${se_net[$i]}" -O $i
+        sha256sum -c "${i}.sha256sum" || red "PROBLEMS ^^^"
     fi
 done
 
 green "For \"$WHEEL\""
 green "RUN TESTS with ./venv_t/bin/python ./tests.py"
 ./venv_t/bin/python ./tests.py
-green "RUN TESTS with ./venv_t/bin/python ./speed_test.py"
-./venv_t/bin/python ./speed_test.py
