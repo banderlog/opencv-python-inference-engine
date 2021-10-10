@@ -24,7 +24,8 @@ fi
 
 green "RESET GIT SUBMODULES"
 # git checkout dev
-# use `git fetch --tags && git checkout tags/<tag>` for update
+# for update use `git submodule update --init --recursive  --jobs=4`
+#   cd submodule dir and `git fetch --tags && git checkout tags/<tag>`
 git submodule update --init --recursive --depth=1 --jobs=4
 # restore changes command will differ between GIT versions (e.g., `restore`)
 git submodule foreach --recursive git checkout .

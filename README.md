@@ -92,6 +92,7 @@ sudo snap install cmake --classic
 sudo apt-get update
 # nasm for ffmpeg
 # libusb-1.0-0-dev for MYRIAD plugin
+sudo apt update
 sudo apt install build-essential git pkg-config python3-dev nasm python3 virtualenv libusb-1.0-0-dev chrpath shellcheck
 
 # for ngraph

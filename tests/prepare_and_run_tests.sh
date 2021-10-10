@@ -48,7 +48,7 @@ fi
 green "GET MODELS"
 
 if [ ! -d "rateme" ]; then
-    ./venv_t/bin/pip3 install --python-version 3 rateme -U --no-deps -t ./
+    ./venv_t/bin/pip3 install "https://github.com/banderlog/rateme/releases/download/v0.1.1/rateme-0.1.1.tar.gz"
 fi
 
 # urls, filenames and checksums are from:

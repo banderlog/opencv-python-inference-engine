@@ -12,6 +12,7 @@ class TestPackage(unittest.TestCase):
         img = cv2.imread('dislike.jpg')
         answer = model.predict(img)
         self.assertEqual(answer, 'dislike')
+        print('rateme: passed')
 
     def test_inference_engine(self):
         img = cv2.imread('helloworld.png')
@@ -22,11 +23,13 @@ class TestPackage(unittest.TestCase):
         recognizer12 = TextRecognizer('./text-recognition-0012.xml')
         answer = recognizer12.do_ocr(img, bboxes)
         self.assertEqual(answer, ['hello', 'world'])
+        print('text detection and recognition: passed')
 
     def test_ffmpeg(self):
         cap = cv2.VideoCapture('short_video.mp4')
         answer, img = cap.read()
         self.assertTrue(answer)
+        print('video opening: passed')
 
 
 if __name__ == '__main__':
