@@ -66,5 +66,5 @@ links, pixels = detector.detect(img)
 ## Files
 
 + `short_video.mp4` from [here](https://www.pexels.com/video/a-cattails-fluff-floats-in-air-2156021/)  (free)
-+ `dislike.jpg` from [rateme repository](https://github.com/heyml/rateme/tree/master/test_imgs)
++ `dislike.jpg` from [rateme repository](https://github.com/banderlog/rateme/blob/master/test_imgs/dislike.jpg)
 + `helloworld.png` I either made it or forgot from where it downloaded from
