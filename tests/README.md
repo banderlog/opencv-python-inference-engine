@@ -59,7 +59,7 @@ links, pixels = detector.detect(img)
 
 ## Models
 
-+ [rateme](https://github.com/heyml/rateme) (YOLO3)
++ [rateme](https://github.com/banderlog/rateme) (YOLO3)
 + [text-detection-0004](https://github.com/opencv/open_model_zoo/blob/master/models/intel/text-detection-0004/description/text-detection-0004.md)
 + [text-recognition-0012](https://github.com/opencv/open_model_zoo/blob/master/models/intel/text-recognition-0012/description/text-recognition-0012.md)
 
