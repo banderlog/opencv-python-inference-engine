@@ -89,7 +89,6 @@ sudo apt remove --purge cmake
 hash -r
 sudo snap install cmake --classic
 
-sudo apt-get update
 # nasm for ffmpeg
 # libusb-1.0-0-dev for MYRIAD plugin
 sudo apt update
