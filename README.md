@@ -21,7 +21,7 @@ You will need to preprocess data as a model requires and decode the output. A de
 
 ## Downloading intel models
 
-The official way is clumsy because you need to git clone the whole [model_zoo](https://github.com/opencv/open_model_zoo) ([details](https://github.com/opencv/open_model_zoo/issues/522))
+The official way is awkward because you need to git clone the whole [model_zoo](https://github.com/opencv/open_model_zoo) ([details](https://github.com/opencv/open_model_zoo/issues/522))
 
 Better to find a model description [here](https://github.com/opencv/open_model_zoo/blob/master/models/intel/index.md) and download manually from [here](https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/)
 
