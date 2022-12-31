@@ -24,7 +24,6 @@ PY_LIB_PATH=`find $ABS_PORTION/venv/lib/ -iname libpython3.${PY_VER}m.so`
 
 
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
-      -D HAVE_NGRAPH=ON \
       -D WITH_WEBP=OFF \
       -D BUILD_DOCS=OFF \
       -D BUILD_EXAMPLES=OFF \
