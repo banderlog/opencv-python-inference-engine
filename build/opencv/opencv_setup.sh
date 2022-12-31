@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# <https://docs.opencv.org/4.x/db/d05/tutorial_config_reference.html>
+
 # for CPU_BASELINE and CPU_DISPATCH see https://github.com/opencv/opencv/wiki/CPU-optimizations-build-options
 # they should match with ones for  dldt/inference-engine/src/extension/cmake/OptimizationFlags.cmake 
 #
@@ -22,9 +24,10 @@ PY_LIB_PATH=`find $ABS_PORTION/venv/lib/ -iname libpython3.${PY_VER}m.so`
 
 
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D HAVE_NGRAPH=ON \
+      -D WITH_WEBP=OFF \
       -D BUILD_DOCS=OFF \
       -D BUILD_EXAMPLES=OFF \
-      -D BUILD_JPEG=OFF \
       -D BUILD_JPEG=OFF \
       -D BUILD_PERF_TESTS=OFF \
       -D BUILD_SHARED_LIBS=OFF \
@@ -42,8 +45,9 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D ENABLE_CXX11=ON \
       -D ENABLE_PRECOMPILED_HEADERS=OFF \
       -D FFMPEG_INCLUDE_DIRS=$FFMPEG_PATH/include \
-      -D INF_ENGINE_INCLUDE_DIRS=$ABS_PORTION/dldt/inference-engine/include \
-      -D INF_ENGINE_LIB_DIRS=$ABS_PORTION/dldt/bin/intel64/Release/lib \
+      -D WITH_INF_ENGINE=ON \
+      -D INF_ENGINE_INCLUDE_DIRS=$ABS_PORTION/dldt/src/inference/include \
+      -D INF_ENGINE_LIB_DIRS=$ABS_PORTION/dldt/bin/intel64/Release \
       -D INF_ENGINE_RELEASE=2022030000 \
       -D INSTALL_CREATE_DISTRIB=ON \
       -D INSTALL_C_EXAMPLES=OFF \
@@ -65,11 +69,9 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D WITH_FFMPEG=ON \
       -D WITH_GSTRREAMER=OFF \
       -D WITH_GTK=OFF \
-      -D WITH_INF_ENGINE=ON \
       -D WITH_IPP=OFF \
       -D WITH_ITT=OFF \
       -D WITH_JASPER=OFF \
-      -D WITH_NGRAPH=ON \
       -D WITH_OPENEXR=OFF \
       -D WITH_OPENMP=OFF \
       -D WITH_PNG=ON \
@@ -78,5 +80,4 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D WITH_TBB=ON \
       -D WITH_V4L=ON \
       -D WITH_VTK=OFF \
-      -D WITH_WEBP=OFF \
-      -D ngraph_DIR=$ABS_PORTION/build/dldt/ngraph ../../opencv
+      -D ngraph_DIR=$ABS_PORTION/dldt/src/core/include/ngraph ../../opencv
