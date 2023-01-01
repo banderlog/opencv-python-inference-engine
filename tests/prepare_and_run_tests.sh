@@ -43,13 +43,10 @@ fi
 
 ./venv_t/bin/pip3 install --force-reinstall "$WHEEL"
 ./venv_t/bin/pip3 install -r requirements.txt
+./venv_t/bin/pip3 install "https://github.com/banderlog/rateme/releases/download/v0.1.1/rateme-0.1.1.tar.gz"
 
 
 green "GET MODELS"
-
-if [ ! -d "rateme" ]; then
-    ./venv_t/bin/pip3 install "https://github.com/banderlog/rateme/releases/download/v0.1.1/rateme-0.1.1.tar.gz"
-fi
 
 # urls, filenames and checksums are from:
 #  + <https://github.com/opencv/open_model_zoo/blob/2020.1/models/intel/text-detection-0004/model.yml>

@@ -138,7 +138,7 @@ cp build/opencv/lib/python3/cv2.cpython*.so create_wheel/cv2/cv2.so
 cp dldt/bin/intel64/Release/lib/*.so create_wheel/cv2/
 cp dldt/bin/intel64/Release/lib/*.mvcmd create_wheel/cv2/
 cp dldt/bin/intel64/Release/lib/plugins.xml create_wheel/cv2/
-cp dldt/inference-engine/temp/tbb/lib/libtbb.so.2 create_wheel/cv2/
+cp dldt/temp/tbb/lib/libtbb.so.2 create_wheel/cv2/
 
 cp build/ffmpeg/binaries/lib/*.so create_wheel/cv2/
 

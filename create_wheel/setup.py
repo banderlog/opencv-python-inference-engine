@@ -15,7 +15,7 @@ class EmptyListWithLength(list):
 
 setuptools.setup(
     name='opencv-python-inference-engine',
-    version='2022.01.05',
+    version='2023.01.03',
     url="https://github.com/banderlog/opencv-python-inference-engine",
     maintainer="Kabakov Borys",
     license='MIT, Apache 2.0',
