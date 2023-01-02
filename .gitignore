@@ -35,7 +35,7 @@ create_wheel/*
 !create_wheel/setup.py
 !create_wheel/cv2
 create_wheel/cv2/*
-!create_wheel/cv2/__init__.py
+!create_wheel/cv2/*.py
 
 tests/venv_t
 tests/rateme*

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # https://github.com/openvinotoolkit/openvino/wiki/CMakeOptionsForCustomCompilation
+# apt install cython cmake patchelf
 cmake -D THREADING=TBB \
       -D CMAKE_BUILD_TYPE=Release \
       -D ENABLE_FASTER_BUILD=ON \
@@ -10,9 +11,9 @@ cmake -D THREADING=TBB \
       -D ENABLE_AVX512F=OFF \
       -D ENABLE_DOCS=OFF \
       -D ENABLE_GAPI_TESTS=OFF \
-      -D ENABLE_OPENCV=OFF \
+      -D ENABLE_OPENCV=ON \
       -D ENABLE_PROFILING_ITT=OFF \
-      -D ENABLE_PYTHON=OFF \
+      -D ENABLE_PYTHON=ON \
       -D ENABLE_WHEEL=OFF \
       -D ENABLE_SAMPLES=OFF \
       -D ENABLE_TESTS=OFF \
@@ -23,7 +24,6 @@ cmake -D THREADING=TBB \
       -D ENABLE_OV_TF_FRONTEND=ON \
       -D ENABLE_OV_IR_FRONTEND=ON \
       -D BUILD_TESTING=OFF \
-      -D BUILD_template_plugin=OFF \
       -D ENABLE_GAPI_PREPROCESSING=OFF \
-      -D ENABLE_TEMPLATE=OFF \
+      -D ENABLE_TEMPLATE=ON \
       -D SELECTIVE_BUILD=OFF ../../dldt/
