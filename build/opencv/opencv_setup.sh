@@ -19,8 +19,9 @@ export PKG_CONFIG_PATH=$FFMPEG_PATH/lib/pkgconfig:$PKG_CONFIG_PATH
 export PKG_CONFIG_LIBDIR=$FFMPEG_PATH/lib/:$PKG_CONFIG_LIBDIR
 
 # grep "5" from "Python 3.5.2"
-PY_VER=`$ABS_PORTION/venv/bin/python3 --version | sed -rn "s/Python .\.(.)\..$/\1/p"`
-PY_LIB_PATH=`find $ABS_PORTION/venv/lib/ -iname libpython3.${PY_VER}m.so`
+#PY_VER=`$ABS_PORTION/venv/bin/python3 --version | sed -rn "s/Python .\.(.)\..$/\1/p"`
+PY_VER=`$ABS_PORTION/venv/bin/python3 --version | grep -oE '[0-9.]{3}' | head -n1`
+PY_LIB_PATH=`find $ABS_PORTION/venv/lib/ -iname libpython${PY_VER}m.so`
 
 
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
@@ -59,8 +60,8 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D OPENCV_SKIP_PYTHON_LOADER=ON \
       -D PYTHON3_EXECUTABLE=$ABS_PORTION/venv/bin/python3 \
       -D PYTHON3_LIBRARY:PATH=$PY_LIB_PATH \
-      -D PYTHON3_NUMPY_INCLUDE_DIRS:PATH=$ABS_PORTION/venv/lib/python3.${PY_VER}/site-packages/numpy/core/include \
-      -D PYTHON3_PACKAGES_PATH=$ABS_PORTION/venv/lib/python3.${PY_VER}/site-packages \
+      -D PYTHON3_NUMPY_INCLUDE_DIRS:PATH=$ABS_PORTION/venv/lib/python${PY_VER}/site-packages/numpy/core/include \
+      -D PYTHON3_PACKAGES_PATH=$ABS_PORTION/venv/lib/python${PY_VER}/site-packages \
       -D PYTHON_DEFAULT_EXECUTABLE=$ABS_PORTION/venv/bin/python3 \
       -D PYTHON_INCLUDE_DIR=/usr/include/python3.${PY_VER} \
       -D WITH_1394=OFF \
