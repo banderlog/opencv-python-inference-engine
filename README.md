@@ -4,7 +4,7 @@
 
 ---
 
-**It is deprecated now, all future updates are improbable**
+$${\color{red}It \space is \space deprecated \space now, \space all \space future \space updates \space are \space improbable}$$
 
 A lot has changed during my military leave:
 
