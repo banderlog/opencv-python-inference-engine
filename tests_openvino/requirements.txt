@@ -1,0 +1,3 @@
+scikit-image
+openvino==2022.3.0
+opencv-python

@@ -41,6 +41,12 @@ tests/venv_t
 tests/rateme*
 venv
 
+tests_openvino/venv_t
+tests_openvino/venv_d
+tests_openvino/rateme*
+tests_openvino/*.bin
+tests_openvino/*.xml
+
 *cache*
 .ipynb_checkpoints
 *tar.gz

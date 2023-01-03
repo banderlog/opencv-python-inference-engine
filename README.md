@@ -2,6 +2,20 @@
 
 # opencv-python-inference-engine
 
+---
+
+**It is deprecated now, all future updates are improbable**
+
+A lot has changed during my military leave:
+
+1. Everything [changed since OpenVINO 2021.1](https://github.com/openvinotoolkit/openvino/releases/tag/2022.1.0), now it should be [two separate libs](https://opencv.org/how-to-use-opencv-with-openvino/), building process and inference engine API have changed dramatically, *without backwards compatibility* (btw, opencv-python now *official* python builds).
+2. Now opencv has small package installations via pip: <https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/download.html>, so the overall reason for creating that package is gone.
+3. Just [look on current official way](https://github.com/banderlog/opencv-python-inference-engine/tree/dev/create_wheel/cv2) of importing cv2 cxx lib into python module via 5 python scripts -- I do not want to mess with this growing lump of crutches
+
+My advice is to use openvino and opencv-python packages, see rewritten examples in [`tests_openvino`](https://github.com/banderlog/opencv-python-inference-engine/tree/master/tests_openvinol)
+
+---
+
 This is *Unofficial* pre-built OpenCV with the inference engine part of [OpenVINO](https://github.com/openvinotoolkit/openvino) package for Python.
 
 ## Installing from `pip3`
