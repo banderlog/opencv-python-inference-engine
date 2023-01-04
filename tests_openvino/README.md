@@ -3,6 +3,7 @@ Only way to download models -- through model downloader, no manual download anym
 - <https://github.com/openvinotoolkit/open_model_zoo/blob/releases/2022/3/models/intel/index.md>
 - <https://github.com/openvinotoolkit/open_model_zoo/blob/releases/2022/3/models/public/index.md>
 - <https://github.com/openvinotoolkit/open_model_zoo/>
+- <https://github.com/opencv/opencv_zoo> (you need to clone github repo to get them)
 
 Sometimes models are backwards compatible to new OpenVINO version, sometimes no.
 Sometimes new model versions became unworkable.
